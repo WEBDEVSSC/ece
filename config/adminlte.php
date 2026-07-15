@@ -14,8 +14,8 @@ return [
     |
     */
 
-    'title' => 'E.C.E. Coah',
-    'title_prefix' => '',
+    'title' => '',
+    'title_prefix' => 'E.C.E. Coahuila | ',
     'title_postfix' => '',
 
     /*
@@ -63,12 +63,12 @@ return [
     |
     */
 
-    'logo' => '<b>E.C.E.</b>Coah',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
-    'logo_img_class' => 'brand-image img-circle elevation-3',
+    'logo' => '<b>E.C.E.</b> Coah',
+    'logo_img' => 'vendor/adminlte/dist/img/LOGO-35.png',
+    'logo_img_class' => 'brand-image',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
-    'logo_img_alt' => 'Admin Logo',
+    'logo_img_alt' => 'Salud Coahuila',
 
     /*
     |--------------------------------------------------------------------------
@@ -86,7 +86,7 @@ return [
     'auth_logo' => [
         'enabled' => false,
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+            'path' => 'vendor/adminlte/dist/img/LOGO-35.png',
             'alt' => 'Auth Logo',
             'class' => '',
             'width' => 50,
@@ -113,10 +113,10 @@ return [
         'enabled' => true,
         'mode' => 'fullscreen',
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+            'path' => 'vendor/adminlte/dist/img/LOGO-35.png',
             'alt' => 'AdminLTE Preloader Image',
             'effect' => 'animation__shake',
-            'width' => 60,
+            'width' => 80,
             'height' => 60,
         ],
     ],
@@ -171,12 +171,12 @@ return [
     |
     */
 
-    'classes_auth_card' => 'card-outline card-primary',
+    'classes_auth_card' => 'card-outline card-info',
     'classes_auth_header' => '',
     'classes_auth_body' => '',
     'classes_auth_footer' => '',
     'classes_auth_icon' => '',
-    'classes_auth_btn' => 'btn-flat btn-primary',
+    'classes_auth_btn' => 'btn-flat btn-info',
 
     /*
     |--------------------------------------------------------------------------
@@ -260,9 +260,9 @@ return [
     'dashboard_url' => 'home',
     'logout_url' => 'logout',
     'login_url' => 'login',
-    'register_url' => 'register',
-    'password_reset_url' => 'password/reset',
-    'password_email_url' => 'password/email',
+    'register_url' => false,
+    'password_reset_url' => false,
+    'password_email_url' => false,
     'profile_url' => false,
     'disable_darkmode_routes' => false,
 
@@ -303,20 +303,31 @@ return [
             'text' => 'Dashboard',
             'url' => 'home',
             'icon' => 'far fa-fw fa-file',
-            'label' => 4,
-            'label_color' => 'success',
         ],
-        ['header' => 'AJUSTES GENERALES'],
+        
         [
             'text' => 'Médicos',
-            'url' => 'admin/medicos/medicosIndex',
-            'icon' => 'fas fa-fw fa-user',
+            'url' => 'admin/settings/medicos/medicosIndex',
+            'icon' => 'fas fa-fw fa-user-doctor',
+            'can' => 'root',
+        ],
+        [
+            'text' => 'Usuarios',
+            'url' => 'admin/settings/usuarios/usuariosIndex',
+            'icon' => 'fas fa-fw fa-users',
+            'can' => 'root',
+        ],
+        [
+            'text' => 'Roles',
+            'url' => 'admin/settings/roles/rolesIndex',
+            'icon' => 'fas fa-fw fa-user-shield',
+            'can' => 'root',
         ],
     ],
 
     /*
     |--------------------------------------------------------------------------
-    | Menu Filters
+    | Menu Filters 
     |--------------------------------------------------------------------------
     |
     | Here we can modify the menu filters of the admin panel.
@@ -416,6 +427,16 @@ return [
                     'type' => 'js',
                     'asset' => false,
                     'location' => '//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js',
+                ],
+            ],
+        ],
+        'FontAwesome' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'css',
+                    'asset' => false,
+                    'location' => 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css',
                 ],
             ],
         ],

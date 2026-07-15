@@ -45,4 +45,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function clues()
+    {
+        return $this->belongsTo(CatClue::class, 'clues_id', 'id');
+    }
 }

@@ -561,5 +561,7 @@ class ClueSeeder extends Seeder
         foreach ($clues as $clue) {
             Clue::create($clue);
         }
+
+        $this->command->info('CLUES insertados correctamente.');
     }
 }

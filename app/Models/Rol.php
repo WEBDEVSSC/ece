@@ -4,12 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class TipoPersonalMedico extends Model
+class Rol extends Model
 {
     //
-    protected $table = 'tipos_personal_medico';
+    protected $table = 'roles';
 
     protected $fillable = [
+        'rol',
         'descripcion',
     ];
 }

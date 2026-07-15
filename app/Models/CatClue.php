@@ -4,10 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Clue extends Model
+class CatClue extends Model
 {
     //
-    protected $table = 'clues';
+    protected $table = 'cat_clues';
 
     protected $fillable = [
         'clues',
@@ -16,4 +16,9 @@ class Clue extends Model
         'jurisdiccion_label',
         'municipio',
     ];
+
+    public function getCluesNombreAttribute()
+    {
+        return "{$this->clues} - {$this->nombre}";
+    }
 }
