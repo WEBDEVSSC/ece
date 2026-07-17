@@ -304,25 +304,12 @@ return [
             'url' => 'home',
             'icon' => 'far fa-fw fa-file',
         ],
-        
         [
-            'text' => 'Médicos',
-            'url' => 'admin/settings/medicos/medicosIndex',
-            'icon' => 'fas fa-fw fa-user-doctor',
+            'text' => 'Settings',
+            'url' => 'admin/settings/index',
+            'icon' => 'fas fa-fw fa-cogs',
             'can' => 'root',
-        ],
-        [
-            'text' => 'Usuarios',
-            'url' => 'admin/settings/usuarios/usuariosIndex',
-            'icon' => 'fas fa-fw fa-users',
-            'can' => 'root',
-        ],
-        [
-            'text' => 'Roles',
-            'url' => 'admin/settings/roles/rolesIndex',
-            'icon' => 'fas fa-fw fa-user-shield',
-            'can' => 'root',
-        ],
+        ]
     ],
 
     /*
