@@ -50,4 +50,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(CatClue::class, 'clues_id', 'id');
     }
+
+    public function medico()
+    {
+        return $this->belongsTo(Medico::class);
+    }
 }

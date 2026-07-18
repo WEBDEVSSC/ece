@@ -82,6 +82,10 @@ Route::delete('admin/settings/usuarios/usuariosDestroy/{id}', [UsuarioController
 
 Route::get('admin/settings/usuarios/usuariosShow/{id}', [UsuarioController::class,'usuariosShow'])->name('usuariosShow');
 
+Route::get('admin/settings/usuarios/createUsuarioMedico/{id}', [UsuarioController::class,'createUsuarioMedico'])->name('createUsuarioMedico');
+
+Route::put('admin/settings/usuarios/updateUsuarioMedico/{id}', [UsuarioController::class,'updateUsuarioMedico'])->name('updateUsuarioMedico');
+
 /*******************************************************************************************
  * 
  * 

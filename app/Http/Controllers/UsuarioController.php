@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Medico;
 use App\Models\User;
 use App\Models\Rol;
 use Illuminate\Http\Request;
@@ -153,5 +154,43 @@ class UsuarioController extends Controller
         $usuario->delete();
 
         return redirect()->route('usuariosIndex')->with('success', 'Usuario eliminado exitosamente.');
+    }
+
+    public function createUsuarioMedico($id)
+    {
+        $usuario = User::findOrFail($id); 
+
+        $login = Auth::user();
+
+        $medicos = Medico::where('clues_id', $login->clues_id)->get();
+
+        if ($usuario->clues_id !== $login->clues_id) {
+            abort(403, 'No tienes permiso para editar este usuario.');
+        }
+
+        return view('settings.usuarios.asignar-medico-create', compact('usuario', 'medicos'));
+    }
+
+    public function updateUsuarioMedico(Request $request, $id)
+    {
+        $usuario = User::findOrFail($id);
+
+        $login = Auth::user();
+
+        if ($usuario->clues_id !== $login->clues_id) {
+            abort(403, 'No tienes permiso para actualizar este usuario.');
+        }
+
+        $request->validate([
+            'medico_id' => 'required|exists:medicos,id',
+        ],[
+            'medico_id.required' => 'Debe seleccionar un médico.',
+            'medico_id.exists' => 'El médico seleccionado no es válido.',
+        ]);
+
+        $usuario->medico_id = $request->input('medico_id');
+        $usuario->save();
+
+        return redirect()->route('usuariosIndex')->with('success', 'Médico asignado al usuario exitosamente.');
     }
 }

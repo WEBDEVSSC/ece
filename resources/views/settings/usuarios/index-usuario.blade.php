@@ -51,6 +51,7 @@
                 <th>E-mail</th>
                 <th>Unidad</th>
                 <th>Rol</th>
+                <th>Médico</th>
                 <th></th>
             </tr>
         </thead>
@@ -59,14 +60,16 @@
                 <tr>
                     <td>{{ $usuario->name }}</td>
                     <td>{{ $usuario->email }}</td>
-                    <td>{{ $usuario->clues->clues_nombre  ?? 'No asignado' }}</td>
+                    <td>{{ $usuario->clues ? $usuario->clues->clues_nombre : 'No asignado' }}</td>
                     <td>{{ $usuario->role }}</td>
-
+                    <td>{{ $usuario->medico ? $usuario->medico->nombre_completo : 'No asignado' }}</td>
 
                     <td class="text-right">
                         <a href="{{ route('usuariosShow', $usuario->id) }}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="DETALLES"><i class="fas fa-eye"></i></a>
 
                         <a href="{{ route('usuariosEdit', $usuario->id) }}" class="btn btn-secondary btn-sm" data-toggle="tooltip" data-placement="top" title="EDITAR"><i class="fas fa-edit"></i></a>
+
+                        <a href="{{ route('createUsuarioMedico', $usuario->id) }}" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="ASIGNAR MÉDICO"><i class="fas fa-user-md"></i></a>
 
                         <form action="{{ route('usuariosDestroy', $usuario->id) }}" method="POST" class="form-eliminar" style="display: inline-block;">
                             @csrf

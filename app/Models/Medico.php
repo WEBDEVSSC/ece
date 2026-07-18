@@ -51,4 +51,9 @@ class Medico extends Model
     {
         return $this->belongsTo(CatPais::class, 'pais_nacimiento_id', 'id');
     }
+
+    public function users()
+    {
+        return $this->hasOne(User::class);
+    }
 }
