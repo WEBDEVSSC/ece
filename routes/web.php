@@ -60,6 +60,14 @@ Route::delete('admin/settings/medicos/medicosDestroy/{id}', [MedicoController::c
 
 Route::get('admin/settings/medicos/medicosShow/{id}', [MedicoController::class,'medicosShow'])->name('medicosShow');
 
+Route::get('admin/settings/medicos/vacaciones/indexMedicosVacacion/{id}', [MedicoController::class,'indexMedicosVacacion'])->name('indexMedicosVacacion');
+
+Route::get('admin/settings/medicos/vacaciones/createMedicosVacacion/{id}', [MedicoController::class,'createMedicosVacacion'])->name('createMedicosVacacion');
+
+Route::post('admin/settings/medicos/vacaciones/storeMedicosVacacion/{id}', [MedicoController::class,'storeMedicosVacacion'])->name('storeMedicosVacacion');
+
+Route::delete('admin/settings/medicos/vacaciones/deleteMedicosVacacion/{id}', [MedicoController::class,'deleteMedicosVacacion'])->name('deleteMedicosVacacion');
+
 /*******************************************************************************************
  * 
  * 
@@ -105,3 +113,11 @@ Route::get('admin/settings/roles/rolesEdit/{id}', [RolController::class,'rolesEd
 Route::put('admin/settings/roles/rolesUpdate/{id}', [RolController::class,'rolesUpdate'])->name('rolesUpdate');
 
 Route::delete('admin/settings/roles/rolesDelete/{id}', [RolController::class,'rolesDelete'])->name('rolesDelete');
+
+/*******************************************************************************************
+ * 
+ * 
+ * MODULO DE RECEPCION DE PACIENTES
+ * 
+ * 
+ ******************************************************************************************/

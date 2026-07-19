@@ -309,7 +309,32 @@ return [
             'url' => 'admin/settings/index',
             'icon' => 'fas fa-fw fa-cogs',
             'can' => 'root',
-        ]
+        ],
+        
+        [
+            'text' => 'Recepción',
+            'icon' => 'fa-solid fa-hospital-user',
+            'submenu' => [
+                [
+                    'text' => 'Nuevo Paciente',
+                    'url' => 'admin/pacientes/buscador-paciente',
+                    'can' => 'recepcion',
+                    'icon' => 'fa-solid fa-user-plus',
+                ],
+                [
+                    'text' => 'Panel de Control',
+                    'url' => 'admin/pacientes/index-paciente',
+                    'can' => 'recepcion',
+                    'icon' => 'fa-solid fa-sliders',
+                ],
+                [
+                    'text' => 'Citas',
+                    'url' => 'admin/citas/buscador-cita',
+                    'can' => 'recepcion',
+                    'icon' => 'fa-regular fa-calendar-days',
+                ],
+            ],
+        ],
     ],
 
     /*

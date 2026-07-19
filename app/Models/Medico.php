@@ -27,33 +27,59 @@ class Medico extends Model
         'role'
     ];
 
+    /**
+     * NOMBRE COMPLETO CONCATENADO DEL MÉDICO
+     */
     public function getNombreCompletoAttribute()
     {
         return trim("{$this->apellido_paterno} {$this->apellido_materno} {$this->nombres}");
     }
 
+    /**
+     * TIPO DE PERSONAL MÉDICO
+     */
     public function tipoPersonal()
     {
         return $this->belongsTo(CatTipoPersonalMedico::class, 'tipo_personal_id', 'id');
     }
 
+    /**
+     * SERVICIO DE ESPECIALIDAD DEL MÉDICO
+     */
     public function servicioEspecialidadMedico()
     {
         return $this->belongsTo(CatServiciosEspecialidadMedico::class, 'servicio_id', 'id');
     }
 
+    /**
+     * CLUES AL QUE PERTENECE EL MÉDICO
+     */
     public function clues()
     {
         return $this->belongsTo(CatClue::class, 'clues_id', 'id');
     }
 
+    /**
+     * PAIS DE NACIMIENTO DEL MÉDICO
+     */
     public function paisNacimiento()
     {
         return $this->belongsTo(CatPais::class, 'pais_nacimiento_id', 'id');
     }
 
+    /**
+     * USUARIO ASOCIADO AL MÉDICO
+     */
     public function users()
     {
         return $this->hasOne(User::class);
+    }
+
+    /**
+     * VACACIONES DEL MÉDICO
+     */
+    public function vacaciones()
+    {
+        return $this->hasMany(MedicoVacacion::class);
     }
 }

@@ -19,5 +19,6 @@ class DatabaseSeeder extends Seeder
        $this->call(ServicioEspecialidadMedicoSeeder::class);
        $this->call(ClueSeeder::class);
        $this->call(CatPaisesSeeder::class);
+       $this->call(CatEscolaridadSeeder::class);
     }
 }

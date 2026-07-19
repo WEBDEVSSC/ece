@@ -70,7 +70,9 @@
                         <a href="{{ route('medicosShow', $medico->id) }}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="DETALLES"><i class="fas fa-eye"></i></a>
 
                         <a href="{{ route('medicosEdit', $medico->id) }}" class="btn btn-secondary btn-sm" data-toggle="tooltip" data-placement="top" title="EDITAR"><i class="fas fa-edit"></i></a>
-                        
+
+                        <a href="{{ route('indexMedicosVacacion', $medico->id) }}" class="btn btn-dark btn-sm" data-toggle="tooltip" data-placement="top" title="VACACIONES"><i class="fas fa-suitcase"></i></a>
+
                         <form action="{{ route('medicosDestroy', $medico->id) }}" method="POST" class="form-eliminar" style="display: inline-block;">
                             @csrf
                             @method('DELETE')

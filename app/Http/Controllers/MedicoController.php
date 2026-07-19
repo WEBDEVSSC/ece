@@ -7,6 +7,7 @@ use App\Models\CatServiciosEspecialidadMedico;
 use App\Models\CatTipoPersonalMedico;
 use App\Models\CatClue;
 use App\Models\Medico;
+use App\Models\MedicoVacacion;
 use App\Models\Rol;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -318,5 +319,83 @@ class MedicoController extends Controller
         $medico->delete();
 
         return redirect()->route('medicosIndex')->with('destroy', 'Registro eliminado correctamente');
+    }
+
+    public function indexMedicosVacacion($id)
+    {
+        $medico = Medico::findOrFail($id);
+
+        $medicoVacaciones = $medico->vacaciones()
+            ->whereYear('fecha', now()->year)
+            ->orderBy('fecha')
+            ->get();
+
+        return view('settings.medicos.index-medico-vacacion',compact('medico', 'medicoVacaciones'));
+    }
+
+    public function createMedicosVacacion($id)
+    {
+        $medico = Medico::findOrFail($id);
+
+        $user = Auth::user();
+
+        if ($medico->clues_id !== $user->clues_id) {
+            abort(403, 'No tienes permiso para asignar vacaciones a este médico.');
+        }
+
+        return view('settings.medicos.create-medico-vacacion', compact('medico'));
+    }
+
+    public function storeMedicosVacacion(Request $request, $id)
+    {
+        $request->validate([
+            'fecha'=> 'date|required|after_or_equal:today',
+            'concepto' => 'required|string|max:50',
+        ],[
+            'fecha.required' => 'Debe seleccionar una fecha.',
+            'fecha.date' => 'La fecha seleccionada no es válida.',
+            'fecha.after' => 'La fecha debe ser posterior al día de hoy.',
+
+            'concepto.required' => 'Debe capturar el concepto.',
+            'concepto.string' => 'El concepto debe ser un texto válido.',
+            'concepto.max' => 'El concepto no puede exceder los 50 caracteres.',
+        ]);
+
+        $consultaMedicoVacacion = MedicoVacacion::where('medico_id',$id)
+            ->whereDate('fecha', $request->fecha)
+            ->exists();
+
+        if ($consultaMedicoVacacion) {
+            return back()
+                ->withErrors([
+                    'fecha' => 'La fecha seleccionada ya fue asignada para este médico.'
+                ])
+                ->withInput();
+        }
+
+        $medicoVacacion = new MedicoVacacion();
+
+        $medicoVacacion->medico_id = $id;
+        $medicoVacacion->fecha = $request->fecha;
+        $medicoVacacion->concepto = $request->concepto;
+
+        $medicoVacacion->save();
+
+        return redirect()->route('indexMedicosVacacion',$id)->with('success', 'Fecha registrada correctamente');
+    }
+
+    public function deleteMedicosVacacion($id)
+    {
+        $medicoVacacion = MedicoVacacion::findOrFail($id);
+
+        $user = Auth::user();
+
+        if ($medicoVacacion->medico->clues_id !== $user->clues_id) {
+            abort(403, 'No tienes permiso para eliminar vacaciones a este médico.');
+        }
+
+        $medicoVacacion->delete();
+
+        return redirect()->route('indexMedicosVacacion',$medicoVacacion->medico_id)->with('destroy', 'Fecha eliminada correctamente');
     }
 }
