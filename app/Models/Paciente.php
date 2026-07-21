@@ -65,6 +65,14 @@ class Paciente extends Model
     }
 
     /**
+     * Derechohabiencia
+     */
+    public function derechohabiencia()
+    {
+        return $this->belongsTo(CatDerechohabiencia::class, 'derechohabiencia_id');
+    }
+
+    /**
      * Nombre completo.
      */
     public function getNombreCompletoAttribute()
@@ -73,4 +81,6 @@ class Paciente extends Model
             "{$this->apellido_paterno} {$this->apellido_materno} {$this->nombre}"
         );
     }
+
+    
 }

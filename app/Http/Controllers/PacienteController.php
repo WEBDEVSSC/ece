@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\CatDerechohabiencia;
 use App\Models\CatEscolaridad;
 use App\Models\CatEstadoCivil;
 use App\Models\Paciente;
@@ -65,7 +66,9 @@ class PacienteController extends Controller
 
         $estadosCivil = CatEstadoCivil::all();
 
-        return view('pacientes.create-paciente', compact('curp','fechaNacimiento','sexo','escolaridades','estadosCivil'));
+        $derechohabiencias = CatDerechohabiencia::all();
+
+        return view('pacientes.create-paciente', compact('curp','fechaNacimiento','sexo','escolaridades','estadosCivil','derechohabiencias'));
     }
 
 

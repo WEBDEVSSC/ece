@@ -127,7 +127,7 @@
 
                 <select name="estado_civil_id" id="estado_civil_id" class="form-control">
 
-                    <option value="">-- Seleccione estado civiluna opción --</option>
+                    <option value="">-- Seleccione una opción --</option>
 
                     @foreach($estadosCivil as $estadoCivil)
                         <option 
@@ -163,6 +163,25 @@
                 @error('email')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
+            </div>
+
+            <div class="col-md-3">
+                    <p><strong>Derechohabiencia</strong></p>
+                    <select name="derechohabiencia_id" id="derechohabiencia_id" class="form-control">
+                        <option value="">-- Seleccione una opción --</option>
+
+                        @foreach($derechohabiencias as $derecho)
+                            <option value="{{ $derecho->id }}"
+                                {{ old('derechohabiencia_id') == $derecho->id ? 'selected' : '' }}>
+                                {{ $derecho->derechohabiencia }}
+                            </option>
+                        @endforeach
+
+                    </select>
+                     @error('derechohabiencia_id')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+
             </div>
         </div>
 

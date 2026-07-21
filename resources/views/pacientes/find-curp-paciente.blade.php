@@ -35,7 +35,7 @@
     </div>
     <div class="card-footer text-right">
         <button type="submit" class="btn btn-success btn-sm">
-            <i class="fas fa-save mr-1"></i> REGISTRAR DATOS
+            <i class="fas fa-save mr-1"></i> BUSCAR DATOS
         </button>
     </div>
     </form>
