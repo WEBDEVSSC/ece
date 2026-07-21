@@ -81,6 +81,13 @@
         </div>
 
         <div class="row mt-3">
+            <div class="col-md-3">
+                <p><strong>¿Contrato por Programa U013?</strong></p>
+                {{ $medico->programa_smymg == 1 ? 'SI' : 'NO' }}
+            </div>
+        </div>
+
+        <div class="row mt-3">
            <table class="table table-striped">
                 <thead>
                     <tr>
@@ -146,8 +153,9 @@
     <div class="card-footer"></div>
 </div>
 
-    
 @stop
+
+@include('layouts.footer')
 
 @section('css')
     {{-- Add here extra stylesheets --}}

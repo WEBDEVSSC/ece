@@ -6,7 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class TipoPersonalMedicoSeeder extends Seeder
+class CatTipoPersonalMedicoSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -39,7 +39,7 @@ class TipoPersonalMedicoSeeder extends Seeder
         ];
 
         foreach ($tipos as $id => $descripcion) {
-            DB::table('tipos_personal_medico')->insert([
+            DB::table('cat_tipos_personal_medico')->insert([
                 'id' => $id,
                 'descripcion' => $descripcion,
                 'created_at' => now(),

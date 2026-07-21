@@ -69,9 +69,6 @@
     </div>
     <div class="card-body">
 
-        
-    
-
         <div class="card-body table-responsive p-0">
             <table class="table table-hover table-striped">
                 <thead>
@@ -114,12 +111,15 @@
                 </tbody>
             </table>
         </div>
+    </div>
     
     <div class="card-footer"></div>
 </div>
 
     
 @stop
+
+@include('layouts.footer')
 
 @section('css')
     {{-- Add here extra stylesheets --}}

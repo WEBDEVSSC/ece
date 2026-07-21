@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MedicoController;
+use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\UsuarioController;
@@ -121,3 +122,9 @@ Route::delete('admin/settings/roles/rolesDelete/{id}', [RolController::class,'ro
  * 
  * 
  ******************************************************************************************/
+
+Route::get('admin/recepcion/pacientes/pacientesFind', [PacienteController::class,'pacientesFind'])->name('pacientesFind');
+
+Route::get('admin/recepcion/pacientes/pacientesSearch', [PacienteController::class,'pacientesSearch'])->name('pacientesSearch');
+
+Route::get('admin/recepcion/pacientes/pacientesCreate', [PacienteController::class,'pacientesCreate'])->name('pacientesCreate');

@@ -55,10 +55,12 @@ class MedicoController extends Controller
             'apellido_paterno' => 'required|string|max:100',
             'apellido_materno' => 'required|string|max:100',
             'nombres' => 'required|string|max:150',
+            'pais_nacimiento_id' => 'required|integer|exists:cat_paises,id',
             'cedula' => 'required|string|max:16',
             'tipo_personal_id' => 'required|integer|exists:cat_tipos_personal_medico,id',
             'servicio_id' => 'required|integer|exists:cat_servicios_especialidad_medicos,id',
             'clues_id' => 'required|integer|exists:cat_clues,id',
+            'programa_smymg' => 'required|in:0,1',
 
             'lunes_entrada' => 'nullable|date_format:H:i',
             'lunes_salida' => 'nullable|date_format:H:i|after:lunes_entrada',
@@ -90,6 +92,9 @@ class MedicoController extends Controller
             'nombres.required' => 'El nombre es obligatorio.',
             'nombres.max' => 'El nombre no puede tener más de 150 caracteres.',
 
+            'pais_nacimiento_id.required' => 'Debe seleccionar un país de nacimiento.',
+            'pais_nacimiento_id.exists' => 'El país seleccionado no es válido.',
+
             'tipo_personal_id.required' => 'El tipo de personal es obligatorio.',
             'tipo_personal_id.integer' => 'El tipo de personal debe ser un número válido.',
             'tipo_personal_id.exists' => 'El tipo de personal seleccionado no existe.',
@@ -105,6 +110,9 @@ class MedicoController extends Controller
             'cedula.required' => 'La cédula profesional es obligatoria.',
             'cedula.string' => 'La cédula debe ser texto.',
             'cedula.max' => 'La cédula no debe exceder los 16 caracteres.',
+
+            'programa_smymg.required' => 'Debe indicar si el médico pertenece al Programa U013.',
+            'programa_smymg.boolean' => 'El valor seleccionado no es válido.',
 
             'lunes_entrada.date_format' => 'La hora de entrada del lunes debe tener el formato HH:MM.',
             'lunes_salida.date_format' => 'La hora de salida del lunes debe tener el formato HH:MM.',
@@ -139,10 +147,12 @@ class MedicoController extends Controller
         $medico->apellido_paterno = $request->apellido_paterno;
         $medico->apellido_materno = $request->apellido_materno;
         $medico->nombres = $request->nombres;
+        $medico->pais_nacimiento_id = $request->pais_nacimiento_id;
         $medico->tipo_personal_id = $request->tipo_personal_id;
         $medico->cedula_profesional = $request->cedula;
         $medico->servicio_id = $request->servicio_id;
         $medico->clues_id = $request->clues_id;
+        $medico->programa_smymg = $request->programa_smymg;
 
         $medico->lunes_entrada = $request->lunes_entrada;
         $medico->lunes_salida = $request->lunes_salida;
@@ -202,26 +212,27 @@ class MedicoController extends Controller
             'apellido_paterno' => 'required|string|max:100',
             'apellido_materno' => 'required|string|max:100',
             'nombres' => 'required|string|max:150',
+            'programa_smymg' => 'required|in:0,1',
             'cedula' => 'required|string|max:16',
             'tipo_personal_id' => 'required|integer|exists:cat_tipos_personal_medico,id',
             'servicio_id' => 'required|integer|exists:cat_servicios_especialidad_medicos,id',
 
-            'lunes_entrada' => 'nullable|date_format:H:i:s',
-            'lunes_salida' => 'nullable|date_format:H:i:s|after:lunes_entrada',
-            'martes_entrada' => 'nullable|date_format:H:i:s',
-            'martes_salida' => 'nullable|date_format:H:i:s|after:martes_entrada',
-            'miercoles_entrada' => 'nullable|date_format:H:i:s',
-            'miercoles_salida' => 'nullable|date_format:H:i:s|after:miercoles_entrada',
-            'jueves_entrada' => 'nullable|date_format:H:i:s',
-            'jueves_salida' => 'nullable|date_format:H:i:s|after:jueves_entrada',
-            'viernes_entrada' => 'nullable|date_format:H:i:s',
-            'viernes_salida' => 'nullable|date_format:H:i:s|after:viernes_entrada',
-            'sabado_entrada' => 'nullable|date_format:H:i:s',
-            'sabado_salida' => 'nullable|date_format:H:i:s|after:sabado_entrada',
-            'domingo_entrada' => 'nullable|date_format:H:i:s',
-            'domingo_salida' => 'nullable|date_format:H:i:s|after:domingo_entrada', 
-            'festivos_entrada' => 'nullable|date_format:H:i:s',
-            'festivos_salida' => 'nullable|date_format:H:i:s|after:festivos_entrada',
+            'lunes_entrada' => 'nullable|date_format:H:i',
+            'lunes_salida' => 'nullable|date_format:H:i|after:lunes_entrada',
+            'martes_entrada' => 'nullable|date_format:H:i',
+            'martes_salida' => 'nullable|date_format:H:i|after:martes_entrada',
+            'miercoles_entrada' => 'nullable|date_format:H:i',
+            'miercoles_salida' => 'nullable|date_format:H:i|after:miercoles_entrada',
+            'jueves_entrada' => 'nullable|date_format:H:i',
+            'jueves_salida' => 'nullable|date_format:H:i|after:jueves_entrada',
+            'viernes_entrada' => 'nullable|date_format:H:i',
+            'viernes_salida' => 'nullable|date_format:H:i|after:viernes_entrada',
+            'sabado_entrada' => 'nullable|date_format:H:i',
+            'sabado_salida' => 'nullable|date_format:H:i|after:sabado_entrada',
+            'domingo_entrada' => 'nullable|date_format:H:i',
+            'domingo_salida' => 'nullable|date_format:H:i|after:domingo_entrada', 
+            'festivos_entrada' => 'nullable|date_format:H:i',
+            'festivos_salida' => 'nullable|date_format:H:i|after:festivos_entrada',
         ], [
             'curp.required' => 'El CURP es obligatorio.',
             'curp.size' => 'El CURP debe tener exactamente 18 caracteres.',
@@ -250,6 +261,9 @@ class MedicoController extends Controller
             'cedula.required' => 'La cédula profesional es obligatoria.',
             'cedula.string' => 'La cédula debe ser texto.',
             'cedula.max' => 'La cédula no debe exceder los 16 caracteres.',
+
+            'programa_smymg.required' => 'Debe indicar si el médico pertenece al Programa U013.',
+            'programa_smymg.boolean' => 'El valor seleccionado no es válido.',
 
             'lunes_entrada.date_format' => 'La hora de entrada del lunes debe tener el formato HH:MM.',
             'lunes_salida.date_format' => 'La hora de salida del lunes debe tener el formato HH:MM.',
@@ -287,6 +301,7 @@ class MedicoController extends Controller
         $medico->tipo_personal_id = $request->tipo_personal_id;
         $medico->cedula_profesional = $request->cedula;
         $medico->servicio_id = $request->servicio_id;
+        $medico->programa_smymg = $request->programa_smymg;
 
         $medico->lunes_entrada = $request->lunes_entrada;
         $medico->lunes_salida = $request->lunes_salida;

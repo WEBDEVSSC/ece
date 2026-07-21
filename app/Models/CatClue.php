@@ -21,4 +21,9 @@ class CatClue extends Model
     {
         return "{$this->clues} - {$this->nombre}";
     }
+
+    public function pacientes()
+    {
+        return $this->hasMany(Paciente::class, 'clues_id');
+    }
 }

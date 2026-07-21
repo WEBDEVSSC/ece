@@ -317,7 +317,7 @@ return [
             'submenu' => [
                 [
                     'text' => 'Nuevo Paciente',
-                    'url' => 'admin/pacientes/buscador-paciente',
+                    'url' => 'admin/recepcion/pacientes/pacientesFind',
                     'can' => 'recepcion',
                     'icon' => 'fa-solid fa-user-plus',
                 ],

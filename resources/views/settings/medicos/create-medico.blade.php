@@ -3,6 +3,8 @@
 
 @section('title', 'Dashboard')
 
+@section('plugins.Select2', true)
+
 @section('content_header')
     <h1><strong>Médicos</strong> <small>Panel de Control</small></h1>
 @stop
@@ -42,7 +44,7 @@
 
             <div class="col-md-3">
                 <p><strong>Pais de nacimiento</strong></p>
-                <select name="pais_nacimiento_id" id="pais_nacimiento_id" class="form-control">
+                <select name="pais_nacimiento_id" id="pais_nacimiento_id" class="form-control select2">
                     <option value="">Seleccione una opción</option>
                     @foreach($paisesNacimiento as $paisNacimiento)
                         <option value="{{ $paisNacimiento->id }}" {{ old('pais_nacimiento_id') == $paisNacimiento->id ? 'selected' : '' }}>
@@ -138,6 +140,19 @@
         </div>
 
         <div class="row mt-3">
+            
+            <div class="col-md-3">
+                <p><strong>¿Contrato por Programa U013?</strong></p>
+                <select name="programa_smymg" id="programa_smymg" class="form-control">
+                    <option value="0" {{ old('programa_smymg', 0) == 0 ? 'selected' : '' }}>NO</option>
+                    <option value="1" {{ old('programa_smymg') == 1 ? 'selected' : '' }}>SÍ</option>
+                </select>
+
+                @error('programa_smymg')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+            
             <div class="col-md-6">
                 <p><strong>CLUES</strong></p>
                 <select name="clues" id="clues" class="form-control" disabled>
@@ -314,8 +329,38 @@
 @section('css')
     {{-- Add here extra stylesheets --}}
     {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
+
+    <style>
+        /* Asegura que Select2 tenga el mismo alto y bordes redondeados */
+        .select2-container--default .select2-selection--single {
+            height: calc(2.25rem + 2px) !important; /* Ajuste de altura */
+            border-radius: 0.25rem !important; /* Bordes redondeados */
+            border: 1px solid #ced4da !important; /* Color del borde */
+        }
+        
+        /* Alineación del texto */
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            line-height: calc(2.25rem - 2px) !important;
+            padding-left: 0.75rem !important;
+        }
+        
+        /* Ajuste del ícono desplegable */
+        .select2-container--default .select2-selection--single .select2-selection__arrow {
+            height: calc(2.25rem + 2px) !important;
+        }
+    </style>
 @stop
 
 @section('js')
     <script> console.log("Hi, I'm using the Laravel-AdminLTE package!"); </script>
+
+    <script>
+        $(document).ready(function() {
+            $('#pais_nacimiento_id').select2({
+                placeholder: "-- Seleccione una opcion --",
+                allowClear: true
+            });
+        });
+    </script>
+    
 @stop
