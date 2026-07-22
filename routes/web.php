@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CitaConsultaExternaController;
 use App\Http\Controllers\MedicoController;
 use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\RolController;
@@ -145,5 +146,20 @@ Route::put('admin/recepcion/pacientes/pacientesDXMedicoStore/{id}', [PacienteCon
 
 
 Route::get('admin/recepcion/pacientes/pacientesShow/{id}', [PacienteController::class,'pacientesShow'])->name('pacientesShow');
+
+/*******************************************************************************************
+ * 
+ * 
+ * MODULO DE CITAS DE CONSULTA EXTERNA
+ * 
+ * 
+ ******************************************************************************************/
+
+Route::get('admin/recepcion/consulta-externa/citas-buscar', [CitaConsultaExternaController::class,'citasConsultaExternaSearch'])->name('citasConsultaExternaSearch');
+
+Route::get('admin/recepcion/consulta-externa/citas-mostrar', [CitaConsultaExternaController::class,'citasConsultaExternaFind'])->name('citasConsultaExternaFind');
+
+Route::post('admin/recepcion/consulta-externa/citas-store', [CitaConsultaExternaController::class,'citasConsultaExternaStore'])->name('citasConsultaExternaStore');
+
 
 

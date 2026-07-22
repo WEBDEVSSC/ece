@@ -329,7 +329,7 @@ return [
                 ],
                 [
                     'text' => 'Citas',
-                    'url' => 'admin/citas/buscador-cita',
+                    'url' => 'admin/recepcion/consulta-externa/citas-buscar',
                     'can' => 'recepcion',
                     'icon' => 'fa-regular fa-calendar-days',
                 ],
