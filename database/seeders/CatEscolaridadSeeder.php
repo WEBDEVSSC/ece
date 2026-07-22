@@ -14,23 +14,19 @@ class CatEscolaridadSeeder extends Seeder
     public function run(): void
     {
         $escolaridades = [
-            'Sin escolaridad',
-            'Preescolar',
-            'Primaria incompleta',
-            'Primaria completa',
-            'Secundaria incompleta',
-            'Secundaria completa',
-            'Carrera técnica',
-            'Preparatoria o Bachillerato incompleto',
-            'Preparatoria o Bachillerato completo',
-            'Técnico Superior Universitario (TSU)',
-            'Licenciatura incompleta',
-            'Licenciatura completa',
-            'Especialidad',
-            'Maestría',
-            'Doctorado',
-            'Posdoctorado',
-            'Se desconoce',
+            'SIN ESCOLARIDAD',
+            'PREESCOLAR',
+            'PRIMARIA',
+            'SECUNDARIA',
+            'CARRERA TÉCNICA',
+            'PREPARATORIA O BACHILLERATO',
+            'TÉCNICO SUPERIOR UNIVERSITARIO (TSU)',
+            'LICENCIATURA',
+            'ESPECIALIDAD',
+            'MAESTRÍA',
+            'DOCTORADO',
+            'POSDOCTORADO',
+            'SE DESCONOCE',
         ];
 
         foreach ($escolaridades as $escolaridad) {

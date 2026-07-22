@@ -13,15 +13,15 @@ class CatEstadoCivilSeeder extends Seeder
      */
     public function run(): void
     {
-         $estadosCiviles = [
-            'Soltero(a)',
-            'Casado(a)',
-            'Unión libre',
-            'Separado(a)',
-            'Divorciado(a)',
-            'Viudo(a)',
-            'Concubinato',
-            'Se desconoce',
+        $estadosCiviles = [
+            'SOLTERO(A)',
+            'CASADO(A)',
+            'UNIÓN LIBRE',
+            'SEPARADO(A)',
+            'DIVORCIADO(A)',
+            'VIUDO(A)',
+            'CONCUBINATO',
+            'SE DESCONOCE',
         ];
 
         foreach ($estadosCiviles as $estadoCivil) {

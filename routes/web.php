@@ -128,3 +128,22 @@ Route::get('admin/recepcion/pacientes/pacientesFind', [PacienteController::class
 Route::get('admin/recepcion/pacientes/pacientesSearch', [PacienteController::class,'pacientesSearch'])->name('pacientesSearch');
 
 Route::get('admin/recepcion/pacientes/pacientesCreate', [PacienteController::class,'pacientesCreate'])->name('pacientesCreate');
+
+Route::post('admin/recepcion/pacientes/pacientesStore', [PacienteController::class,'pacientesStore'])->name('pacientesStore');
+
+Route::get('admin/recepcion/pacientes/pacientesIndex', [PacienteController::class,'pacientesIndex'])->name('pacientesIndex');
+
+
+Route::get('admin/recepcion/pacientes/pacientesNoExpedienteCreate/{id}', [PacienteController::class,'pacientesNoExpedienteCreate'])->name('pacientesNoExpedienteCreate');
+
+Route::put('admin/recepcion/pacientes/pacientesNoExpedienteStore/{id}', [PacienteController::class,'pacientesNoExpedienteStore'])->name('pacientesNoExpedienteStore');
+
+
+Route::get('admin/recepcion/pacientes/pacientesDXMedicoCreate/{id}', [PacienteController::class,'pacientesDXMedicoCreate'])->name('pacientesDXMedicoCreate');
+
+Route::put('admin/recepcion/pacientes/pacientesDXMedicoStore/{id}', [PacienteController::class,'pacientesDXMedicoStore'])->name('pacientesDXMedicoStore');
+
+
+Route::get('admin/recepcion/pacientes/pacientesShow/{id}', [PacienteController::class,'pacientesShow'])->name('pacientesShow');
+
+

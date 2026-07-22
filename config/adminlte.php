@@ -323,7 +323,7 @@ return [
                 ],
                 [
                     'text' => 'Panel de Control',
-                    'url' => 'admin/pacientes/index-paciente',
+                    'url' => 'admin/recepcion/pacientes/pacientesIndex',
                     'can' => 'recepcion',
                     'icon' => 'fa-solid fa-sliders',
                 ],

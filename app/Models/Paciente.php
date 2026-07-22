@@ -25,7 +25,8 @@ class Paciente extends Model
         'celular',
         'email',
         'no_expediente',
-        'clues_id'
+        'clues_id',
+        'derechohabiencia_id'
     ];
 
     protected $casts = [

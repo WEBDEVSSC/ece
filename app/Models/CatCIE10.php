@@ -14,4 +14,12 @@ class CatCIE10 extends Model
         'no_caracteres',
         'nombre',
     ];
+
+     /**
+     * Clave y nombre del diagnóstico.
+     */
+    public function getClaveNombreAttribute()
+    {
+        return "{$this->catalog_key} - {$this->nombre}";
+    }
 }

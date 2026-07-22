@@ -26,13 +26,13 @@
 
 <div class="card">
     <div class="card-header text-right">
-        <a href="{{ route('medicosIndex') }}" class="btn btn-success btn-sm">
+        {{-- <a href="{{ route('pacientesIndex') }}" class="btn btn-success btn-sm">--}}
             <i class="fas fa-desktop mr-1"></i> PANEL DE CONTROL
         </a>
     </div>
     <div class="card-body">
 
-        <form action="{{ route('medicosStore') }}" method="POST">
+        <form action="{{ route('pacientesStore') }}" method="POST">
 
         @csrf
 
@@ -178,7 +178,7 @@
                         @endforeach
 
                     </select>
-                     @error('derechohabiencia_id')
+                    @error('derechohabiencia_id')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
 
@@ -188,7 +188,13 @@
         <div class="row mt-3">
             <div class="col-md-12">
                 <p><strong>Alergias</strong></p>
-                <textarea name="alergias" id="alergias" cols="30" rows="10" class="form-control"></textarea>
+                <textarea name="alergias" id="alergias" cols="30" rows="5" maxlength="500" class="form-control" oninput="contadorCaracteres()">{{ old('alergias') }}</textarea>
+
+                @error('alergias')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+
+                 <small class="text-muted">Caracteres utilizados:<span id="contador">0</span>/500</small>
             </div>
         </div>
 
@@ -210,6 +216,8 @@
     
 @stop
 
+@include('layouts.footer')
+
 @section('css')
     {{-- Add here extra stylesheets --}}
     {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
@@ -217,4 +225,13 @@
 
 @section('js')
     <script> console.log("Hi, I'm using the Laravel-AdminLTE package!"); </script>
+
+    <script>
+        function contadorCaracteres() {
+            let texto = document.getElementById('alergias');
+            let contador = document.getElementById('contador');
+
+            contador.textContent = texto.value.length;
+        }
+    </script>
 @stop
