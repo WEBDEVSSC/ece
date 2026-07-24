@@ -335,6 +335,34 @@ return [
                 ],
             ],
         ],
+
+        [
+            'text' => 'Mis Citas',
+            'icon' => 'fas fa-calendar-alt',
+            'submenu' => [
+                [
+                    'text' => 'Hoy',
+                    'url' => 'admin/medicos/consulta-externa/mis-citas',
+                    'can' => 'medicoConsultaExterna',
+                    'icon' => 'fas fa-calendar-day',
+                ],
+                
+            ],
+        ],
+
+        [
+            'text' => 'Citas',
+            'icon' => 'fas fa-calendar-alt',
+            'submenu' => [
+                [
+                    'text' => 'Hoy',
+                    'url' => 'admin/enfermeria/consulta-externa/citas-hoy',
+                    'can' => 'enfermeriaConsultaExterna',
+                    'icon' => 'fas fa-calendar-day',
+                ],
+                
+            ],
+        ],
     ],
 
     /*

@@ -7,6 +7,7 @@ use App\Models\CatCIE10;
 use App\Models\CatDerechohabiencia;
 use App\Models\CatEscolaridad;
 use App\Models\CatEstadoCivil;
+use App\Models\CitaConsultaExterna;
 use App\Models\Paciente;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -75,8 +76,6 @@ class PacienteController extends Controller
 
     public function pacientesStore(Request $request)
     {
-     
-    
         $request->validate([
             'curp' => 'required|string|size:18',
             'nombre' => 'required|string|max:100',
@@ -238,9 +237,13 @@ class PacienteController extends Controller
             abort(403, 'No tienes permiso para modificar este paciente.');
         }
 
+        $citasProgramadas = CitaConsultaExterna::where('paciente_id',$id)
+        ->orderBy('created_at','DESC')                
+        ->get();
+
         $edad = Carbon::parse($paciente->fecha_nacimiento)->age;
 
-        return view('pacientes.show-paciente', compact('paciente','edad'));
+        return view('pacientes.show-paciente', compact('paciente','edad','citasProgramadas'));
 
     }
 

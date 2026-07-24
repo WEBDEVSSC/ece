@@ -42,6 +42,11 @@ class CitaConsultaExterna extends Model
      */
     public function clues()
     {
-        return $this->belongsTo(CatClue::class);
+        return $this->belongsTo(CatClue::class, 'clues_id');
+    }
+
+    public function signosVitales()
+    {
+        return $this->hasOne(CitaConsultaExternaSignosVitales::class, 'cita_id');
     }
 }

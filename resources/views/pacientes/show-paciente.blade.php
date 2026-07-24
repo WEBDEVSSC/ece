@@ -137,8 +137,6 @@
         </div>
     </div>
 
-    
-
     </div>
     <div class="card-footer text-right">
         <div class="row mt-3">
@@ -146,6 +144,63 @@
                 <p><strong>CLUES</strong>
                 {{ $paciente->clues->clues_nombre }}</p>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-3">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header"></div>
+            <div class="card-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Hora</th>
+                            <th>Médico</th>
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($citasProgramadas as $cita)
+                            <tr>
+                                <td>{{ \Carbon\Carbon::parse($cita->fecha)->format('d/m/Y') }}</td>
+                                <td>{{ $cita->hora }}</td>
+                                <td>{{ $cita->medico->nombre_completo ?? 'N/A' }}</td>
+                                <td>{{ $cita->status }}</td>
+
+                                @if($cita->status == "NUEVA")
+
+                                    <td class="text-center align-middle">
+                                        <form action="{{ route('citasConsultaExternaDelete', $cita->id) }}" method="POST" class="form-eliminar" style="display: inline-block;">
+                                            @csrf
+                                            @method('DELETE')
+
+                                            <button type="submit" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="ELIMINAR CITA"> <i class="fas fa-trash"></i> </button>
+                                        </form>
+                                    </td>
+
+                                @else
+
+                                    <td class="text-center align-middle">
+                                        <a href="{{ route('citasConsultaExternaShow',$cita->id) }}" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="VER CITA"><i class="fas fa-eye"></i></a>
+                                    </td>
+
+                                @endif
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="5" class="text-center text-muted">
+                                    No hay citas programadas.
+                                </td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer"></div>
         </div>
     </div>
 </div>
@@ -211,7 +266,7 @@
 
                 Swal.fire({
                     title: '¿Está seguro?',
-                    text: "El médico será eliminado del sistema.",
+                    text: "La cita será eliminada del sistema.",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#d33',

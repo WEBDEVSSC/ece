@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\CitaConsultaExternaController;
+use App\Http\Controllers\MedicoConsultaExternaController;
 use App\Http\Controllers\MedicoController;
 use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\SignosVitalesConsultaExternaController;
 use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -150,7 +152,7 @@ Route::get('admin/recepcion/pacientes/pacientesShow/{id}', [PacienteController::
 /*******************************************************************************************
  * 
  * 
- * MODULO DE CITAS DE CONSULTA EXTERNA
+ * MODULO DE CITAS DE CONSULTA EXTERNA - RECEPCION
  * 
  * 
  ******************************************************************************************/
@@ -160,6 +162,36 @@ Route::get('admin/recepcion/consulta-externa/citas-buscar', [CitaConsultaExterna
 Route::get('admin/recepcion/consulta-externa/citas-mostrar', [CitaConsultaExternaController::class,'citasConsultaExternaFind'])->name('citasConsultaExternaFind');
 
 Route::post('admin/recepcion/consulta-externa/citas-store', [CitaConsultaExternaController::class,'citasConsultaExternaStore'])->name('citasConsultaExternaStore');
+
+Route::delete('admin/recepcion/consulta-externa/citas-delete/{id}', [CitaConsultaExternaController::class,'citasConsultaExternaDelete'])->name('citasConsultaExternaDelete');
+
+Route::get('admin/recepcion/consulta-externa/citas-show/{id}', [CitaConsultaExternaController::class,'citasConsultaExternaShow'])->name('citasConsultaExternaShow');
+
+/*******************************************************************************************
+ * 
+ * 
+ * MODULO DE CITAS DE CONSULTA EXTERNA - MEDICOS
+ * 
+ * 
+ ******************************************************************************************/
+
+Route::get('admin/medicos/consulta-externa/mis-citas',[MedicoConsultaExternaController::class, 'medicoMisCitasIndex'])->name('medicoMisCitasIndex');
+
+/*******************************************************************************************
+ * 
+ * 
+ * MODULO DE CITAS DE CONSULTA EXTERNA - ENFERMERIA
+ * 
+ * 
+ ******************************************************************************************/
+
+Route::get('admin/enfermeria/consulta-externa/citas-hoy', [SignosVitalesConsultaExternaController::class, 'SignosVitalesConsultaExternaIndex'])->name('SignosVitalesConsultaExternaIndex');
+
+Route::get('admin/enfermeria/consulta-externa/signos-vitales-show/{id}', [SignosVitalesConsultaExternaController::class, 'SignosVitalesShow'])->name('SignosVitalesShow');
+
+Route::get('admin/enfermeria/consulta-externa/signos-vitales-create/{id}', [SignosVitalesConsultaExternaController::class, 'SignosVitalesCreate'])->name('SignosVitalesCreate');
+
+Route::post('admin/enfermeria/consulta-externa/signos-vitales-store/{id}', [SignosVitalesConsultaExternaController::class, 'SignosVitalesStore'])->name('SignosVitalesStore');
 
 
 

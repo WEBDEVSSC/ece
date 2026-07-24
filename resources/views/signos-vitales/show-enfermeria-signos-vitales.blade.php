@@ -8,7 +8,7 @@
 @section('plugins.Select2', true)
 
 @section('content_header')
-    <h1><strong>Pacientes</strong> <small class="text-muted">Asignar Diagnóstico</small></h1>
+    <h1><strong>Signos Vitales</strong> <small class="text-muted">Detalles</small></h1>
 @stop
 
 @section('content')
@@ -56,7 +56,7 @@
 
                     <div class="col-md-11">
                         <h4 class="mb-1 font-weight-bold">
-                            {{ $paciente->nombre_completo }}
+                            {{ $signosVitales->cita->paciente->nombre_completo }}
                         </h4>
                     </div>
                 </div>
@@ -67,44 +67,71 @@
 
 <div class="card">
     <div class="card-header text-right">
-        <a href="{{ route('pacientesShow', $paciente->id) }}" class="btn btn-success btn-sm"><i class="fas fa-plus"></i> EXPEDIENTE</a>
+        
     </div>
     <div class="card-body">
 
-    <form action={{ route('pacientesDXMedicoStore', $paciente->id) }} method="POST">
-
-    @csrf
-
-    @method('PUT')
-
-        <div class="row">
-            <div class="col-md-6">
-                <p><strong>Diagnóstico Médico</strong> <small class="text-muted">Seleccione el diagnóstico correspondiente conforme al catálogo CIE-10.</small></p>
-                <select name="diagnostico_medico_id" id="diagnostico_medico_id" class="form-control select2">
-                    <option value="">Seleccione un diagnóstico</option>
-
-                    @foreach($diagnosticos as $diagnostico)
-                        <option value="{{ $diagnostico->id }}"
-                            {{ old('diagnostico_medico_id', $paciente->diagnostico_medico_id) == $diagnostico->id ? 'selected' : '' }}>
-                            {{ $diagnostico->clave_nombre }}
-                        </option>
-                    @endforeach
-                </select>
-
-                @error('diagnostico_medico_id')
-                    <div class="text-danger">{{ $message }}</div>
-                @enderror
-            </div>
+    <div class="row">
+        <div class="col-md-2">
+            <p><strong>Temperatura</strong></p>
+            {{ $signosVitales->temperatura }} °C
         </div>
 
+        <div class="col-md-2">
+            <p><strong>Frecuencia Cardiaca</strong></p>
+            {{ $signosVitales->frecuencia_cardiaca }}
+        </div>
+
+        <div class="col-md-2">
+            <p><strong>Frecuencia Respiratoria</strong></p>
+            {{ $signosVitales->frecuencia_respiratoria }}
+        </div>
+
+        <div class="col-md-2">
+            <p><strong>Saturación de Oxigeno</strong></p>
+            {{ $signosVitales->saturacion_oxigeno }}
+        </div>
+
+        <div class="col-md-2">
+            <p><strong>Tensión Arterial</strong></p>
+            {{ $signosVitales->tension_arterial_sistolica }} / {{ $signosVitales->tension_arterial_diastolica }}
+        </div>
+
+        <div class="col-md-2">
+            <p><strong>Glicema Capilar</strong></p>
+            {{ $signosVitales->glicemia_capilar }} / {{ $signosVitales->glicemia_capilar_medicion == '1' ? 'AYUNO' : 'CASUAL' }}
+        </div>
     </div>
-    <div class="card-footer text-right">
-        <button type="submit" class="btn btn-success btn-sm">
-            <i class="fas fa-save mr-1"></i> REGISTRAR DATOS
-        </button>
+
+    <div class="row mt-3">
+        <div class="col-md-2">
+            <p><strong>Circunferencia Cintura</strong></p>
+            {{ $signosVitales->circunferencia_cintura }}
+        </div>
+
+        <div class="col-md-2">
+            <p><strong>Peso</strong></p>
+            {{ $signosVitales->peso }}
+        </div>
+
+        <div class="col-md-2">
+            <p><strong>Talla</strong></p>
+            {{ $signosVitales->talla }}
+        </div>
+
+        <div class="col-md-2">
+            <p><strong>IMC</strong></p>
+            {{ $signosVitales->imc }}
+        </div>
     </div>
-    </form>
+
+    
+
+    
 </div>
+</div>
+
+
 
     
 @stop
@@ -167,7 +194,7 @@
 
                 Swal.fire({
                     title: '¿Está seguro?',
-                    text: "El médico será eliminado del sistema.",
+                    text: "La cita será eliminada del sistema.",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#d33',

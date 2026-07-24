@@ -120,4 +120,19 @@ class CitaConsultaExternaController extends Controller
         return redirect()->route('citasConsultaExternaSearch')->with('success', 'La cita ha sido agendada correctamente.');
     }
 
+    public function citasConsultaExternaDelete(String $id)
+    {
+        $citaConsultaExterna = CitaConsultaExterna::findOrFail($id);
+
+        $login = Auth::user();
+
+        if ($citaConsultaExterna->clues_id !== $login->clues_id) {
+            abort(403, 'No tienes permiso para eliminar esta cita.');
+        }
+
+        $citaConsultaExterna->delete();
+
+        return redirect()->route('pacientesShow',$citaConsultaExterna->paciente_id)->with('success', 'La cita ha sido eliminada correctamente.');
+    }
+
 }

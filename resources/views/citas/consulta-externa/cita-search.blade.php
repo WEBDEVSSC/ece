@@ -118,14 +118,14 @@
 
 <div class="card">
     <div class="card-header">
-        <label for="">Horarios disponibles</label>
+        <label for="">Disponibilidad de atención</label>
     </div>
     <div class="card-body">
 
         <table class="table table-striped">
     <thead>
         <tr>
-            <th>Médico</th>
+            <th></th>
             <th class="text-center">Lunes</th>
             <th class="text-center">Martes</th>
             <th class="text-center">Miércoles</th>
