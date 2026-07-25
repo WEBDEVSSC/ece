@@ -363,6 +363,28 @@ return [
                 
             ],
         ],
+
+        /**
+         * 
+         * 
+         * CONSULTA EXTERNA - LABORATORIO
+         * 
+         * 
+         */
+
+        [
+            'text' => 'Citas',
+            'icon' => 'fas fa-calendar-alt',
+            'submenu' => [
+                [
+                    'text' => 'Hoy',
+                    'url' => 'admin/enfermeria/consulta-externa/laboratorios/citas-hoy',
+                    'can' => 'laboratorioConsultaExterna',
+                    'icon' => 'fas fa-calendar-day',
+                ],
+                
+            ],
+        ],
     ],
 
     /*

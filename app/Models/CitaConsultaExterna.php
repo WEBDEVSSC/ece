@@ -45,8 +45,19 @@ class CitaConsultaExterna extends Model
         return $this->belongsTo(CatClue::class, 'clues_id');
     }
 
+    /**
+     * Signos vitales de la cita
+     */
     public function signosVitales()
     {
         return $this->hasOne(CitaConsultaExternaSignosVitales::class, 'cita_id');
+    }
+
+    /**
+     * Resultados de laboratorio de la cita.
+     */
+    public function laboratorio()
+    {
+        return $this->hasOne(CitaConsultaExternaLaboratorio::class, 'cita_id');
     }
 }

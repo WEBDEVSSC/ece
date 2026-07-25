@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CitaConsultaExternaController;
+use App\Http\Controllers\CitaConsultaExternaLaboratorioController;
 use App\Http\Controllers\MedicoConsultaExternaController;
 use App\Http\Controllers\MedicoController;
 use App\Http\Controllers\PacienteController;
@@ -192,6 +193,22 @@ Route::get('admin/enfermeria/consulta-externa/signos-vitales-show/{id}', [Signos
 Route::get('admin/enfermeria/consulta-externa/signos-vitales-create/{id}', [SignosVitalesConsultaExternaController::class, 'SignosVitalesCreate'])->name('SignosVitalesCreate');
 
 Route::post('admin/enfermeria/consulta-externa/signos-vitales-store/{id}', [SignosVitalesConsultaExternaController::class, 'SignosVitalesStore'])->name('SignosVitalesStore');
+
+/*******************************************************************************************
+ * 
+ * 
+ * MODULO DE CITAS DE CONSULTA EXTERNA - LABORATORIOS
+ * 
+ * 
+ ******************************************************************************************/
+
+Route::get('admin/enfermeria/consulta-externa/laboratorios/citas-hoy', [CitaConsultaExternaLaboratorioController::class, 'ConsultaExternaLaboratorioIndex'])->name('ConsultaExternaLaboratorioIndex');
+
+Route::get('admin/enfermeria/consulta-externa/laboratorios/laboratorios-show/{id}', [CitaConsultaExternaLaboratorioController::class, 'ConsultaExternaLaboratorioShow'])->name('ConsultaExternaLaboratorioShow');
+
+Route::get('admin/enfermeria/consulta-externa/laboratorios/laboratorios-create/{id}', [CitaConsultaExternaLaboratorioController::class, 'ConsultaExternaLaboratorioCreate'])->name('ConsultaExternaLaboratorioCreate');
+
+Route::post('admin/enfermeria/consulta-externa/laboratorios/laboratorios-store/{id}', [CitaConsultaExternaLaboratorioController::class, 'ConsultaExternaLaboratorioStore'])->name('ConsultaExternaLaboratorioStore');
 
 
 
