@@ -6,7 +6,7 @@
 @section('plugins.Sweetalert2', true)
 
 @section('content_header')
-    <h1><strong>Usuarios</strong> <small class="text-muted">Panel de Control</small></h1>
+    <h1><strong>Valoración Podológica</strong> <small class="text-muted">Citas de Hoy</small></h1>
 @stop
 
 @section('content')
@@ -40,43 +40,37 @@
 
 <div class="card">
     <div class="card-header text-right">
-        <a href="{{ route('usuariosCreate') }}" class="btn btn-success btn-sm"><i class="fas fa-plus"></i> NUEVO REGISTRO</a>
+        
     </div>
     <div class="card-body">
 
         <table class="table">
         <thead>
             <tr>
-                <th>Nombre</th>
-                <th>E-mail</th>
-                <th>Unidad</th>
-                <th>Rol</th>
+                <th>Hora</th>
+                <th>Paciente</th>                
+                <th>Diagnóstico</th>                
                 <th>Médico</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            @foreach($usuarios as $usuario)
+            @foreach($citasHoy as $citaHoy)
                 <tr>
-                    <td>{{ $usuario->name }}</td>
-                    <td>{{ $usuario->email }}</td>
-                    <td>{{ $usuario->clues ? $usuario->clues->clues_nombre : '' }}</td>
-                    <td>{{ $usuario->rol?->rol ?? '' }}</td>
-                    <td>{{ $usuario->medico ? $usuario->medico->nombre_completo : '' }}</td>
+                    <td>{{ $citaHoy->hora }}</td>
+                    <td>{{ $citaHoy->paciente->nombre_completo }}</td>
+                    <td>{{ $citaHoy->paciente->diagnosticoMedico->clave_nombre }}</td>
+                    <td>{{ $citaHoy->medico->nombre_completo }}</td>
+                    
 
                     <td class="text-right">
-                        <a href="{{ route('usuariosShow', $usuario->id) }}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="DETALLES"><i class="fas fa-eye"></i></a>
-
-                        <a href="{{ route('usuariosEdit', $usuario->id) }}" class="btn btn-secondary btn-sm" data-toggle="tooltip" data-placement="top" title="EDITAR"><i class="fas fa-edit"></i></a>
-
-                        <a href="{{ route('createUsuarioMedico', $usuario->id) }}" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="ASIGNAR MÉDICO"><i class="fas fa-user-md"></i></a>
-
-                        <form action="{{ route('usuariosDestroy', $usuario->id) }}" method="POST" class="form-eliminar" style="display: inline-block;">
-                            @csrf
-                            @method('DELETE')
-
-                            <button type="submit" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="ELIMINAR"> <i class="fas fa-trash"></i> </button>
-                        </form>
+                        
+                        @if ($citaHoy->status_valoracion_podologica == 0)
+                            <a href="{{ route('UnemeEnfermeriaValoracionPodologicaCreate', $citaHoy->id) }}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="VALORACION PODOLOGICA"><i class="fas fa-shoe-prints"></i></a>
+                        @else
+                            <a href="{{ route('UnemeEnfermeriaValoracionPodologicaShow', $citaHoy->id) }}" class="btn btn-dark btn-sm" data-toggle="tooltip" data-placement="top" title="VER VALORACION PODOLOGICA"><i class="fas fa-shoe-prints"></i></a>
+                        @endif
+                        
                     </td>
                 </tr>
             @endforeach
@@ -89,6 +83,8 @@
 
     
 @stop
+
+@include('layouts.footer')
 
 @section('css')
     {{-- Add here extra stylesheets --}}

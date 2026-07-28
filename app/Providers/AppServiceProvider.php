@@ -24,7 +24,11 @@ class AppServiceProvider extends ServiceProvider
         //
         Schema::defaultStringLength(191);
 
-        Gate::define('root', function ($user) {
+        Gate::before(function ($user, $ability) {
+            return optional($user->rol)->rol === $ability ? true : null;
+        });
+
+        /*Gate::define('root', function ($user) {
             return $user->role === 'root';
         });
 
@@ -42,6 +46,6 @@ class AppServiceProvider extends ServiceProvider
 
         Gate::define('laboratorioConsultaExterna', function ($user) {
             return $user->role === 'laboratorioConsultaExterna';
-        });
+        });*/
     }
 }

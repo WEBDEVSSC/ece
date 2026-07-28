@@ -74,7 +74,7 @@
                 <select name="rol" id="rol" class="form-control">
                     <option value="">Seleccione una opción</option>
                     @foreach($roles as $rol)
-                        <option value="{{ $rol->rol }}" {{ old('rol', $usuario->role) == $rol->rol ? 'selected' : '' }}>
+                        <option value="{{ $rol->id }}" {{ old('rol', $usuario->id) == $rol->id ? 'selected' : '' }}>
                             {{ $rol->rol }}
                         </option>
                     @endforeach

@@ -2,12 +2,13 @@
 
 use App\Http\Controllers\CitaConsultaExternaController;
 use App\Http\Controllers\CitaConsultaExternaLaboratorioController;
+use App\Http\Controllers\CitaConsultaExternaSignosVitalesController;
 use App\Http\Controllers\MedicoConsultaExternaController;
 use App\Http\Controllers\MedicoController;
 use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\SettingsController;
-use App\Http\Controllers\SignosVitalesConsultaExternaController;
+use App\Http\Controllers\UnemeEnfermeriaValoracionPodologicaController;
 use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -186,13 +187,13 @@ Route::get('admin/medicos/consulta-externa/mis-citas',[MedicoConsultaExternaCont
  * 
  ******************************************************************************************/
 
-Route::get('admin/enfermeria/consulta-externa/citas-hoy', [SignosVitalesConsultaExternaController::class, 'SignosVitalesConsultaExternaIndex'])->name('SignosVitalesConsultaExternaIndex');
+Route::get('admin/enfermeria/consulta-externa/citas-hoy', [CitaConsultaExternaSignosVitalesController::class, 'SignosVitalesConsultaExternaIndex'])->name('SignosVitalesConsultaExternaIndex');
 
-Route::get('admin/enfermeria/consulta-externa/signos-vitales-show/{id}', [SignosVitalesConsultaExternaController::class, 'SignosVitalesShow'])->name('SignosVitalesShow');
+Route::get('admin/enfermeria/consulta-externa/signos-vitales-show/{id}', [CitaConsultaExternaSignosVitalesController::class, 'SignosVitalesShow'])->name('SignosVitalesShow');
 
-Route::get('admin/enfermeria/consulta-externa/signos-vitales-create/{id}', [SignosVitalesConsultaExternaController::class, 'SignosVitalesCreate'])->name('SignosVitalesCreate');
+Route::get('admin/enfermeria/consulta-externa/signos-vitales-create/{id}', [CitaConsultaExternaSignosVitalesController::class, 'SignosVitalesCreate'])->name('SignosVitalesCreate');
 
-Route::post('admin/enfermeria/consulta-externa/signos-vitales-store/{id}', [SignosVitalesConsultaExternaController::class, 'SignosVitalesStore'])->name('SignosVitalesStore');
+Route::post('admin/enfermeria/consulta-externa/signos-vitales-store/{id}', [CitaConsultaExternaSignosVitalesController::class, 'SignosVitalesStore'])->name('SignosVitalesStore');
 
 /*******************************************************************************************
  * 
@@ -209,6 +210,22 @@ Route::get('admin/enfermeria/consulta-externa/laboratorios/laboratorios-show/{id
 Route::get('admin/enfermeria/consulta-externa/laboratorios/laboratorios-create/{id}', [CitaConsultaExternaLaboratorioController::class, 'ConsultaExternaLaboratorioCreate'])->name('ConsultaExternaLaboratorioCreate');
 
 Route::post('admin/enfermeria/consulta-externa/laboratorios/laboratorios-store/{id}', [CitaConsultaExternaLaboratorioController::class, 'ConsultaExternaLaboratorioStore'])->name('ConsultaExternaLaboratorioStore');
+
+/*******************************************************************************************
+ * 
+ * 
+ * UNEMES - ENFERMERIA - VALORACION PODOLOGICA
+ * 
+ * 
+ ******************************************************************************************/
+
+Route::get('admin/enfermeria/consulta-externa/valoracion-podologica/citas-hoy', [UnemeEnfermeriaValoracionPodologicaController::class, 'UnemeEnfermeriaValoracionPodologicaIndex'])->name('UnemeEnfermeriaValoracionPodologicaIndex');
+
+Route::get('admin/enfermeria/consulta-externa/valoracion-podologica/valoracion-podologica-show/{id}', [UnemeEnfermeriaValoracionPodologicaController::class, 'UnemeEnfermeriaValoracionPodologicaShow'])->name('UnemeEnfermeriaValoracionPodologicaShow');
+
+Route::get('admin/enfermeria/consulta-externa/valoracion-podologica/valoracion-podologica-create/{id}', [UnemeEnfermeriaValoracionPodologicaController::class, 'UnemeEnfermeriaValoracionPodologicaCreate'])->name('UnemeEnfermeriaValoracionPodologicaCreate');
+
+Route::post('admin/enfermeria/consulta-externa/valoracion-podologica/valoracion-podologica-store/{id}', [UnemeEnfermeriaValoracionPodologicaController::class, 'UnemeEnfermeriaValoracionPodologicaStore'])->name('UnemeEnfermeriaValoracionPodologicaStore');
 
 
 

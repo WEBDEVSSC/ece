@@ -74,10 +74,10 @@ class UsuarioController extends Controller
 
         $usuario = new User();
 
-        $usuario->name = $request->input('name');
-        $usuario->email = $request->input('email');
-        $usuario->password = bcrypt($request->input('password'));
-        $usuario->role = $request->input('rol');
+        $usuario->name = $request->name;
+        $usuario->email = $request->email;
+        $usuario->password = bcrypt($request->password);
+        $usuario->role_id = $request->rol;
         $usuario->clues_id = $login->clues_id;
 
         $usuario->save();
@@ -128,13 +128,15 @@ class UsuarioController extends Controller
 
         $usuario = User::findOrFail($id);
 
-        $usuario->name = $request->input('name');
-        $usuario->email = $request->input('email');
-        if ($request->filled('password')) 
+        $usuario->name = $request->name;
+        $usuario->email = $request->email;
+
+        if ($request->password) 
         {
-            $usuario->password = bcrypt($request->input('password'));
+            $usuario->password = bcrypt($request->password);
         }
-        $usuario->role = $request->input('rol');
+
+        $usuario->role_id = $request->rol;
 
         $usuario->save();
 

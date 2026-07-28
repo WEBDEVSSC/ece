@@ -7,7 +7,7 @@ use App\Models\CitaConsultaExterna;
 use App\Models\CitaConsultaExternaSignosVitales;
 use Illuminate\Http\Request;
 
-class SignosVitalesConsultaExternaController extends Controller
+class CitaConsultaExternaSignosVitalesController extends Controller
 {
     public function SignosVitalesConsultaExternaIndex()
     {

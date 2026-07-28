@@ -9,21 +9,6 @@
 
 @section('content')
 
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <h5>
-            <i class="fas fa-exclamation-triangle"></i>
-            Se encontraron los siguientes errores:
-        </h5>
-
-        <ul class="mb-0">
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
-
 <div class="card">
     <div class="card-header text-right">
         <a href="{{ route('usuariosIndex') }}" class="btn btn-success btn-sm">
@@ -72,7 +57,7 @@
                 <select name="rol" id="rol" class="form-control">
                     <option value="">Seleccione una opción</option>
                     @foreach($roles as $rol)
-                        <option value="{{ $rol->rol }}" {{ old('rol') == $rol->rol ? 'selected' : '' }}>
+                        <option value="{{ $rol->id }}" {{ old('rol') == $rol->id ? 'selected' : '' }}>
                             {{ $rol->rol }}
                         </option>
                     @endforeach

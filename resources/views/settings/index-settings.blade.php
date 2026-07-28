@@ -82,15 +82,15 @@
             </div>
 
             <div class="col-md-3">
-                <a href="{{ route('medicosIndex') }}" class="text-decoration-none">
+                <a href="{{ route('rolesIndex') }}" class="text-decoration-none">
                     <div class="small-box bg-gradient-info elevation-3">
                         <div class="inner">
-                            <h4 class="font-weight-bold">MÉDICOS</h4>
-                            <p>Catálogo de Médicos</p>
+                            <h4 class="font-weight-bold">ROLES</h4>
+                            <p>Catálogo de Roles</p>
                         </div>
 
                         <div class="icon">
-                            <i class="fas fa-user-md"></i>
+                            <i class="fas fa-users-cog"></i>
                         </div>
 
                         <span class="small-box-footer">
@@ -124,18 +124,6 @@
     </div>
     
 </div>
-
-<div class="form-group">
-    <label>Fecha de nacimiento</label>
-
-    <input
-        type="text"
-        id="fecha"
-        name="fecha"
-        class="form-control"
-        placeholder="Seleccione una fecha">
-</div>
-
     
 @stop
 
@@ -148,22 +136,5 @@
 @stop
 
 @section('js')
-    <script> console.log("Hi, I'm using the Laravel-AdminLTE package!"); </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="https://npmcdn.com/flatpickr/dist/l10n/es.js"></script>
-
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-
-    flatpickr("#fecha", {
-        locale: "es",
-        dateFormat: "Y-m-d",
-        allowInput: true
-    });
-
-});
-</script>
-
-    
+    <script> console.log("Hi, I'm using the Laravel-AdminLTE package!"); </script>    
 @stop

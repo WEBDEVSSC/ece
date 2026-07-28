@@ -46,6 +46,11 @@ class User extends Authenticatable
         ];
     }
 
+    public function rol()
+    {
+        return $this->belongsTo(Rol::class, 'role_id');
+    }
+
     public function clues()
     {
         return $this->belongsTo(CatClue::class, 'clues_id', 'id');
