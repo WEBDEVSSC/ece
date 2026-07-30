@@ -12,6 +12,7 @@ use App\Models\Paciente;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class PacienteController extends Controller
 {
@@ -160,6 +161,24 @@ class PacienteController extends Controller
         return view('pacientes.index-paciente', compact('pacientes'));
     }
 
+    public function pacientesEdit(String $id)
+    {
+        $paciente = Paciente::findOrFail($id);
+
+        $escolaridades = CatEscolaridad::all();
+
+        $estadosCivil = CatEstadoCivil::all();
+
+        $derechohabiencias = CatDerechohabiencia::all();
+
+        return view('pacientes.edit-paciente', compact('paciente','escolaridades','estadosCivil','derechohabiencias'));
+    }
+
+    public function pacientesUpdate(Request $request, String $id)
+    {
+        dd($request->all());
+    }
+
     public function pacientesDXMedicoCreate(String $id)
     {
         $paciente = Paciente::findOrFail($id);
@@ -247,4 +266,21 @@ class PacienteController extends Controller
 
     }
 
+    public function pacientesResumenMedico(String $id)
+    {
+        $paciente = Paciente::findOrFail($id);
+
+        $edad = Carbon::parse($paciente->fecha_nacimiento)->age;
+
+        $citasProgramadas = CitaConsultaExterna::where('paciente_id',$id)
+            ->orderBy('created_at','DESC')                
+            ->get();
+
+        $pdf = Pdf::loadView(
+            'pacientes.show-resumen-medico',
+            compact('paciente','edad','citasProgramadas')
+        );
+
+        return $pdf->stream($paciente->curp.'pdf');
+    }
 }

@@ -1,24 +1,32 @@
-
 @extends('adminlte::page')
 
-@section('title', 'Dashboard')
+@section('title', 'Toma de Resultados de Laboratorio')
 
 @section('plugins.Sweetalert2', true)
 
 @section('content_header')
-    <h1><strong>Laboratorios</strong> <small class="text-muted">Toma de Resultados</small></h1>
+    <div class="container-fluid">
+        <div class="row mb-2 align-items-center">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark font-weight-bold" style="font-size: 1.6rem;">
+                    Laboratorios
+                </h1>
+                <p class="text-muted small mb-0">Toma y registro de resultados de laboratorio</p>
+            </div>
+            <div class="col-sm-6 text-right">
+                <span class="badge bg-white shadow-sm px-3 py-2 text-dark font-weight-normal border">
+                    <i class="far fa-calendar-alt text-primary mr-2"></i>
+                    {{ \Carbon\Carbon::now()->isoFormat('D [de] MMMM, YYYY') }}
+                </span>
+            </div>
+        </div>
+    </div>
 @stop
 
 @section('content')
 
-<!-- -->
-
 @php
-    $alerts = [
-        'success',
-        'update',
-        'destroy',
-    ];
+    $alerts = ['success', 'update', 'destroy'];
 @endphp
 
 @foreach ($alerts as $alert)
@@ -26,147 +34,177 @@
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 Swal.fire({
-                    title: 'Éxito',
-                    text: "{{ session($alert) }}",
+                    toast: true,
+                    position: 'top-end',
                     icon: 'success',
-                    confirmButtonText: 'Ok'
+                    title: "{{ session($alert) }}",
+                    showConfirmButton: false,
+                    timer: 3500,
+                    timerProgressBar: true
                 });
             });
         </script>
     @endif
 @endforeach
 
-<!-- -->
+<div class="container-fluid">
 
-<div class="card">
-    <div class="card-header text-right">
-        
-    </div>
-    <div class="card-body">
-
-        <form action="{{ route('ConsultaExternaLaboratorioStore',$citaId->id); }}" method="POST">
-
-        @csrf
-
-        <div class="row">
-            <div class="col-md-2">
-                <p><strong>HbA1c (%)</strong></p>
-                <input type="number" name="hemoglobina" id="hemoglobina" class="form-control" value="{{ old('hemoglobina') }}">
-                @error('hemoglobina')
-                    <div class="text-danger">{{ $message }}</div>
-                @enderror
-            </div>
-
-            <div class="col-md-2">
-                <p><strong>Glucosa Sérica (70 y 100 mg/dL.)</strong></p>
-                <input type="number" name="glucosa_serica" id="glucosa_serica" class="form-control" value="{{ old('glucosa_serica') }}">
-                @error('glucosa_serica')
-                    <div class="text-danger">{{ $message }}</div>
-                @enderror
-            </div>
-
-            <div class="col-md-2">
-                <p><strong>Triglicéridos (mg/dL)</strong></p>
-                <input type="number" name="trigliceridos" id="trigliceridos" class="form-control" value="{{ old('trigliceridos') }}">
-                @error('trigliceridos')
-                    <div class="text-danger">{{ $message }}</div>
-                @enderror
-            </div>
-
-            <div class="col-md-2">
-                <p><strong>Colesterol (LDL)</strong></p>
-                <input type="number" name="colesterol_ldl" id="colesterol_ldl" class="form-control" value="{{ old('colesterol_ldl') }}">
-                @error('colesterol_ldl')
-                    <div class="text-danger">{{ $message }}</div>
-                @enderror
-            </div>
-
-            <div class="col-md-2">
-                <p><strong>Colesterol (HDL)</strong></p>
-                <input type="number" name="colesterol_hdl" id="colesterol_hdl" class="form-control" value="{{ old('colesterol_hdl') }}">
-                @error('colesterol_hdl')
-                    <div class="text-danger">{{ $message }}</div>
-                @enderror
-            </div>
-
-            <div class="col-md-2">
-                <p><strong>Colesterol (Total)</strong></p>
-                <input type="number" name="colesterol_total" id="colesterol_total" class="form-control" value="{{ old('colesterol_total') }}">
-                @error('colesterol_total')
-                    <div class="text-danger">{{ $message }}</div>
-                @enderror
-            </div>
-
+    <!-- Tarjeta de Información del Paciente -->
+    <div class="card card-outline card-info shadow-sm border-0 mb-4">
+        <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+            <h3 class="card-title text-bold text-dark mb-0" style="font-size: 1.1rem;">
+                <i class="fas fa-user-injured text-info mr-2"></i>
+                Datos del Paciente
+            </h3>
+            <span class="badge badge-light border text-muted px-2 py-1">
+                Expediente: <strong class="text-dark">{{ $citaId->paciente->expediente ?? 'N/E' }}</strong>
+            </span>
         </div>
+        <div class="card-body bg-light">
+            <div class="row align-items-center">
+                <!-- Nombre y Datos Rápidos -->
+                <div class="col-md-5 border-right">
+                    <div class="d-flex align-items-center">
+                        <div class="rounded-circle bg-white shadow-sm d-flex align-items-center justify-content-center mr-3 text-info font-weight-bold" style="width: 50px; height: 50px; font-size: 1.2rem;">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div>
+                            <h5 class="font-weight-bold text-dark mb-1">
+                                {{ $citaId->paciente->nombre ?? 'N/A' }} {{ $citaId->paciente->apellido_paterno ?? '' }} {{ $citaId->paciente->apellido_materno ?? '' }}
+                            </h5>
+                            <span class="badge badge-info">
+                                {{ $citaId->paciente->genero ?? 'No especificado' }}
+                            </span>
+                            <span class="badge badge-secondary ml-1">
+                                {{ $citaId->paciente->edad ?? '--' }} Años
+                            </span>
+                        </div>
+                    </div>
+                </div>
 
-        <div class="row mt-3">
-            <div class="col-md-2">
-                <p><strong>Microalbuminuria (mg)</strong></p>
-                <input type="number" name="microalbuminuria" id="microalbuminuria" class="form-control" value="{{ old('microalbuminuria') }}">
-                @error('microalbuminuria')
-                    <div class="text-danger">{{ $message }}</div>
-                @enderror
+                <!-- Detalle de Cita y Documento -->
+                <div class="col-md-7 mt-3 mt-md-0">
+                    <div class="row text-center text-md-left">
+                        <div class="col-sm-4 border-right">
+                            <small class="text-muted text-uppercase d-block font-weight-bold style-label">DNI / CURP</small>
+                            <span class="font-weight-bold text-dark">{{ $citaId->paciente->curp ?? 'Sin registro' }}</span>
+                        </div>
+                        <div class="col-sm-4 border-right">
+                            <small class="text-muted text-uppercase d-block font-weight-bold style-label">Fecha Nacimiento</small>
+                            <span class="font-weight-bold text-dark">
+                                {{ isset($citaId->paciente->fecha_nacimiento) ? \Carbon\Carbon::parse($citaId->paciente->fecha_nacimiento)->format('d/m/Y') : 'N/A' }}
+                            </span>
+                        </div>
+                        <div class="col-sm-4">
+                            <small class="text-muted text-uppercase d-block font-weight-bold style-label">Teléfono</small>
+                            <span class="font-weight-bold text-dark">{{ $citaId->paciente->telefono ?? 'Sin teléfono' }}</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+    </div>
 
+    <!-- Tarjeta Formulario de Resultados de Laboratorio -->
+    <div class="card card-outline card-primary shadow-sm border-0">
+        <div class="card-header bg-white py-3">
+            <h3 class="card-title text-bold text-dark mb-0" style="font-size: 1.1rem;">
+                <i class="fas fa-vials text-primary mr-2"></i>
+                Registro de Resultados de Laboratorio
+            </h3>
+        </div>
+
+        <form action="{{ route('ConsultaExternaLaboratorioStore', $citaId->id) }}" method="POST">
+            @csrf
+
+            <div class="card-body p-4">
+                <div class="row">
+                    <div class="col-md-2 mb-3">
+                        <label for="hemoglobina" class="form-label font-weight-bold text-muted small text-uppercase">HbA1c (%)</label>
+                        <input type="number" step="0.01" name="hemoglobina" id="hemoglobina" class="form-control" value="{{ old('hemoglobina') }}" placeholder="Ej. 6.5">
+                        @error('hemoglobina')
+                            <div class="text-danger small mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="col-md-2 mb-3">
+                        <label for="glucosa_serica" class="form-label font-weight-bold text-muted small text-uppercase">Glucosa Sérica (mg/dL)</label>
+                        <input type="number" step="0.01" name="glucosa_serica" id="glucosa_serica" class="form-control" value="{{ old('glucosa_serica') }}" placeholder="70 - 100">
+                        @error('glucosa_serica')
+                            <div class="text-danger small mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="col-md-2 mb-3">
+                        <label for="trigliceridos" class="form-label font-weight-bold text-muted small text-uppercase">Triglicéridos (mg/dL)</label>
+                        <input type="number" step="0.01" name="trigliceridos" id="trigliceridos" class="form-control" value="{{ old('trigliceridos') }}" placeholder="Ej. 150">
+                        @error('trigliceridos')
+                            <div class="text-danger small mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="col-md-2 mb-3">
+                        <label for="colesterol_ldl" class="form-label font-weight-bold text-muted small text-uppercase">Colesterol (LDL)</label>
+                        <input type="number" step="0.01" name="colesterol_ldl" id="colesterol_ldl" class="form-control" value="{{ old('colesterol_ldl') }}" placeholder="Ej. 100">
+                        @error('colesterol_ldl')
+                            <div class="text-danger small mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="col-md-2 mb-3">
+                        <label for="colesterol_hdl" class="form-label font-weight-bold text-muted small text-uppercase">Colesterol (HDL)</label>
+                        <input type="number" step="0.01" name="colesterol_hdl" id="colesterol_hdl" class="form-control" value="{{ old('colesterol_hdl') }}" placeholder="Ej. 50">
+                        @error('colesterol_hdl')
+                            <div class="text-danger small mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="col-md-2 mb-3">
+                        <label for="colesterol_total" class="form-label font-weight-bold text-muted small text-uppercase">Colesterol Total</label>
+                        <input type="number" step="0.01" name="colesterol_total" id="colesterol_total" class="form-control" value="{{ old('colesterol_total') }}" placeholder="Ej. 200">
+                        @error('colesterol_total')
+                            <div class="text-danger small mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="row border-top pt-3 mt-2">
+                    <div class="col-md-2 mb-3">
+                        <label for="microalbuminuria" class="form-label font-weight-bold text-muted small text-uppercase">Microalbuminuria (mg)</label>
+                        <input type="number" step="0.01" name="microalbuminuria" id="microalbuminuria" class="form-control" value="{{ old('microalbuminuria') }}" placeholder="Ej. 30">
+                        @error('microalbuminuria')
+                            <div class="text-danger small mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-footer bg-light text-right py-3">
+                <button type="submit" class="btn btn-success px-4 font-weight-bold">
+                    <i class="fas fa-save mr-2"></i> REGISTRAR DATOS
+                </button>
+            </div>
+        </form>
     </div>
-    <div class="card-footer text-right">
-        <button type="submit" class="btn btn-success btn-sm">
-            <i class="fas fa-save mr-1"></i> REGISTRAR DATOS
-        </button>
-    </div>
-    </form>
 </div>
 
-    
 @stop
 
 @include('layouts.footer')
 
 @section('css')
-    {{-- Add here extra stylesheets --}}
-    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
+<style>
+    .style-label {
+        font-size: 0.65rem;
+        letter-spacing: 0.8px;
+    }
+</style>
 @stop
 
 @section('js')
-    <script> console.log("Hi, I'm using the Laravel-AdminLTE package!"); </script>
-
-    <script>
-        $(function () {
-            $('[data-toggle="tooltip"]').tooltip()
-        })
-    </script>
-
-    <script>
-        $(function () {
-
-            $('[data-toggle="tooltip"]').tooltip();
-
-            $('.form-eliminar').submit(function(e){
-
-                e.preventDefault();
-
-                let form = this;
-
-                Swal.fire({
-                    title: '¿Está seguro?',
-                    text: "El médico será eliminado del sistema.",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#d33',
-                    cancelButtonColor: '#6c757d',
-                    confirmButtonText: 'Sí, eliminar',
-                    cancelButtonText: 'Cancelar'
-                }).then((result) => {
-
-                    if (result.isConfirmed) {
-                        form.submit();
-                    }
-
-                });
-
-            });
-
-        });
-        </script>
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
 @stop

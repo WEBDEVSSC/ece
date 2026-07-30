@@ -333,6 +333,12 @@ return [
                     'can' => 'recepcion',
                     'icon' => 'fa-regular fa-calendar-days',
                 ],
+                [
+                    'text' => 'Reportes',
+                    'url' => 'admin/recepcion/consulta-externa/citas-buscar',
+                    'can' => 'recepcion',
+                    'icon' => 'fas fa-chart-bar',
+                ],
             ],
         ],
 
@@ -423,7 +429,7 @@ return [
 
     'plugins' => [
         'Datatables' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',

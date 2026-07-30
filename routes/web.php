@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CitaConsultaExternaController;
+use App\Http\Controllers\CitaConsultaExternaEnfermeriaController;
 use App\Http\Controllers\CitaConsultaExternaLaboratorioController;
 use App\Http\Controllers\CitaConsultaExternaSignosVitalesController;
 use App\Http\Controllers\MedicoConsultaExternaController;
@@ -8,6 +9,7 @@ use App\Http\Controllers\MedicoController;
 use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\UnemeEnfermeriaEstructuraOseaController;
 use App\Http\Controllers\UnemeEnfermeriaValoracionPodologicaController;
 use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Auth;
@@ -138,6 +140,10 @@ Route::post('admin/recepcion/pacientes/pacientesStore', [PacienteController::cla
 
 Route::get('admin/recepcion/pacientes/pacientesIndex', [PacienteController::class,'pacientesIndex'])->name('pacientesIndex');
 
+Route::get('admin/recepcion/pacientes/pacientesEdit/{id}', [PacienteController::class,'pacientesEdit'])->name('pacientesEdit');
+
+Route::put('admin/recepcion/pacientes/pacientesUpdate/{id}', [PacienteController::class,'pacientesUpdate'])->name('pacientesUpdate');
+
 
 Route::get('admin/recepcion/pacientes/pacientesNoExpedienteCreate/{id}', [PacienteController::class,'pacientesNoExpedienteCreate'])->name('pacientesNoExpedienteCreate');
 
@@ -150,6 +156,8 @@ Route::put('admin/recepcion/pacientes/pacientesDXMedicoStore/{id}', [PacienteCon
 
 
 Route::get('admin/recepcion/pacientes/pacientesShow/{id}', [PacienteController::class,'pacientesShow'])->name('pacientesShow');
+
+Route::get('admin/recepcion/pacientes/pacientesResumenMedico/{id}', [PacienteController::class,'pacientesResumenMedico'])->name('pacientesResumenMedico');
 
 /*******************************************************************************************
  * 
@@ -187,7 +195,18 @@ Route::get('admin/medicos/consulta-externa/mis-citas',[MedicoConsultaExternaCont
  * 
  ******************************************************************************************/
 
-Route::get('admin/enfermeria/consulta-externa/citas-hoy', [CitaConsultaExternaSignosVitalesController::class, 'SignosVitalesConsultaExternaIndex'])->name('SignosVitalesConsultaExternaIndex');
+Route::get('admin/enfermeria/consulta-externa/citas-hoy',[CitaConsultaExternaEnfermeriaController::class, 'citasHoyConsultaExternaEnfermeriaIndex'])->name('citasHoyConsultaExternaEnfermeriaIndex');
+
+
+/*******************************************************************************************
+ * 
+ * 
+ * MODULO DE CITAS DE CONSULTA EXTERNA - ENFERMERIA
+ * 
+ * 
+ ******************************************************************************************/
+
+//Route::get('admin/enfermeria/consulta-externa/citas-hoy', [CitaConsultaExternaSignosVitalesController::class, 'SignosVitalesConsultaExternaIndex'])->name('SignosVitalesConsultaExternaIndex');
 
 Route::get('admin/enfermeria/consulta-externa/signos-vitales-show/{id}', [CitaConsultaExternaSignosVitalesController::class, 'SignosVitalesShow'])->name('SignosVitalesShow');
 
@@ -226,6 +245,22 @@ Route::get('admin/enfermeria/consulta-externa/valoracion-podologica/valoracion-p
 Route::get('admin/enfermeria/consulta-externa/valoracion-podologica/valoracion-podologica-create/{id}', [UnemeEnfermeriaValoracionPodologicaController::class, 'UnemeEnfermeriaValoracionPodologicaCreate'])->name('UnemeEnfermeriaValoracionPodologicaCreate');
 
 Route::post('admin/enfermeria/consulta-externa/valoracion-podologica/valoracion-podologica-store/{id}', [UnemeEnfermeriaValoracionPodologicaController::class, 'UnemeEnfermeriaValoracionPodologicaStore'])->name('UnemeEnfermeriaValoracionPodologicaStore');
+
+/*******************************************************************************************
+ * 
+ * 
+ * MODULO DE CITAS DE CONSULTA EXTERNA - EXAMEN DE ESTRUCTURA OSEA
+ * 
+ * 
+ ******************************************************************************************/
+
+//Route::get('admin/enfermeria/consulta-externa/examen-estructura-osea/citas-hoy', [UnemeEnfermeriaEstructuraOseaController::class, 'ConsultaExternaLaboratorioIndex'])->name('ConsultaExternaLaboratorioIndex');
+
+Route::get('admin/enfermeria/consulta-externa/examen-estructura-osea/examen-estructura-osea-show/{id}', [UnemeEnfermeriaEstructuraOseaController::class, 'UnemeEnfermeriaExamenEstructuraOseaShow'])->name('UnemeEnfermeriaExamenEstructuraOseaShow');
+
+Route::get('admin/enfermeria/consulta-externa/examen-estructura-osea/examen-estructura-osea-create/{id}', [UnemeEnfermeriaEstructuraOseaController::class, 'UnemeEnfermeriaExamenEstructuraOseaCreate'])->name('UnemeEnfermeriaExamenEstructuraOseaCreate');
+
+Route::post('admin/enfermeria/consulta-externa/examen-estructura-osea/examen-estructura-osea-store/{id}', [UnemeEnfermeriaEstructuraOseaController::class, 'UnemeEnfermeriaExamenEstructuraOseaStore'])->name('UnemeEnfermeriaExamenEstructuraOseaStore');
 
 
 

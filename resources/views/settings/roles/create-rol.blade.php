@@ -10,8 +10,10 @@
 @section('content')
 
 <div class="card">
-    <div class="card-header">
-        <a href="{{ route('rolesIndex') }}" class="btn btn-success btn-sm">PANEL DE CONTROL</a>
+    <div class="card-header d-flex justify-content-end">
+        <a href="{{ route('rolesIndex') }}" class="btn btn-success btn-sm">
+            <i class="fas fa-desktop mr-1"></i> PANEL DE CONTROL
+        </a>
     </div>
     <div class="card-body">
 
@@ -41,8 +43,11 @@
         </div>
 
     </div>
-    <div class="card-footer">
-        <button type="submit" class="btn btn-success btn-sm">REGISTRAR DATOS</button>
+    <div class="card-footer d-flex justify-content-end">
+
+        <button type="submit" class="btn btn-success btn-sm">
+            <i class="fas fa-save"></i> REGISTRAR DATOS
+        </button>
 
         </form>
 

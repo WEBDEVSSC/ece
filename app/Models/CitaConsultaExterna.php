@@ -68,4 +68,12 @@ class CitaConsultaExterna extends Model
     {
         return $this->hasOne(CitaConsultaExternaValoracionPodologica::class, 'cita_id');
     }
+
+    /**
+     * Examen de estructura ósea.
+     */
+    public function examenEstructuraOsea()
+    {
+        return $this->hasOne(CitaConsultaExternaExamenEstructuraOsea::class, 'cita_id');
+    }
 }

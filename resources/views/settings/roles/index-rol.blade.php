@@ -6,7 +6,7 @@
 @section('plugins.Sweetalert2', true)
 
 @section('content_header')
-    <h1><strong>Roles</strong> <small>Panel de Control</small></h1>
+    <h1><strong>Roles</strong> <small class="text-muted">Panel de Control</small></h1>
 @stop
 
 @section('content')
@@ -39,8 +39,10 @@
 <!-- -->
 
 <div class="card">
-    <div class="card-header">
-        <a href="{{ route('rolesCreate') }}" class="btn btn-success btn-sm">NUEVO REGISTRO</a>
+    <div class="card-header d-flex justify-content-end">
+        <a href="{{ route('rolesCreate') }}" class="btn btn-success btn-sm">
+            <i class="fas fa-plus"></i> NUEVO REGISTRO
+        </a>
     </div>
     <div class="card-body">
 
@@ -58,11 +60,18 @@
                     <td>{{ $rol->rol }}</td>
                     <td>{{ $rol->descripcion }}</td>
                     <td>
-                        <a href="{{ route('rolesEdit', $rol->id)}}" class="btn btn-warning btn-sm">EDITAR</a>
-
-                        <a href="javascript:void(0);" onclick="confirmarEliminacion({{ $rol->id }})" class="btn btn-danger btn-sm float-right mr-2">
-                            ELIMINAR
+                        <a href="{{ route('rolesEdit', $rol->id) }}" class="btn btn-warning btn-sm text-white" data-toggle="tooltip" data-placement="top" title="EDITAR">
+                            <i class="fas fa-edit"></i>
                         </a>
+
+                        <form id="delete-form-{{ $rol->id }}" action="{{ route('rolesDelete', $rol->id) }}" method="POST" style="display:inline-block;">
+                            @csrf
+                            @method('DELETE')
+
+                            <button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="ELIMINAR" onclick="confirmarEliminacion({{ $rol->id }})">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </form>
 
                     </td>
                 </tr>
@@ -86,10 +95,16 @@
     <script> console.log("Hi, I'm using the Laravel-AdminLTE package!"); </script>
 
     <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+
+    <script>
         function confirmarEliminacion(id) {
             Swal.fire({
                 title: '¿Estás seguro?',
-                text: "No podrás revertir esto",
+                text: 'No podrás revertir esto',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#d33',
@@ -98,7 +113,7 @@
                 cancelButtonText: 'Cancelar'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = "{{ route('rolesDelete', ['id' => '__id__']) }}".replace('__id__', id);
+                    document.getElementById('delete-form-' + id).submit();
                 }
             });
         }

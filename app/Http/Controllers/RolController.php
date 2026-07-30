@@ -109,13 +109,10 @@ class RolController extends Controller
      */
     public function rolesDelete($id)
     {
-        // Seleccionamos el registro
         $rol = Rol::findOrFail($id);
 
-        // Lo eliminamos
         $rol->delete();
-
-        // Regresamos a la vista con el mensaje
+        
         return redirect()->route('rolesIndex')->with('delete', 'Registro eliminado correctamente');
     }
 }
