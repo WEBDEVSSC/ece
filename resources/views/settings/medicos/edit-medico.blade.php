@@ -1,291 +1,248 @@
-
 @extends('adminlte::page')
 
-@section('title', 'Dashboard')
+@section('title', 'Actualizar Médico')
 
 @section('plugins.Select2', true)
 
 @section('content_header')
-    <h1><strong>Médicos</strong> <small class="text-muted">Actualizar</small></h1>
+    <div class="container-fluid">
+        <div class="row mb-2 align-items-center">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark font-weight-bold" style="font-size: 1.6rem;">
+                    Actualizar Perfil de Médico
+                </h1>
+                <p class="text-muted small mb-0">Modifique los datos personales, profesionales y horarios del personal de salud</p>
+            </div>
+            <div class="col-sm-6 text-right">
+                <a href="{{ route('medicosIndex') }}" class="btn btn-secondary font-weight-bold shadow-sm">
+                    <i class="fas fa-arrow-left mr-1"></i> REGRESAR AL LISTADO
+                </a>
+            </div>
+        </div>
+    </div>
 @stop
 
 @section('content')
 
-<div class="card">
-    <div class="card-header text-right">
-        <a href="{{ route('medicosIndex') }}" class="btn btn-success btn-sm">
-            <i class="fas fa-desktop mr-1"></i> PANEL DE CONTROL
-        </a>
-    </div>
-    <div class="card-body">
+<div class="container-fluid">
 
-        <form action="{{ route('medicosUpdate', $medico->id) }}" method="POST">
+    @if ($errors->any())
+        <div class="alert alert-danger alert-dismissible fade show shadow-sm border-0 mb-4" role="alert">
+            <h5 class="alert-heading font-weight-bold">
+                <i class="fas fa-exclamation-triangle mr-1"></i> Se encontraron los siguientes errores:
+            </h5>
+            <ul class="mb-0 pl-3">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
 
+    <form action="{{ route('medicosUpdate', $medico->id) }}" method="POST">
         @csrf
-
         @method('PUT')
 
-        <div class="row">
-
-            <div class="col-md-3">
-                <p><strong>Pais de nacimiento</strong></p>
-                <select name="pais_nacimiento_id" id="pais_nacimiento_id" class="form-control select2">
-                    <option value="">Seleccione una opción</option>
-                    @foreach($paisesNacimiento as $paisNacimiento)
-                        <option value="{{ $paisNacimiento->id }}" {{ old('pais_nacimiento_id', $medico->pais_nacimiento_id) == $paisNacimiento->id ? 'selected' : '' }}>
-                            {{ $paisNacimiento->codigo_pais }} - {{ $paisNacimiento->pais }}
-                        </option>
-                    @endforeach
-                </select>
-
-                @error('pais_nacimiento_id')
-                    <div class="text-danger">{{ $message }}</div>
-                @enderror
+        <!-- Información Personal y Profesional -->
+        <div class="card card-outline card-primary shadow-sm border-0 mb-4">
+            <div class="card-header bg-white py-3">
+                <h3 class="card-title text-bold text-dark mb-0" style="font-size: 1.1rem;">
+                    <i class="fas fa-id-card text-primary mr-2"></i>
+                    Información Personal y Profesional
+                </h3>
             </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <label for="pais_nacimiento_id" class="text-muted small text-uppercase mb-1 d-block font-weight-bold">
+                            <i class="fas fa-globe-americas text-secondary mr-1"></i> País de Nacimiento
+                        </label>
+                        <select name="pais_nacimiento_id" id="pais_nacimiento_id" class="form-control select2 @error('pais_nacimiento_id') is-invalid @enderror">
+                            <option value="">Seleccione una opción</option>
+                            @foreach($paisesNacimiento as $paisNacimiento)
+                                <option value="{{ $paisNacimiento->id }}" {{ old('pais_nacimiento_id', $medico->pais_nacimiento_id) == $paisNacimiento->id ? 'selected' : '' }}>
+                                    {{ $paisNacimiento->codigo_pais }} - {{ $paisNacimiento->pais }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('pais_nacimiento_id')
+                            <small class="text-danger font-weight-bold d-block mt-1">{{ $message }}</small>
+                        @enderror
+                    </div>
 
-            <div class="col-md-3">
-                <p><strong>CURP</strong></p>
-                <input type="text" name="curp" id="curp" class="form-control" value="{{ old('curp', $medico->curp) }}">
+                    <div class="col-md-3 mb-3">
+                        <label for="curp" class="text-muted small text-uppercase mb-1 d-block font-weight-bold">
+                            <i class="fas fa-fingerprint text-secondary mr-1"></i> CURP
+                        </label>
+                        <input type="text" name="curp" id="curp" class="form-control text-uppercase @error('curp') is-invalid @enderror" value="{{ old('curp', $medico->curp) }}" placeholder="Ej. AAAA000000XXXXXX00">
+                        @error('curp')
+                            <small class="text-danger font-weight-bold d-block mt-1">{{ $message }}</small>
+                        @enderror
+                    </div>
 
-                @error('curp')
-                    <div class="text-danger">{{ $message }}</div>
-                @enderror
+                    <div class="col-md-3 mb-3">
+                        <label for="apellido_paterno" class="text-muted small text-uppercase mb-1 d-block font-weight-bold">Apellido Paterno</label>
+                        <input type="text" name="apellido_paterno" id="apellido_paterno" class="form-control @error('apellido_paterno') is-invalid @enderror" value="{{ old('apellido_paterno', $medico->apellido_paterno) }}" placeholder="Primer apellido">
+                        @error('apellido_paterno')
+                            <small class="text-danger font-weight-bold d-block mt-1">{{ $message }}</small>
+                        @enderror
+                    </div>
+
+                    <div class="col-md-3 mb-3">
+                        <label for="apellido_materno" class="text-muted small text-uppercase mb-1 d-block font-weight-bold">Apellido Materno</label>
+                        <input type="text" name="apellido_materno" id="apellido_materno" class="form-control @error('apellido_materno') is-invalid @enderror" value="{{ old('apellido_materno', $medico->apellido_materno) }}" placeholder="Segundo apellido">
+                        @error('apellido_materno')
+                            <small class="text-danger font-weight-bold d-block mt-1">{{ $message }}</small>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <label for="nombres" class="text-muted small text-uppercase mb-1 d-block font-weight-bold">Nombre(s)</label>
+                        <input type="text" name="nombres" id="nombres" class="form-control @error('nombres') is-invalid @enderror" value="{{ old('nombres', $medico->nombres) }}" placeholder="Nombre o nombres">
+                        @error('nombres')
+                            <small class="text-danger font-weight-bold d-block mt-1">{{ $message }}</small>
+                        @enderror
+                    </div>
+
+                    <div class="col-md-3 mb-3">
+                        <label for="cedula" class="text-muted small text-uppercase mb-1 d-block font-weight-bold">
+                            <i class="fas fa-id-badge text-secondary mr-1"></i> Cédula Profesional
+                        </label>
+                        <input type="text" name="cedula" id="cedula" class="form-control @error('cedula') is-invalid @enderror" value="{{ old('cedula', $medico->cedula_profesional) }}" placeholder="Número de cédula">
+                        @error('cedula')
+                            <small class="text-danger font-weight-bold d-block mt-1">{{ $message }}</small>
+                        @enderror
+                    </div>
+
+                    <div class="col-md-3 mb-3">
+                        <label for="tipo_personal_id" class="text-muted small text-uppercase mb-1 d-block font-weight-bold">Tipo de Personal</label>
+                        <select name="tipo_personal_id" id="tipo_personal_id" class="form-control custom-select @error('tipo_personal_id') is-invalid @enderror">
+                            <option value="">Seleccione una opción</option>
+                            @foreach($tiposPersonalMedico as $tipo)
+                                <option value="{{ $tipo->id }}" {{ old('tipo_personal_id', $medico->tipo_personal_id) == $tipo->id ? 'selected' : '' }}>
+                                    {{ $tipo->descripcion }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('tipo_personal_id')
+                            <small class="text-danger font-weight-bold d-block mt-1">{{ $message }}</small>
+                        @enderror
+                    </div>
+
+                    <div class="col-md-3 mb-3">
+                        <label for="servicio_id" class="text-muted small text-uppercase mb-1 d-block font-weight-bold">
+                            <i class="fas fa-stethoscope text-secondary mr-1"></i> Servicio / Especialidad
+                        </label>
+                        <select name="servicio_id" id="servicio_id" class="form-control custom-select @error('servicio_id') is-invalid @enderror">
+                            <option value="">Seleccione una opción</option>
+                            @foreach($servicioEspecialidadMedico as $servicio)
+                                <option value="{{ $servicio->id }}" {{ old('servicio_id', $medico->servicio_id) == $servicio->id ? 'selected' : '' }}>
+                                    {{ $servicio->especialidad }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('servicio_id')
+                            <small class="text-danger font-weight-bold d-block mt-1">{{ $message }}</small>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <label for="programa_smymg" class="text-muted small text-uppercase mb-1 d-block font-weight-bold">
+                            <i class="fas fa-file-contract text-secondary mr-1"></i> ¿Programa U013?
+                        </label>
+                        <select name="programa_smymg" id="programa_smymg" class="form-control custom-select @error('programa_smymg') is-invalid @enderror">
+                            <option value="0" {{ old('programa_smymg', $medico->programa_smymg) == 0 ? 'selected' : '' }}>NO</option>
+                            <option value="1" {{ old('programa_smymg', $medico->programa_smymg) == 1 ? 'selected' : '' }}>SÍ</option>
+                        </select>
+                        @error('programa_smymg')
+                            <small class="text-danger font-weight-bold d-block mt-1">{{ $message }}</small>
+                        @enderror
+                    </div>
+                </div>
             </div>
-
-            <div class="col-md-3">
-                <p><strong>Apellido Paterno</strong></p>
-                <input type="text" name="apellido_paterno" id="apellido_paterno" class="form-control" value="{{ old('apellido_paterno', $medico->apellido_paterno) }}">
-
-                @error('apellido_paterno')
-                    <div class="text-danger">{{ $message }}</div>
-                @enderror
-            </div>
-
-            <div class="col-md-3">
-                <p><strong>Apellido Materno</strong></p>
-                <input type="text" name="apellido_materno" id="apellido_materno" class="form-control" value="{{ old('apellido_materno', $medico->apellido_materno) }}">
-
-                @error('apellido_materno')
-                    <div class="text-danger">{{ $message }}</div>
-                @enderror
-            </div>
-
         </div>
 
-        <div class="row mt-3">
-
-            <div class="col-md-3">
-                <p><strong>Nombre(s)</strong></p>
-                <input type="text" name="nombres" id="nombres" class="form-control" value="{{ old('nombres', $medico->nombres) }}">
-
-                @error('nombres')
-                    <div class="text-danger">{{ $message }}</div>
-                @enderror
+        <!-- Jornada Laboral y Horarios -->
+        <div class="card card-outline card-secondary shadow-sm border-0 mb-4">
+            <div class="card-header bg-white py-3">
+                <h3 class="card-title text-bold text-dark mb-0" style="font-size: 1.1rem;">
+                    <i class="fas fa-calendar-alt text-secondary mr-2"></i>
+                    Jornada Laboral y Horarios de Atención
+                </h3>
             </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped mb-0 text-sm align-middle">
+                        <thead class="thead-light">
+                            <tr>
+                                <th class="px-3" width="30%">Día Semanal</th>
+                                <th width="35%" class="text-center">Hora de Entrada</th>
+                                <th width="35%" class="text-center">Hora de Salida</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @php
+                                $dias = [
+                                    'lunes' => 'Lunes',
+                                    'martes' => 'Martes',
+                                    'miercoles' => 'Miércoles',
+                                    'jueves' => 'Jueves',
+                                    'viernes' => 'Viernes',
+                                    'sabado' => 'Sábado',
+                                    'domingo' => 'Domingo',
+                                    'festivos' => 'Festivos',
+                                ];
+                            @endphp
 
-            <div class="col-md-3">
-                <p><strong>Cedula</strong></p>
-                <input type="text" name="cedula" id="cedula" class="form-control" value="{{ old('cedula', $medico->cedula_profesional) }}">
-
-                @error('nombres')
-                    <div class="text-danger">{{ $message }}</div>
-                @enderror
+                            @foreach ($dias as $key => $nombreDia)
+                                <tr>
+                                    <td class="px-3 align-middle font-weight-bold text-dark">
+                                        {{ $nombreDia }}
+                                    </td>
+                                    <td class="px-4">
+                                        <div class="input-group input-group-sm">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-clock text-success"></i></span>
+                                            </div>
+                                            <input type="time" name="{{ $key }}_entrada" class="form-control @error($key.'_entrada') is-invalid @enderror" value="{{ old($key.'_entrada', $medico->{$key.'_entrada'}) }}">
+                                        </div>
+                                        @error($key.'_entrada')
+                                            <small class="text-danger font-weight-bold d-block mt-1">{{ $message }}</small>
+                                        @enderror
+                                    </td>
+                                    <td class="px-4">
+                                        <div class="input-group input-group-sm">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-clock text-danger"></i></span>
+                                            </div>
+                                            <input type="time" name="{{ $key }}_salida" class="form-control @error($key.'_salida') is-invalid @enderror" value="{{ old($key.'_salida', $medico->{$key.'_salida'}) }}">
+                                        </div>
+                                        @error($key.'_salida')
+                                            <small class="text-danger font-weight-bold d-block mt-1">{{ $message }}</small>
+                                        @enderror
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
-             <div class="col-md-3">
-                <p><strong>Tipo de personal</strong></p>
-                <select name="tipo_personal_id" id="tipo_personal_id" class="form-control">
-                    <option value="">Seleccione una opción</option>
-                    @foreach($tiposPersonalMedico as $tipo)
-                        <option value="{{ $tipo->id }}" {{ old('tipo_personal_id', $medico->tipo_personal_id) == $tipo->id ? 'selected' : '' }}>
-                            {{ $tipo->descripcion }}
-                        </option>
-                    @endforeach
-                </select>
-
-                @error('tipo_personal_id')
-                    <div class="text-danger">{{ $message }}</div>
-                @enderror
+            <div class="card-footer bg-white border-top text-right py-3">
+                <a href="{{ route('medicosIndex') }}" class="btn btn-outline-secondary font-weight-bold mr-2">
+                    CANCELAR
+                </a>
+                <button type="submit" class="btn btn-success font-weight-bold shadow-sm">
+                    <i class="fas fa-save mr-1"></i> GUARDAR CAMBIOS
+                </button>
             </div>
-            <div class="col-md-3">
-                <p><strong>Servicio/Especialidad</strong></p>
-                <select name="servicio_id" id="servicio_id" class="form-control">
-                    <option value="">Seleccione una opción</option>
-                    @foreach($servicioEspecialidadMedico as $servicio)
-                        <option value="{{ $servicio->id }}" {{ old('servicio_id', $medico->servicio_id) == $servicio->id ? 'selected' : '' }}>
-                            {{ $servicio->especialidad }}
-                        </option>
-                    @endforeach
-                </select>
-
-                @error('servicio_id')
-                    <div class="text-danger">{{ $message }}</div>
-                @enderror
-            </div>
-
         </div>
-
-        <div class="row mt-3">
-            <div class="col-md-3">
-                <p><strong>¿Contrato por Programa U013?</strong></p>
-                <select name="programa_smymg" id="programa_smymg" class="form-control">
-                    <option value="0" {{ old('programa_smymg', $medico->programa_smymg) == 0 ? 'selected' : '' }}>NO</option>
-                    <option value="1" {{ old('programa_smymg', $medico->programa_smymg) == 1 ? 'selected' : '' }}>SÍ</option>
-                </select>
-
-                @error('programa_smymg')
-                    <div class="text-danger">{{ $message }}</div>
-                @enderror
-            </div>
-        </div>
-
-        <div class="row mt-3">
-           <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th width="25%">Día</th>
-                        <th width="37.5%" class="text-center">Hora de Entrada</th>
-                        <th width="37.5%" class="text-center">Hora de Salida</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    <tr>
-                        <td><strong>Lunes</strong></td>
-                        <td>
-                            <input type="time" name="lunes_entrada" class="form-control" value="{{ old('lunes_entrada', $medico->lunes_entrada) }}">
-                            @error('lunes_entrada')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </td>
-                        <td>
-                            <input type="time" name="lunes_salida" class="form-control" value="{{ old('lunes_salida', $medico->lunes_salida) }}">
-                            @error('lunes_salida')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><strong>Martes</strong></td>
-                        <td>
-                            <input type="time" name="martes_entrada" class="form-control" value="{{ old('martes_entrada', $medico->martes_entrada) }}">
-                            @error('martes_entrada')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </td>
-                        <td>
-                            <input type="time" name="martes_salida" class="form-control" value="{{ old('martes_salida', $medico->martes_salida) }}">
-                            @error('martes_salida')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><strong>Miércoles</strong></td>
-                        <td>
-                            <input type="time" name="miercoles_entrada" class="form-control" value="{{ old('miercoles_entrada', $medico->miercoles_entrada) }}">
-                            @error('miercoles_entrada')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </td>
-                        <td>
-                            <input type="time" name="miercoles_salida" class="form-control" value="{{ old('miercoles_salida', $medico->miercoles_salida) }}">
-                            @error('miercoles_salida')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><strong>Jueves</strong></td>
-                        <td>
-                            <input type="time" name="jueves_entrada" class="form-control" value="{{ old('jueves_entrada', $medico->jueves_entrada) }}">
-                            @error('jueves_entrada')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </td>
-                        <td>
-                            <input type="time" name="jueves_salida" class="form-control" value="{{ old('jueves_salida', $medico->jueves_salida) }}">
-                            @error('jueves_salida')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><strong>Viernes</strong></td>
-                        <td>
-                            <input type="time" name="viernes_entrada" class="form-control" value="{{ old('viernes_entrada', $medico->viernes_entrada) }}">
-                            @error('viernes_entrada')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </td>
-                        <td>
-                            <input type="time" name="viernes_salida" class="form-control" value="{{ old('viernes_salida', $medico->viernes_salida) }}">
-                            @error('viernes_salida')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><strong>Sábado</strong></td>
-                        <td>
-                            <input type="time" name="sabado_entrada" class="form-control" value="{{ old('sabado_entrada', $medico->sabado_entrada) }}">
-                            @error('sabado_entrada')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </td>
-                        <td>
-                            <input type="time" name="sabado_salida" class="form-control" value="{{ old('sabado_salida', $medico->sabado_salida) }}">
-                            @error('sabado_salida')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><strong>Domingo</strong></td>
-                        <td>
-                            <input type="time" name="domingo_entrada" class="form-control" value="{{ old('domingo_entrada', $medico->domingo_entrada) }}">
-                            @error('domingo_entrada')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </td>
-                        <td>
-                            <input type="time" name="domingo_salida" class="form-control" value="{{ old('domingo_salida', $medico->domingo_salida) }}">
-                            @error('domingo_salida')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><strong>Festivos</strong></td>
-                        <td>
-                            <input type="time" name="festivos_entrada" class="form-control" value="{{ old('festivos_entrada', $medico->festivos_entrada) }}">
-                            @error('festivos_entrada')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </td>
-                        <td>
-                            <input type="time" name="festivos_salida" class="form-control" value="{{ old('festivos_salida', $medico->festivos_salida) }}">
-                            @error('festivos_salida')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-    </div>
-    <div class="card-footer text-right">
-        <button type="submit" class="btn btn-success btn-sm">
-            <i class="fas fa-save mr-1"></i> REGISTRAR DATOS
-        </button>
-    </div>
     </form>
 </div>
 
@@ -296,39 +253,42 @@
 @include('layouts.footer')
 
 @section('css')
-    {{-- Add here extra stylesheets --}}
-    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
+<style>
+    .style-label {
+        font-size: 0.7rem;
+        letter-spacing: 0.8px;
+    }
+    
+    /* Adaptación e integración limpia para Select2 */
+    .select2-container--default .select2-selection--single {
+        height: calc(2.25rem + 2px) !important;
+        border-radius: 0.25rem !important;
+        border: 1px solid #ced4da !important;
+    }
+    
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        line-height: calc(2.25rem - 2px) !important;
+        padding-left: 0.75rem !important;
+    }
+    
+    .select2-container--default .select2-selection--single .select2-selection__arrow {
+        height: calc(2.25rem + 2px) !important;
+    }
 
-    <style>
-        /* Asegura que Select2 tenga el mismo alto y bordes redondeados */
-        .select2-container--default .select2-selection--single {
-            height: calc(2.25rem + 2px) !important; /* Ajuste de altura */
-            border-radius: 0.25rem !important; /* Bordes redondeados */
-            border: 1px solid #ced4da !important; /* Color del borde */
-        }
-        
-        /* Alineación del texto */
-        .select2-container--default .select2-selection--single .select2-selection__rendered {
-            line-height: calc(2.25rem - 2px) !important;
-            padding-left: 0.75rem !important;
-        }
-        
-        /* Ajuste del ícono desplegable */
-        .select2-container--default .select2-selection--single .select2-selection__arrow {
-            height: calc(2.25rem + 2px) !important;
-        }
-    </style>
+    .select2-container--default .select2-selection--single .select2-selection__placeholder {
+        color: #6c757d;
+    }
+</style>
 @stop
 
 @section('js')
-    <script> console.log("Hi, I'm using the Laravel-AdminLTE package!"); </script>
-
-    <script>
-        $(document).ready(function() {
-            $('#pais_nacimiento_id').select2({
-                placeholder: "-- Seleccione una opcion --",
-                allowClear: true
-            });
+<script>
+    $(document).ready(function() {
+        $('#pais_nacimiento_id').select2({
+            placeholder: "-- Seleccione una opción --",
+            allowClear: true,
+            width: '100%'
         });
-    </script>
+    });
+</script>
 @stop
