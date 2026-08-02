@@ -1,26 +1,33 @@
-
 @extends('adminlte::page')
 
-@section('title', 'Dashboard')
+@section('title', 'Asignar Diagnóstico')
 
 @section('plugins.Sweetalert2', true)
-
 @section('plugins.Select2', true)
 
 @section('content_header')
-    <h1><strong>Pacientes</strong> <small class="text-muted">Asignar Diagnóstico</small></h1>
+    <div class="container-fluid">
+        <div class="row mb-2 align-items-center">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark font-weight-bold" style="font-size: 1.6rem;">
+                    Asignar Diagnóstico
+                </h1>
+                <p class="text-muted small mb-0">Gestión de expediente clínico del paciente</p>
+            </div>
+            <div class="col-sm-6 text-right">
+                <span class="badge bg-white shadow-sm px-3 py-2 text-dark font-weight-normal border">
+                    <i class="far fa-calendar-alt text-primary mr-2"></i>
+                    {{ \Carbon\Carbon::now()->isoFormat('D [de] MMMM, YYYY') }}
+                </span>
+            </div>
+        </div>
+    </div>
 @stop
 
 @section('content')
 
-<!-- -->
-
 @php
-    $alerts = [
-        'success',
-        'update',
-        'destroy',
-    ];
+    $alerts = ['success', 'update', 'destroy', 'error'];
 @endphp
 
 @foreach ($alerts as $alert)
@@ -28,162 +35,160 @@
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 Swal.fire({
-                    title: 'Éxito',
-                    text: "{{ session($alert) }}",
-                    icon: 'success',
-                    confirmButtonText: 'Ok'
+                    toast: true,
+                    position: 'top-end',
+                    icon: "{{ $alert == 'error' ? 'error' : 'success' }}",
+                    title: "{{ session($alert) }}",
+                    showConfirmButton: false,
+                    timer: 3500,
+                    timerProgressBar: true
                 });
             });
         </script>
     @endif
 @endforeach
 
-<!-- -->
+<div class="container-fluid">
 
-<div class="row">
-    <div class="col-12">
-        <div class="card card-info card-outline shadow-sm">
-            <div class="card-header">
-                <h3 class="card-title">
-                    <i class="fas fa-user-md text-info mr-2"></i>
-                    Paciente seleccionado
-                </h3>
-            </div>
+    @if ($errors->any())
+        <div class="alert alert-danger alert-dismissible fade show shadow-sm border-0 mb-4" role="alert">
+            <h5 class="alert-heading font-weight-bold">
+                <i class="fas fa-exclamation-triangle mr-1"></i> Se encontraron los siguientes errores:
+            </h5>
+            <ul class="mb-0 pl-3">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
 
-            <div class="card-body">
-                <div class="row align-items-center">
-                    
-
-                    <div class="col-md-11">
-                        <h4 class="mb-1 font-weight-bold">
-                            {{ $paciente->nombre_completo }}
-                        </h4>
-                    </div>
+    {{-- Tarjeta de Información del Paciente --}}
+    <div class="card card-outline card-info shadow-sm border-0 mb-4">
+        <div class="card-header bg-white py-3">
+            <h3 class="card-title text-bold text-info mb-0" style="font-size: 1.1rem;">
+                <i class="fas fa-user-md mr-2"></i> PACIENTE SELECCIONADO
+            </h3>
+        </div>
+        <div class="card-body p-4">
+            <div class="row align-items-center">
+                <div class="col-md-12">
+                    <h4 class="mb-1 font-weight-bold text-dark">
+                        {{ $paciente->nombre_completo }}
+                    </h4>
+                    <span class="text-muted small">
+                        <i class="fas fa-id-card mr-1"></i> CURP: <strong>{{ $paciente->curp ?? 'N/A' }}</strong>
+                    </span>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="card">
-    <div class="card-header text-right">
-        <a href="{{ route('pacientesShow', $paciente->id) }}" class="btn btn-success btn-sm"><i class="fas fa-plus"></i> EXPEDIENTE</a>
-    </div>
-    <div class="card-body">
-
-    <form action={{ route('pacientesDXMedicoStore', $paciente->id) }} method="POST">
-
-    @csrf
-
-    @method('PUT')
-
-        <div class="row">
-            <div class="col-md-6">
-                <p><strong>Diagnóstico Médico</strong> <small class="text-muted">Seleccione el diagnóstico correspondiente conforme al catálogo CIE-10.</small></p>
-                <select name="diagnostico_medico_id" id="diagnostico_medico_id" class="form-control select2">
-                    <option value="">Seleccione un diagnóstico</option>
-
-                    @foreach($diagnosticos as $diagnostico)
-                        <option value="{{ $diagnostico->id }}"
-                            {{ old('diagnostico_medico_id', $paciente->diagnostico_medico_id) == $diagnostico->id ? 'selected' : '' }}>
-                            {{ $diagnostico->clave_nombre }}
-                        </option>
-                    @endforeach
-                </select>
-
-                @error('diagnostico_medico_id')
-                    <div class="text-danger">{{ $message }}</div>
-                @enderror
+    {{-- Tarjeta Formulario de Diagnóstico --}}
+    <div class="card card-outline card-primary shadow-sm border-0">
+        <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+            <h3 class="card-title text-bold text-primary mb-0" style="font-size: 1.1rem;">
+                <i class="fas fa-stethoscope mr-2"></i> DIAGNÓSTICO MÉDICO
+            </h3>
+            <div class="card-tools">
+                <a href="{{ route('pacientesShow', $paciente->id) }}" class="btn btn-outline-success btn-sm font-weight-bold">
+                    <i class="fas fa-folder-open mr-1"></i> EXPEDIENTE
+                </a>
             </div>
         </div>
 
+        <form action="{{ route('pacientesDXMedicoStore', $paciente->id) }}" method="POST">
+            @csrf
+            @method('PUT')
+
+            <div class="card-body p-4">
+                <div class="row">
+                    <div class="col-md-8 mb-3">
+                        <label for="diagnostico_medico_id" class="font-weight-bold text-dark">
+                            Diagnóstico Médico
+                        </label>
+                        <p class="text-muted small mb-2">Seleccione el diagnóstico correspondiente conforme al catálogo CIE-10.</p>
+
+                        <div class="input-group">
+                            <select name="diagnostico_medico_id" id="diagnostico_medico_id" class="form-control select2 @error('diagnostico_medico_id') is-invalid @enderror" style="width: 100%;">
+                                <option value=""></option>
+                                @foreach($diagnosticos as $diagnostico)
+                                    <option value="{{ $diagnostico->id }}"
+                                        {{ old('diagnostico_medico_id', $paciente->diagnostico_medico_id) == $diagnostico->id ? 'selected' : '' }}>
+                                        {{ $diagnostico->clave_nombre }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        @error('diagnostico_medico_id')
+                            <div class="text-danger small mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-footer bg-light text-right py-3">
+                <button type="submit" class="btn btn-success px-4 font-weight-bold shadow-sm">
+                    <i class="fas fa-save mr-2"></i> REGISTRAR DATOS
+                </button>
+            </div>
+        </form>
     </div>
-    <div class="card-footer text-right">
-        <button type="submit" class="btn btn-success btn-sm">
-            <i class="fas fa-save mr-1"></i> REGISTRAR DATOS
-        </button>
-    </div>
-    </form>
+
 </div>
 
-    
+<br>
+
 @stop
 
 @include('layouts.footer')
 
 @section('css')
-    {{-- Add here extra stylesheets --}}
-    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
+<style>
+    /* Homologación de Select2 con estilos Bootstrap 4 AdminLTE */
+    .select2-container--default .select2-selection--single {
+        height: calc(2.25rem + 2px) !important;
+        border-radius: 0.25rem !important;
+        border: 1px solid #ced4da !important;
+    }
+    
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        line-height: calc(2.25rem - 2px) !important;
+        padding-left: 0.75rem !important;
+        color: #495057 !important;
+    }
+    
+    .select2-container--default .select2-selection--single .select2-selection__arrow {
+        height: calc(2.25rem + 2px) !important;
+    }
 
-    <style>
-        /* Asegura que Select2 tenga el mismo alto y bordes redondeados */
-        .select2-container--default .select2-selection--single {
-            height: calc(2.25rem + 2px) !important; /* Ajuste de altura */
-            border-radius: 0.25rem !important; /* Bordes redondeados */
-            border: 1px solid #ced4da !important; /* Color del borde */
-        }
-        
-        /* Alineación del texto */
-        .select2-container--default .select2-selection--single .select2-selection__rendered {
-            line-height: calc(2.25rem - 2px) !important;
-            padding-left: 0.75rem !important;
-        }
-        
-        /* Ajuste del ícono desplegable */
-        .select2-container--default .select2-selection--single .select2-selection__arrow {
-            height: calc(2.25rem + 2px) !important;
-        }
-    </style>
+    .select2-container--default .select2-selection--single .select2-selection__placeholder {
+        color: #6c757d !important;
+    }
+
+    .style-label {
+        font-size: 0.65rem;
+        letter-spacing: 0.8px;
+    }
+</style>
 @stop
 
 @section('js')
-    <script> console.log("Hi, I'm using the Laravel-AdminLTE package!"); </script>
-
-    <script>
-        $(document).ready(function() {
-            $('#diagnostico_medico_id').select2({
-                placeholder: "-- Seleccione una opcion --",
-                allowClear: true
-            });
+<script>
+    $(document).ready(function() {
+        // Inicialización del Select2
+        $('#diagnostico_medico_id').select2({
+            placeholder: "-- Seleccione una opción --",
+            allowClear: true,
+            width: '100%'
         });
-    </script>
 
-    <script>
-        $(function () {
-            $('[data-toggle="tooltip"]').tooltip()
-        })
-    </script>
-
-    <script>
-        $(function () {
-
-            $('[data-toggle="tooltip"]').tooltip();
-
-            $('.form-eliminar').submit(function(e){
-
-                e.preventDefault();
-
-                let form = this;
-
-                Swal.fire({
-                    title: '¿Está seguro?',
-                    text: "El médico será eliminado del sistema.",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#d33',
-                    cancelButtonColor: '#6c757d',
-                    confirmButtonText: 'Sí, eliminar',
-                    cancelButtonText: 'Cancelar'
-                }).then((result) => {
-
-                    if (result.isConfirmed) {
-                        form.submit();
-                    }
-
-                });
-
-            });
-
-        });
-        </script>
+        // Inicialización de Tooltips
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
 @stop

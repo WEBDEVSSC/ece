@@ -132,7 +132,7 @@
                                 <td class="align-middle">
                                     <div class="text-dark">
                                         <i class="fas fa-user-md text-secondary mr-1"></i>
-                                        {{ $citaHoy->medico->nombre_completo ?? 'No asignado' }}
+                                        {{ $citaHoy->personalUnidad->nombre_completo ?? 'No asignado' }}
                                     </div>
                                 </td>
                                 <td class="text-center align-middle px-3">
