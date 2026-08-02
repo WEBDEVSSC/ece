@@ -5,7 +5,7 @@ use App\Http\Controllers\CitaConsultaExternaEnfermeriaController;
 use App\Http\Controllers\CitaConsultaExternaLaboratorioController;
 use App\Http\Controllers\CitaConsultaExternaSignosVitalesController;
 use App\Http\Controllers\MedicoConsultaExternaController;
-use App\Http\Controllers\MedicoController;
+use App\Http\Controllers\PersonalUnidadController;
 use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\SettingsController;
@@ -56,27 +56,27 @@ Route::get('admin/settings/index', [SettingsController::class, 'index'])->name('
  * 
  ******************************************************************************************/
 
-Route::get('admin/settings/medicos/medicosCreate', [MedicoController::class,'medicosCreate'])->name('medicosCreate');
+Route::get('admin/settings/personal-unidad/personalUnidadCreate', [PersonalUnidadController::class,'personalUnidadCreate'])->name('personalUnidadCreate');
 
-Route::get('admin/settings/medicos/medicosIndex', [MedicoController::class,'medicosIndex'])->name('medicosIndex');
+Route::get('admin/settings/personal-unidad/personalUnidadIndex', [PersonalUnidadController::class,'personalUnidadIndex'])->name('personalUnidadIndex');
 
-Route::post('admin/settings/medicos/medicosStore', [MedicoController::class,'medicosStore'])->name('medicosStore');
+Route::post('admin/settings/personal-unidad/personalUnidadStore', [PersonalUnidadController::class,'personalUnidadStore'])->name('personalUnidadStore');
 
-Route::get('admin/settings/medicos/medicosEdit/{id}', [MedicoController::class,'medicosEdit'])->name('medicosEdit');
+Route::get('admin/settings/personal-unidad/personalUnidadEdit/{id}', [PersonalUnidadController::class,'personalUnidadEdit'])->name('personalUnidadEdit');
 
-Route::put('admin/settings/medicos/medicosUpdate/{id}', [MedicoController::class,'medicosUpdate'])->name('medicosUpdate');
+Route::put('admin/settings/personal-unidad/personalUnidadUpdate/{id}', [PersonalUnidadController::class,'personalUnidadUpdate'])->name('personalUnidadUpdate');
 
-Route::delete('admin/settings/medicos/medicosDestroy/{id}', [MedicoController::class,'medicosDestroy'])->name('medicosDestroy');
+Route::delete('admin/settings/personal-unidad/personalUnidadDestroy/{id}', [PersonalUnidadController::class,'personalUnidadDestroy'])->name('personalUnidadDestroy');
 
-Route::get('admin/settings/medicos/medicosShow/{id}', [MedicoController::class,'medicosShow'])->name('medicosShow');
+Route::get('admin/settings/personal-unidad/personalUnidadShow/{id}', [PersonalUnidadController::class,'personalUnidadShow'])->name('personalUnidadShow');
 
-Route::get('admin/settings/medicos/vacaciones/indexMedicosVacacion/{id}', [MedicoController::class,'indexMedicosVacacion'])->name('indexMedicosVacacion');
+Route::get('admin/settings/personal-unidad/vacaciones/indexPersonalUnidadVacacion/{id}', [PersonalUnidadController::class,'indexPersonalUnidadVacacion'])->name('indexPersonalUnidadVacacion');
 
-Route::get('admin/settings/medicos/vacaciones/createMedicosVacacion/{id}', [MedicoController::class,'createMedicosVacacion'])->name('createMedicosVacacion');
+Route::get('admin/settings/personal-unidad/vacaciones/createPersonalUnidadVacacion/{id}', [PersonalUnidadController::class,'createPersonalUnidadVacacion'])->name('createPersonalUnidadVacacion');
 
-Route::post('admin/settings/medicos/vacaciones/storeMedicosVacacion/{id}', [MedicoController::class,'storeMedicosVacacion'])->name('storeMedicosVacacion');
+Route::post('admin/settings/personal-unidad/vacaciones/storePersonalUnidadVacacion/{id}', [PersonalUnidadController::class,'storePersonalUnidadVacacion'])->name('storePersonalUnidadVacacion');
 
-Route::delete('admin/settings/medicos/vacaciones/deleteMedicosVacacion/{id}', [MedicoController::class,'deleteMedicosVacacion'])->name('deleteMedicosVacacion');
+Route::delete('admin/settings/personal-unidad/vacaciones/deletePersonalUnidadVacacion/{id}', [PersonalUnidadController::class,'deletePersonalUnidadVacacion'])->name('deletePersonalUnidadVacacion');
 
 /*******************************************************************************************
  * 
@@ -100,9 +100,9 @@ Route::delete('admin/settings/usuarios/usuariosDestroy/{id}', [UsuarioController
 
 Route::get('admin/settings/usuarios/usuariosShow/{id}', [UsuarioController::class,'usuariosShow'])->name('usuariosShow');
 
-Route::get('admin/settings/usuarios/createUsuarioMedico/{id}', [UsuarioController::class,'createUsuarioMedico'])->name('createUsuarioMedico');
+Route::get('admin/settings/usuarios/createUsuarioPersonalUnidad/{id}', [UsuarioController::class,'createUsuarioPersonalUnidad'])->name('createUsuarioPersonalUnidad');
 
-Route::put('admin/settings/usuarios/updateUsuarioMedico/{id}', [UsuarioController::class,'updateUsuarioMedico'])->name('updateUsuarioMedico');
+Route::put('admin/settings/usuarios/updateUsuarioPersonalUnidad/{id}', [UsuarioController::class,'updateUsuarioPersonalUnidad'])->name('updateUsuarioPersonalUnidad');
 
 /*******************************************************************************************
  * 

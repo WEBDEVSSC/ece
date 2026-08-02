@@ -44,11 +44,11 @@
 
         <div class="row">
             <div class="col-md-3">
-                <a href="{{ route('medicosIndex') }}" class="text-decoration-none">
+                <a href="{{ route('personalUnidadIndex') }}" class="text-decoration-none">
                     <div class="small-box bg-gradient-info elevation-3">
                         <div class="inner">
-                            <h4 class="font-weight-bold">MÉDICOS</h4>
-                            <p>Catálogo de Médicos</p>
+                            <h4 class="font-weight-bold">PERSONAL UNIDAD</h4>
+                            <p>Catálogo de Personal de Salud</p>
                         </div>
 
                         <div class="icon">
@@ -101,7 +101,7 @@
             </div>
 
             <div class="col-md-3">
-                <a href="{{ route('medicosIndex') }}" class="text-decoration-none">
+                <a href="{{ route('personalUnidadIndex') }}" class="text-decoration-none">
                     <div class="small-box bg-gradient-info elevation-3">
                         <div class="inner">
                             <h4 class="font-weight-bold">MÉDICOS</h4>

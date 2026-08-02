@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\CitaConsultaExterna;
-use App\Models\Medico;
-use App\Models\MedicoVacacion;
+use App\Models\PersonalUnidad;
+use App\Models\PersonalUnidadVacacion;
 use App\Models\Paciente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,9 +18,9 @@ class CitaConsultaExternaController extends Controller
 
         $pacientes = Paciente::where('clues_id',$login->clues_id)->get();
 
-        $medicos = Medico::where('clues_id',$login->clues_id)->get();
+        $medicos = PersonalUnidad::where('clues_id',$login->clues_id)->get();
 
-        $listaMedicos = Medico::where('clues_id',$login->clues_id)->get();
+        $listaMedicos = PersonalUnidad::where('clues_id',$login->clues_id)->get();
 
         return view('citas.consulta-externa.cita-search', compact('pacientes', 'medicos', 'listaMedicos'));
     }
@@ -34,12 +34,12 @@ class CitaConsultaExternaController extends Controller
             'fecha' => 'required',
         ]);
 
-        $medico = Medico::findOrFail($request->medico_id);
+        $medico = PersonalUnidad::findOrFail($request->medico_id);
         $paciente = Paciente::findOrFail($request->paciente_id);
         $fecha = $request->fecha;
 
         // Verificar vacaciones
-        $medicoDeVacaciones = MedicoVacacion::where('medico_id', $request->medico_id)
+        $medicoDeVacaciones = PersonalUnidadVacacion::where('personal_unidad_id', $request->medico_id)
             ->whereDate('fecha', $fecha)
             ->exists();
 

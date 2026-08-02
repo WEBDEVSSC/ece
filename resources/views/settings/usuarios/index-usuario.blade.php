@@ -26,30 +26,27 @@
 
 <div class="container-fluid">
 
-    {{-- Alertas con SweetAlert2 --}}
-    @php
-        $alerts = [
-            'success',
-            'update',
-            'destroy',
-        ];
-    @endphp
+@php
+    $alerts = ['success', 'update', 'destroy'];
+@endphp
 
-    @foreach ($alerts as $alert)
-        @if(session($alert))
-            <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    Swal.fire({
-                        title: '¡Éxito!',
-                        text: "{{ session($alert) }}",
-                        icon: 'success',
-                        confirmButtonText: 'Aceptar',
-                        confirmButtonColor: '#28a745'
-                    });
+@foreach ($alerts as $alert)
+    @if(session($alert))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'success',
+                    title: "{{ session($alert) }}",
+                    showConfirmButton: false,
+                    timer: 3500,
+                    timerProgressBar: true
                 });
-            </script>
-        @endif
-    @endforeach
+            });
+        </script>
+    @endif
+@endforeach
 
     <!-- Tabla Principal de Usuarios -->
     <div class="card card-outline card-primary shadow-sm border-0 mb-4">
@@ -69,7 +66,7 @@
                             <th>Correo Electrónico</th>
                             <th>Unidad / CLUES</th>
                             <th>Rol</th>
-                            <th>Médico Asignado</th>
+                            <th>Personal Asignado</th>
                             <th width="200" class="text-center">Acciones</th>
                         </tr>
                     </thead>
@@ -97,10 +94,10 @@
                                     @endif
                                 </td>
                                 <td class="align-middle">
-                                    @if($usuario->medico)
+                                    @if($usuario->personalUnidad)
                                         <span class="text-primary font-weight-bold">
                                             <i class="fas fa-user-md mr-1"></i>
-                                            {{ $usuario->medico->nombre_completo }}
+                                            {{ $usuario->personalUnidad->nombre_completo }}
                                         </span>
                                     @else
                                         <span class="text-muted small"><em>Sin asignar</em></span>
@@ -116,7 +113,7 @@
                                             <i class="fas fa-edit"></i>
                                         </a>
 
-                                        <a href="{{ route('createUsuarioMedico', $usuario->id) }}" class="btn btn-sm btn-outline-info" data-toggle="tooltip" data-placement="top" title="Asignar Médico">
+                                        <a href="{{ route('createUsuarioPersonalUnidad', $usuario->id) }}" class="btn btn-sm btn-outline-info" data-toggle="tooltip" data-placement="top" title="Asignar Personal de Salud">
                                             <i class="fas fa-user-md"></i>
                                         </a>
 

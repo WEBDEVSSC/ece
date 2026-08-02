@@ -9,12 +9,12 @@
         <div class="row mb-2 align-items-center">
             <div class="col-sm-6">
                 <h1 class="m-0 text-dark font-weight-bold" style="font-size: 1.6rem;">
-                    Registro de Nuevo Médico
+                    Registro de Nuevo Personal de Salud
                 </h1>
                 <p class="text-muted small mb-0">Ingrese los datos personales, profesionales y horarios del personal de salud</p>
             </div>
             <div class="col-sm-6 text-right">
-                <a href="{{ route('medicosIndex') }}" class="btn btn-secondary font-weight-bold shadow-sm">
+                <a href="{{ route('personalUnidadIndex') }}" class="btn btn-secondary font-weight-bold shadow-sm">
                     <i class="fas fa-arrow-left mr-1"></i> REGRESAR AL LISTADO
                 </a>
             </div>
@@ -26,23 +26,7 @@
 
 <div class="container-fluid">
 
-    @if ($errors->any())
-        <div class="alert alert-danger alert-dismissible fade show shadow-sm border-0 mb-4" role="alert">
-            <h5 class="alert-heading font-weight-bold">
-                <i class="fas fa-exclamation-triangle mr-1"></i> Se encontraron los siguientes errores:
-            </h5>
-            <ul class="mb-0 pl-3">
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    @endif
-
-    <form action="{{ route('medicosStore') }}" method="POST">
+    <form action="{{ route('personalUnidadStore') }}" method="POST">
         @csrf
         <input type="hidden" name="clues_id" value="{{ $usuario->clues_id }}">
 
@@ -252,7 +236,7 @@
                 </div>
             </div>
             <div class="card-footer bg-white border-top text-right py-3">
-                <a href="{{ route('medicosIndex') }}" class="btn btn-outline-secondary font-weight-bold mr-2">
+                <a href="{{ route('personalUnidadIndex') }}" class="btn btn-outline-secondary font-weight-bold mr-2">
                     CANCELAR
                 </a>
                 <button type="submit" class="btn btn-success font-weight-bold shadow-sm">

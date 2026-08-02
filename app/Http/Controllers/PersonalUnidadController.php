@@ -4,34 +4,34 @@ namespace App\Http\Controllers;
 
 use App\Models\CatPais;
 use App\Models\CatServiciosEspecialidadMedico;
-use App\Models\CatTipoPersonalMedico;
 use App\Models\CatClue;
-use App\Models\Medico;
-use App\Models\MedicoVacacion;
+use App\Models\CatTipoPersonalUnidad;
+use App\Models\PersonalUnidad;
+use App\Models\PersonalUnidadVacacion;
 use App\Models\Rol;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class MedicoController extends Controller
+class PersonalUnidadController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function medicosIndex()
+    public function personalUnidadIndex()
     {
         $user = Auth::user();
 
-        $medicos = Medico::where('clues_id', $user->clues_id)->get();
+        $personalUnidad = PersonalUnidad::where('clues_id', $user->clues_id)->get();
         
-        return view('settings.medicos.index-medico', compact('medicos'));
+        return view('settings.personal-unidad.index-personal-unidad', compact('personalUnidad'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function medicosCreate()
+    public function personalUnidadCreate()
     {
-        $tiposPersonalMedico = CatTipoPersonalMedico::all();
+        $tiposPersonalMedico = CatTipoPersonalUnidad::all();
 
         $servicioEspecialidadMedico = CatServiciosEspecialidadMedico::all();
 
@@ -41,17 +41,17 @@ class MedicoController extends Controller
 
         $paisesNacimiento = CatPais::orderBy('pais', 'asc')->get();
 
-        return view('settings.medicos.create-medico', compact('tiposPersonalMedico','servicioEspecialidadMedico','clues','usuario','paisesNacimiento'));
+        return view('settings.personal-unidad.create-personal-unidad', compact('tiposPersonalMedico','servicioEspecialidadMedico','clues','usuario','paisesNacimiento'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function medicosStore(Request $request)
+    public function personalUnidadStore(Request $request)
     {
         // Validamos los datos
         $request->validate([
-            'curp' => 'required|string|size:18',
+            'curp' => 'required|string|size:18|unique:personal_unidad,curp',
             'apellido_paterno' => 'required|string|max:100',
             'apellido_materno' => 'required|string|max:100',
             'nombres' => 'required|string|max:150',
@@ -82,6 +82,7 @@ class MedicoController extends Controller
         ], [
             'curp.required' => 'El CURP es obligatorio.',
             'curp.size' => 'El CURP debe tener exactamente 18 caracteres.',
+            'curp.unique' => 'Ya existe un médico registrado con esa CURP.',
 
             'apellido_paterno.required' => 'El apellido paterno es obligatorio.',
             'apellido_paterno.max' => 'El apellido paterno no puede tener más de 100 caracteres.',
@@ -141,72 +142,74 @@ class MedicoController extends Controller
         ]);
 
         // Guardamos los datos
-        $medico = new Medico();
+        $personalUnidad = new PersonalUnidad();
 
-        $medico->curp = $request->curp;
-        $medico->apellido_paterno = $request->apellido_paterno;
-        $medico->apellido_materno = $request->apellido_materno;
-        $medico->nombres = $request->nombres;
-        $medico->pais_nacimiento_id = $request->pais_nacimiento_id;
-        $medico->tipo_personal_id = $request->tipo_personal_id;
-        $medico->cedula_profesional = $request->cedula;
-        $medico->servicio_id = $request->servicio_id;
-        $medico->clues_id = $request->clues_id;
-        $medico->programa_smymg = $request->programa_smymg;
+        $personalUnidad->curp = $request->curp;
+        $personalUnidad->apellido_paterno = $request->apellido_paterno;
+        $personalUnidad->apellido_materno = $request->apellido_materno;
+        $personalUnidad->nombres = $request->nombres;
+        $personalUnidad->pais_nacimiento_id = $request->pais_nacimiento_id;
+        $personalUnidad->tipo_personal_id = $request->tipo_personal_id;
+        $personalUnidad->cedula_profesional = $request->cedula;
+        $personalUnidad->servicio_id = $request->servicio_id;
+        $personalUnidad->clues_id = $request->clues_id;
+        $personalUnidad->programa_smymg = $request->programa_smymg;
 
-        $medico->lunes_entrada = $request->lunes_entrada;
-        $medico->lunes_salida = $request->lunes_salida;
-        $medico->martes_entrada = $request->martes_entrada;
-        $medico->martes_salida = $request->martes_salida;
-        $medico->miercoles_entrada = $request->miercoles_entrada;
-        $medico->miercoles_salida = $request->miercoles_salida;
-        $medico->jueves_entrada = $request->jueves_entrada;
-        $medico->jueves_salida = $request->jueves_salida;
-        $medico->viernes_entrada = $request->viernes_entrada;
-        $medico->viernes_salida = $request->viernes_salida;
-        $medico->sabado_entrada = $request->sabado_entrada;
-        $medico->sabado_salida = $request->sabado_salida;
-        $medico->domingo_entrada = $request->domingo_entrada;
-        $medico->domingo_salida = $request->domingo_salida;
-        $medico->festivos_entrada = $request->festivos_entrada;
-        $medico->festivos_salida = $request->festivos_salida;
+        $personalUnidad->lunes_entrada = $request->lunes_entrada;
+        $personalUnidad->lunes_salida = $request->lunes_salida;
+        $personalUnidad->martes_entrada = $request->martes_entrada;
+        $personalUnidad->martes_salida = $request->martes_salida;
+        $personalUnidad->miercoles_entrada = $request->miercoles_entrada;
+        $personalUnidad->miercoles_salida = $request->miercoles_salida;
+        $personalUnidad->jueves_entrada = $request->jueves_entrada;
+        $personalUnidad->jueves_salida = $request->jueves_salida;
+        $personalUnidad->viernes_entrada = $request->viernes_entrada;
+        $personalUnidad->viernes_salida = $request->viernes_salida;
+        $personalUnidad->sabado_entrada = $request->sabado_entrada;
+        $personalUnidad->sabado_salida = $request->sabado_salida;
+        $personalUnidad->domingo_entrada = $request->domingo_entrada;
+        $personalUnidad->domingo_salida = $request->domingo_salida;
+        $personalUnidad->festivos_entrada = $request->festivos_entrada;
+        $personalUnidad->festivos_salida = $request->festivos_salida;
 
-        $medico->save();
+        $personalUnidad->save();
 
-        return redirect()->route('medicosIndex')->with('success', 'Registro realizado correctamente');
+        return redirect()->route('personalUnidadIndex')->with('success', 'Registro realizado correctamente');
     }
 
     /**
      * Display the specified resource.
      */
-    public function medicosShow($id)
+    public function personalUnidadShow($id)
     {
-        $medico = Medico::findOrFail($id);
+        $personalUnidad = PersonalUnidad::findOrFail($id);
 
-        return view('settings.medicos.show-medico', compact('medico'));
+        return view('settings.personal-unidad.show-personal-unidad', compact('personalUnidad'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function medicosEdit($id)
+    public function personalUnidadEdit($id)
     {
-        $medico = Medico::findOrFail($id);
+        $personalUnidad = PersonalUnidad::findOrFail($id);
 
-        $tiposPersonalMedico = CatTipoPersonalMedico::all();
+        $tiposPersonalUnidad = CatTipoPersonalUnidad::all();
 
         $servicioEspecialidadMedico = CatServiciosEspecialidadMedico::all();
 
         $paisesNacimiento = CatPais::orderBy('pais', 'asc')->get();
 
-        return view('settings.medicos.edit-medico', compact('medico', 'tiposPersonalMedico', 'servicioEspecialidadMedico', 'paisesNacimiento'));
+        return view('settings.personal-unidad.edit-personal-unidad', compact('personalUnidad', 'tiposPersonalUnidad', 'servicioEspecialidadMedico', 'paisesNacimiento'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function medicosUpdate(Request $request, $id)
+    public function personalUnidadUpdate(Request $request, $id)
     {
+        //dd($request->all());
+
         $request->validate([
             'curp' => 'required|string|size:18',
             'apellido_paterno' => 'required|string|max:100',
@@ -214,25 +217,32 @@ class MedicoController extends Controller
             'nombres' => 'required|string|max:150',
             'programa_smymg' => 'required|in:0,1',
             'cedula' => 'required|string|max:16',
-            'tipo_personal_id' => 'required|integer|exists:cat_tipos_personal_medico,id',
+            'tipo_personal_id' => 'required|integer|exists:cat_tipos_personal_unidad,id',
             'servicio_id' => 'required|integer|exists:cat_servicios_especialidad_medicos,id',
 
-            'lunes_entrada' => 'nullable|date_format:H:i',
-            'lunes_salida' => 'nullable|date_format:H:i|after:lunes_entrada',
-            'martes_entrada' => 'nullable|date_format:H:i',
-            'martes_salida' => 'nullable|date_format:H:i|after:martes_entrada',
-            'miercoles_entrada' => 'nullable|date_format:H:i',
-            'miercoles_salida' => 'nullable|date_format:H:i|after:miercoles_entrada',
-            'jueves_entrada' => 'nullable|date_format:H:i',
-            'jueves_salida' => 'nullable|date_format:H:i|after:jueves_entrada',
-            'viernes_entrada' => 'nullable|date_format:H:i',
-            'viernes_salida' => 'nullable|date_format:H:i|after:viernes_entrada',
-            'sabado_entrada' => 'nullable|date_format:H:i',
-            'sabado_salida' => 'nullable|date_format:H:i|after:sabado_entrada',
-            'domingo_entrada' => 'nullable|date_format:H:i',
-            'domingo_salida' => 'nullable|date_format:H:i|after:domingo_entrada', 
-            'festivos_entrada' => 'nullable|date_format:H:i',
-            'festivos_salida' => 'nullable|date_format:H:i|after:festivos_entrada',
+            'lunes_entrada'    => 'nullable|date_format:H:i,H:i:s',
+            'lunes_salida'     => 'nullable|date_format:H:i,H:i:s|required_with:lunes_entrada|after:lunes_entrada',
+
+            'martes_entrada'   => 'nullable|date_format:H:i,H:i:s',
+            'martes_salida'    => 'nullable|date_format:H:i,H:i:s|required_with:martes_entrada|after:martes_entrada',
+
+            'miercoles_entrada'=> 'nullable|date_format:H:i,H:i:s',
+            'miercoles_salida' => 'nullable|date_format:H:i,H:i:s|required_with:miercoles_entrada|after:miercoles_entrada',
+
+            'jueves_entrada'   => 'nullable|date_format:H:i,H:i:s',
+            'jueves_salida'    => 'nullable|date_format:H:i,H:i:s|required_with:jueves_entrada|after:jueves_entrada',
+
+            'viernes_entrada'  => 'nullable|date_format:H:i,H:i:s',
+            'viernes_salida'   => 'nullable|date_format:H:i,H:i:s|required_with:viernes_entrada|after:viernes_entrada',
+
+            'sabado_entrada'   => 'nullable|date_format:H:i,H:i:s',
+            'sabado_salida'    => 'nullable|date_format:H:i,H:i:s|required_with:sabado_entrada|after:sabado_entrada',
+
+            'domingo_entrada'  => 'nullable|date_format:H:i,H:i:s',
+            'domingo_salida'   => 'nullable|date_format:H:i,H:i:s|required_with:domingo_entrada|after:domingo_entrada',
+
+            'festivos_entrada' => 'nullable|date_format:H:i,H:i:s',
+            'festivos_salida'  => 'nullable|date_format:H:i,H:i:s|required_with:festivos_entrada|after:festivos_entrada',
         ], [
             'curp.required' => 'El CURP es obligatorio.',
             'curp.size' => 'El CURP debe tener exactamente 18 caracteres.',
@@ -292,65 +302,65 @@ class MedicoController extends Controller
         ]);
 
         // Guardamos los datos
-        $medico = Medico::findOrFail($id);
+        $personalUnidad = PersonalUnidad::findOrFail($id);
 
-        $medico->curp = $request->curp;
-        $medico->apellido_paterno = $request->apellido_paterno;
-        $medico->apellido_materno = $request->apellido_materno;
-        $medico->nombres = $request->nombres;
-        $medico->tipo_personal_id = $request->tipo_personal_id;
-        $medico->cedula_profesional = $request->cedula;
-        $medico->servicio_id = $request->servicio_id;
-        $medico->programa_smymg = $request->programa_smymg;
+        $personalUnidad->curp = $request->curp;
+        $personalUnidad->apellido_paterno = $request->apellido_paterno;
+        $personalUnidad->apellido_materno = $request->apellido_materno;
+        $personalUnidad->nombres = $request->nombres;
+        $personalUnidad->tipo_personal_id = $request->tipo_personal_id;
+        $personalUnidad->cedula_profesional = $request->cedula;
+        $personalUnidad->servicio_id = $request->servicio_id;
+        $personalUnidad->programa_smymg = $request->programa_smymg;
 
-        $medico->lunes_entrada = $request->lunes_entrada;
-        $medico->lunes_salida = $request->lunes_salida;
-        $medico->martes_entrada = $request->martes_entrada;
-        $medico->martes_salida = $request->martes_salida;
-        $medico->miercoles_entrada = $request->miercoles_entrada;
-        $medico->miercoles_salida = $request->miercoles_salida;
-        $medico->jueves_entrada = $request->jueves_entrada;
-        $medico->jueves_salida = $request->jueves_salida;
-        $medico->viernes_entrada = $request->viernes_entrada;
-        $medico->viernes_salida = $request->viernes_salida;
-        $medico->sabado_entrada = $request->sabado_entrada;
-        $medico->sabado_salida = $request->sabado_salida;
-        $medico->domingo_entrada = $request->domingo_entrada;
-        $medico->domingo_salida = $request->domingo_salida;
-        $medico->festivos_entrada = $request->festivos_entrada;
-        $medico->festivos_salida = $request->festivos_salida;
+        $personalUnidad->lunes_entrada = $request->lunes_entrada;
+        $personalUnidad->lunes_salida = $request->lunes_salida;
+        $personalUnidad->martes_entrada = $request->martes_entrada;
+        $personalUnidad->martes_salida = $request->martes_salida;
+        $personalUnidad->miercoles_entrada = $request->miercoles_entrada;
+        $personalUnidad->miercoles_salida = $request->miercoles_salida;
+        $personalUnidad->jueves_entrada = $request->jueves_entrada;
+        $personalUnidad->jueves_salida = $request->jueves_salida;
+        $personalUnidad->viernes_entrada = $request->viernes_entrada;
+        $personalUnidad->viernes_salida = $request->viernes_salida;
+        $personalUnidad->sabado_entrada = $request->sabado_entrada;
+        $personalUnidad->sabado_salida = $request->sabado_salida;
+        $personalUnidad->domingo_entrada = $request->domingo_entrada;
+        $personalUnidad->domingo_salida = $request->domingo_salida;
+        $personalUnidad->festivos_entrada = $request->festivos_entrada;
+        $personalUnidad->festivos_salida = $request->festivos_salida;
 
-        $medico->save();
+        $personalUnidad->save();
 
-        return redirect()->route('medicosIndex')->with('update', 'Registro actualizado correctamente');
+        return redirect()->route('personalUnidadIndex')->with('update', 'Registro actualizado correctamente');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function medicosDestroy($id)
+    public function personalUnidadDestroy($id)
     {
-        $medico = Medico::findOrFail($id);
-        $medico->delete();
+        $personalUnidad = PersonalUnidad::findOrFail($id);
+        $personalUnidad->delete();
 
-        return redirect()->route('medicosIndex')->with('destroy', 'Registro eliminado correctamente');
+        return redirect()->route('personalUnidadIndex')->with('destroy', 'Registro eliminado correctamente');
     }
 
-    public function indexMedicosVacacion($id)
+    public function indexPersonalUnidadVacacion($id)
     {
-        $medico = Medico::findOrFail($id);
+        $medico = PersonalUnidad::findOrFail($id);
 
         $medicoVacaciones = $medico->vacaciones()
             ->whereYear('fecha', now()->year)
             ->orderBy('fecha')
             ->get();
 
-        return view('settings.medicos.index-medico-vacacion',compact('medico', 'medicoVacaciones'));
+        return view('settings.personal-unidad.index-personal-unidad-vacacion',compact('medico', 'medicoVacaciones'));
     }
 
-    public function createMedicosVacacion($id)
+    public function createPersonalUnidadVacacion($id)
     {
-        $medico = Medico::findOrFail($id);
+        $medico = PersonalUnidad::findOrFail($id);
 
         $user = Auth::user();
 
@@ -358,10 +368,10 @@ class MedicoController extends Controller
             abort(403, 'No tienes permiso para asignar vacaciones a este médico.');
         }
 
-        return view('settings.medicos.create-medico-vacacion', compact('medico'));
+        return view('settings.personal-unidad.create-personal-unidad-vacacion', compact('medico'));
     }
 
-    public function storeMedicosVacacion(Request $request, $id)
+    public function storePersonalUnidadVacacion(Request $request, $id)
     {
         $request->validate([
             'fecha'=> 'date|required|after_or_equal:today',
@@ -376,11 +386,11 @@ class MedicoController extends Controller
             'concepto.max' => 'El concepto no puede exceder los 50 caracteres.',
         ]);
 
-        $consultaMedicoVacacion = MedicoVacacion::where('medico_id',$id)
+        $consultaPersonalUnidadVacacion = PersonalUnidadVacacion::where('personal_unidad_id',$id)
             ->whereDate('fecha', $request->fecha)
             ->exists();
 
-        if ($consultaMedicoVacacion) {
+        if ($consultaPersonalUnidadVacacion) {
             return back()
                 ->withErrors([
                     'fecha' => 'La fecha seleccionada ya fue asignada para este médico.'
@@ -388,29 +398,29 @@ class MedicoController extends Controller
                 ->withInput();
         }
 
-        $medicoVacacion = new MedicoVacacion();
+        $personalUnidadVacacion = new PersonalUnidadVacacion();
 
-        $medicoVacacion->medico_id = $id;
-        $medicoVacacion->fecha = $request->fecha;
-        $medicoVacacion->concepto = $request->concepto;
+        $personalUnidadVacacion->personal_unidad_id = $id;
+        $personalUnidadVacacion->fecha = $request->fecha;
+        $personalUnidadVacacion->concepto = $request->concepto;
 
-        $medicoVacacion->save();
+        $personalUnidadVacacion->save();
 
-        return redirect()->route('indexMedicosVacacion',$id)->with('success', 'Fecha registrada correctamente');
+        return redirect()->route('indexPersonalUnidadVacacion',$id)->with('success', 'Fecha registrada correctamente');
     }
 
-    public function deleteMedicosVacacion($id)
+    public function deletePersonalUnidadVacacion($id)
     {
-        $medicoVacacion = MedicoVacacion::findOrFail($id);
+        $personalUnidadVacacion = PersonalUnidadVacacion::findOrFail($id);
 
         $user = Auth::user();
 
-        if ($medicoVacacion->medico->clues_id !== $user->clues_id) {
+        if ($personalUnidadVacacion->personal_unidad->clues_id !== $user->clues_id) {
             abort(403, 'No tienes permiso para eliminar vacaciones a este médico.');
         }
 
-        $medicoVacacion->delete();
+        $personalUnidadVacacion->delete();
 
-        return redirect()->route('indexMedicosVacacion',$medicoVacacion->medico_id)->with('destroy', 'Fecha eliminada correctamente');
+        return redirect()->route('indexPersonalUnidadVacacion',$personalUnidadVacacion->personal_unidad_id)->with('destroy', 'Fecha eliminada correctamente');
     }
 }

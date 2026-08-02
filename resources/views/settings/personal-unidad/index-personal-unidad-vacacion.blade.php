@@ -11,10 +11,10 @@
                 <h1 class="m-0 text-dark font-weight-bold" style="font-size: 1.6rem;">
                     Vacaciones Registradas
                 </h1>
-                <p class="text-muted small mb-0">Listado de periodos y días de asueto asignados al médico</p>
+                <p class="text-muted small mb-0">Listado de periodos y días de asueto asignados al personal de salud</p>
             </div>
             <div class="col-sm-6 text-right">
-                <a href="{{ route('medicosIndex') }}" class="btn btn-secondary font-weight-bold shadow-sm">
+                <a href="{{ route('personalUnidadIndex') }}" class="btn btn-secondary font-weight-bold shadow-sm">
                     <i class="fas fa-arrow-left mr-1"></i> REGRESAR AL LISTADO
                 </a>
             </div>
@@ -27,36 +27,34 @@
 <div class="container-fluid">
 
     {{-- Alertas con SweetAlert2 --}}
-    @php
-        $alerts = [
-            'success',
-            'update',
-            'destroy',
-        ];
-    @endphp
+@php
+    $alerts = ['success', 'update', 'destroy'];
+@endphp
 
-    @foreach ($alerts as $alert)
-        @if(session($alert))
-            <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    Swal.fire({
-                        title: '¡Éxito!',
-                        text: "{{ session($alert) }}",
-                        icon: 'success',
-                        confirmButtonText: 'Aceptar',
-                        confirmButtonColor: '#28a745'
-                    });
+@foreach ($alerts as $alert)
+    @if(session($alert))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'success',
+                    title: "{{ session($alert) }}",
+                    showConfirmButton: false,
+                    timer: 3500,
+                    timerProgressBar: true
                 });
-            </script>
-        @endif
-    @endforeach
+            });
+        </script>
+    @endif
+@endforeach
 
     <!-- Información del Médico Seleccionado -->
     <div class="card card-outline card-info shadow-sm border-0 mb-4">
         <div class="card-header bg-white py-3">
             <h3 class="card-title text-bold text-dark mb-0" style="font-size: 1.1rem;">
                 <i class="fas fa-user-md text-info mr-2"></i>
-                Médico Seleccionado
+                Tarjeta Informativa del Personal de Salud
             </h3>
         </div>
         <div class="card-body">
@@ -78,7 +76,7 @@
                 Historial de Vacaciones
             </h3>
             <div class="card-tools">
-                <a href="{{ route('createMedicosVacacion', $medico->id) }}" class="btn btn-success font-weight-bold shadow-sm">
+                <a href="{{ route('createPersonalUnidadVacacion', $medico->id) }}" class="btn btn-success font-weight-bold shadow-sm">
                     <i class="fas fa-plus mr-1"></i> NUEVO REGISTRO
                 </a>
             </div>
@@ -107,7 +105,7 @@
                                     {{ $vacacion->concepto }}
                                 </td>
                                 <td class="text-center align-middle">
-                                    <form action="{{ route('deleteMedicosVacacion', $vacacion->id) }}" method="POST" class="d-inline formulario-eliminar">
+                                    <form action="{{ route('deletePersonalUnidadVacacion', $vacacion->id) }}" method="POST" class="d-inline formulario-eliminar">
                                         @csrf
                                         @method('DELETE')
 

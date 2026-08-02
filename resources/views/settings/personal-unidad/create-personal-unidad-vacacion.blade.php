@@ -12,7 +12,7 @@
                 <p class="text-muted small mb-0">Registro e historial de periodos vacacionales del personal médico</p>
             </div>
             <div class="col-sm-6 text-right">
-                <a href="{{ route('medicosIndex') }}" class="btn btn-secondary font-weight-bold shadow-sm">
+                <a href="{{ route('personalUnidadIndex') }}" class="btn btn-secondary font-weight-bold shadow-sm">
                     <i class="fas fa-arrow-left mr-1"></i> REGRESAR AL LISTADO
                 </a>
             </div>
@@ -68,7 +68,7 @@
             </h3>
         </div>
         
-        <form action="{{ route('storeMedicosVacacion', $medico->id) }}" method="POST">
+        <form action="{{ route('storePersonalUnidadVacacion', $medico->id) }}" method="POST">
             @csrf
 
             <div class="card-body">
@@ -101,7 +101,7 @@
             </div>
 
             <div class="card-footer bg-white border-top text-right py-3">
-                <a href="{{ route('medicosIndex') }}" class="btn btn-outline-secondary font-weight-bold mr-2">
+                <a href="{{ route('personalUnidadIndex') }}" class="btn btn-outline-secondary font-weight-bold mr-2">
                     CANCELAR
                 </a>
                 <button type="submit" class="btn btn-success font-weight-bold shadow-sm">

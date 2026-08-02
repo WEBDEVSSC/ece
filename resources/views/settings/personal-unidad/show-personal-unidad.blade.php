@@ -9,12 +9,12 @@
         <div class="row mb-2 align-items-center">
             <div class="col-sm-6">
                 <h1 class="m-0 text-dark font-weight-bold" style="font-size: 1.6rem;">
-                    Expediente del Médico
+                    Expediente del Personal de Salud
                 </h1>
                 <p class="text-muted small mb-0">Información detallada del profesional de la salud y sus horarios</p>
             </div>
             <div class="col-sm-6 text-right">
-                <a href="{{ route('medicosIndex') }}" class="btn btn-secondary font-weight-bold shadow-sm">
+                <a href="{{ route('personalUnidadIndex') }}" class="btn btn-secondary font-weight-bold shadow-sm">
                     <i class="fas fa-arrow-left mr-1"></i> REGRESAR AL LISTADO
                 </a>
             </div>
@@ -56,7 +56,7 @@
                 <div class="info-box-content">
                     <span class="info-box-text text-muted text-uppercase style-label">Cédula Profesional</span>
                     <span class="info-box-number text-dark font-weight-bold" style="font-size: 1.2rem;">
-                        {{ $medico->cedula_profesional ?? 'Sin Registro' }}
+                        {{ $personalUnidad->cedula_profesional ?? 'Sin Registro' }}
                     </span>
                 </div>
             </div>
@@ -67,7 +67,7 @@
                 <div class="info-box-content">
                     <span class="info-box-text text-muted text-uppercase style-label">Especialidad</span>
                     <span class="info-box-number text-dark font-weight-bold" style="font-size: 1.1rem;">
-                        {{ $medico->servicioEspecialidadMedico->especialidad ?? 'No especificado' }}
+                        {{ $personalUnidad->servicioEspecialidadMedico->especialidad ?? 'No especificado' }}
                     </span>
                 </div>
             </div>
@@ -78,7 +78,7 @@
                 <div class="info-box-content">
                     <span class="info-box-text text-muted text-uppercase style-label">Programa U013</span>
                     <span class="info-box-number text-dark font-weight-bold" style="font-size: 1.2rem;">
-                        @if($medico->programa_smymg == 1)
+                        @if($personalUnidad->programa_smymg == 1)
                             <span class="text-success"><i class="fas fa-check-circle mr-1"></i> Contratado</span>
                         @else
                             <span class="text-secondary"><i class="fas fa-times-circle mr-1"></i> No Aplica</span>
@@ -96,7 +96,7 @@
                 <i class="fas fa-id-card text-primary mr-2"></i>
                 Información Personal y Profesional
             </h3>
-            <a href="{{ route('medicosEdit', $medico->id) }}" class="btn btn-outline-secondary btn-sm">
+            <a href="{{ route('personalUnidadEdit', $personalUnidad->id) }}" class="btn btn-outline-secondary btn-sm">
                 <i class="fas fa-edit mr-1"></i> Editar Información
             </a>
         </div>
@@ -104,19 +104,19 @@
             <div class="row">
                 <div class="col-md-3 mb-3">
                     <label class="text-muted small text-uppercase mb-1 d-block">CURP</label>
-                    <span class="font-weight-bold text-dark h6"><code>{{ $medico->curp }}</code></span>
+                    <span class="font-weight-bold text-dark h6"><code>{{ $personalUnidad->curp }}</code></span>
                 </div>
                 <div class="col-md-3 mb-3">
                     <label class="text-muted small text-uppercase mb-1 d-block">Nombre Completo</label>
-                    <span class="font-weight-bold text-dark h6">{{ $medico->nombre_completo }}</span>
+                    <span class="font-weight-bold text-dark h6">{{ $personalUnidad->nombre_completo }}</span>
                 </div>
                 <div class="col-md-3 mb-3">
                     <label class="text-muted small text-uppercase mb-1 d-block">País de Nacimiento</label>
-                    <span class="text-dark"><i class="fas fa-globe-americas text-secondary mr-1"></i> {{ $medico->paisNacimiento->pais ?? 'No especificado' }}</span>
+                    <span class="text-dark"><i class="fas fa-globe-americas text-secondary mr-1"></i> {{ $personalUnidad->paisNacimiento->pais ?? 'No especificado' }}</span>
                 </div>
                 <div class="col-md-3 mb-3">
                     <label class="text-muted small text-uppercase mb-1 d-block">Cédula Profesional</label>
-                    <span class="text-dark"><i class="fas fa-id-badge text-secondary mr-1"></i> {{ $medico->cedula_profesional ?? 'Sin Registro' }}</span>
+                    <span class="text-dark"><i class="fas fa-id-badge text-secondary mr-1"></i> {{ $personalUnidad->cedula_profesional ?? 'Sin Registro' }}</span>
                 </div>
             </div>
 
@@ -126,16 +126,16 @@
                 <div class="col-md-3 mb-3">
                     <label class="text-muted small text-uppercase mb-1 d-block">Tipo de Personal</label>
                     <span class="badge badge-light border text-dark px-2 py-1">
-                        {{ $medico->tipoPersonal->descripcion ?? 'No especificado' }}
+                        {{ $personalUnidad->tipoPersonal->descripcion ?? 'No especificado' }}
                     </span>
                 </div>
                 <div class="col-md-3 mb-3">
                     <label class="text-muted small text-uppercase mb-1 d-block">Servicio / Especialidad</label>
-                    <span class="text-dark font-weight-bold">{{ $medico->servicioEspecialidadMedico->especialidad ?? 'No especificado' }}</span>
+                    <span class="text-dark font-weight-bold">{{ $personalUnidad->servicioEspecialidadMedico->especialidad ?? 'No especificado' }}</span>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label class="text-muted small text-uppercase mb-1 d-block">Unidad de Adscripción (CLUES)</label>
-                    <span class="text-dark"><i class="fas fa-hospital text-secondary mr-1"></i> {{ $medico->clues->clues_nombre ?? 'No especificado' }}</span>
+                    <span class="text-dark"><i class="fas fa-hospital text-secondary mr-1"></i> {{ $personalUnidad->clues->clues_nombre ?? 'No especificado' }}</span>
                 </div>
             </div>
         </div>
@@ -162,14 +162,14 @@
                     <tbody>
                         @php
                             $dias = [
-                                'Lunes' => ['entrada' => $medico->lunes_entrada, 'salida' => $medico->lunes_salida],
-                                'Martes' => ['entrada' => $medico->martes_entrada, 'salida' => $medico->martes_salida],
-                                'Miércoles' => ['entrada' => $medico->miercoles_entrada, 'salida' => $medico->miercoles_salida],
-                                'Jueves' => ['entrada' => $medico->jueves_entrada, 'salida' => $medico->jueves_salida],
-                                'Viernes' => ['entrada' => $medico->viernes_entrada, 'salida' => $medico->viernes_salida],
-                                'Sábado' => ['entrada' => $medico->sabado_entrada, 'salida' => $medico->sabado_salida],
-                                'Domingo' => ['entrada' => $medico->domingo_entrada, 'salida' => $medico->domingo_salida],
-                                'Festivos' => ['entrada' => $medico->festivos_entrada, 'salida' => $medico->festivos_salida],
+                                'Lunes' => ['entrada' => $personalUnidad->lunes_entrada, 'salida' => $personalUnidad->lunes_salida],
+                                'Martes' => ['entrada' => $personalUnidad->martes_entrada, 'salida' => $personalUnidad->martes_salida],
+                                'Miércoles' => ['entrada' => $personalUnidad->miercoles_entrada, 'salida' => $personalUnidad->miercoles_salida],
+                                'Jueves' => ['entrada' => $personalUnidad->jueves_entrada, 'salida' => $personalUnidad->jueves_salida],
+                                'Viernes' => ['entrada' => $personalUnidad->viernes_entrada, 'salida' => $personalUnidad->viernes_salida],
+                                'Sábado' => ['entrada' => $personalUnidad->sabado_entrada, 'salida' => $personalUnidad->sabado_salida],
+                                'Domingo' => ['entrada' => $personalUnidad->domingo_entrada, 'salida' => $personalUnidad->domingo_salida],
+                                'Festivos' => ['entrada' => $personalUnidad->festivos_entrada, 'salida' => $personalUnidad->festivos_salida],
                             ];
                         @endphp
 

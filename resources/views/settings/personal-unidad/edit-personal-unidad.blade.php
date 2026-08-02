@@ -9,12 +9,12 @@
         <div class="row mb-2 align-items-center">
             <div class="col-sm-6">
                 <h1 class="m-0 text-dark font-weight-bold" style="font-size: 1.6rem;">
-                    Actualizar Perfil de Médico
+                    Actualizar Perfil del Personal de Salud
                 </h1>
                 <p class="text-muted small mb-0">Modifique los datos personales, profesionales y horarios del personal de salud</p>
             </div>
             <div class="col-sm-6 text-right">
-                <a href="{{ route('medicosIndex') }}" class="btn btn-secondary font-weight-bold shadow-sm">
+                <a href="{{ route('personalUnidadIndex') }}" class="btn btn-secondary font-weight-bold shadow-sm">
                     <i class="fas fa-arrow-left mr-1"></i> REGRESAR AL LISTADO
                 </a>
             </div>
@@ -26,23 +26,7 @@
 
 <div class="container-fluid">
 
-    @if ($errors->any())
-        <div class="alert alert-danger alert-dismissible fade show shadow-sm border-0 mb-4" role="alert">
-            <h5 class="alert-heading font-weight-bold">
-                <i class="fas fa-exclamation-triangle mr-1"></i> Se encontraron los siguientes errores:
-            </h5>
-            <ul class="mb-0 pl-3">
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    @endif
-
-    <form action="{{ route('medicosUpdate', $medico->id) }}" method="POST">
+    <form action="{{ route('personalUnidadUpdate', $personalUnidad->id) }}" method="POST">
         @csrf
         @method('PUT')
 
@@ -63,7 +47,7 @@
                         <select name="pais_nacimiento_id" id="pais_nacimiento_id" class="form-control select2 @error('pais_nacimiento_id') is-invalid @enderror">
                             <option value="">Seleccione una opción</option>
                             @foreach($paisesNacimiento as $paisNacimiento)
-                                <option value="{{ $paisNacimiento->id }}" {{ old('pais_nacimiento_id', $medico->pais_nacimiento_id) == $paisNacimiento->id ? 'selected' : '' }}>
+                                <option value="{{ $paisNacimiento->id }}" {{ old('pais_nacimiento_id', $personalUnidad->pais_nacimiento_id) == $paisNacimiento->id ? 'selected' : '' }}>
                                     {{ $paisNacimiento->codigo_pais }} - {{ $paisNacimiento->pais }}
                                 </option>
                             @endforeach
@@ -77,7 +61,7 @@
                         <label for="curp" class="text-muted small text-uppercase mb-1 d-block font-weight-bold">
                             <i class="fas fa-fingerprint text-secondary mr-1"></i> CURP
                         </label>
-                        <input type="text" name="curp" id="curp" class="form-control text-uppercase @error('curp') is-invalid @enderror" value="{{ old('curp', $medico->curp) }}" placeholder="Ej. AAAA000000XXXXXX00">
+                        <input type="text" name="curp" id="curp" class="form-control text-uppercase @error('curp') is-invalid @enderror" value="{{ old('curp', $personalUnidad->curp) }}" placeholder="Ej. AAAA000000XXXXXX00">
                         @error('curp')
                             <small class="text-danger font-weight-bold d-block mt-1">{{ $message }}</small>
                         @enderror
@@ -85,7 +69,7 @@
 
                     <div class="col-md-3 mb-3">
                         <label for="apellido_paterno" class="text-muted small text-uppercase mb-1 d-block font-weight-bold">Apellido Paterno</label>
-                        <input type="text" name="apellido_paterno" id="apellido_paterno" class="form-control @error('apellido_paterno') is-invalid @enderror" value="{{ old('apellido_paterno', $medico->apellido_paterno) }}" placeholder="Primer apellido">
+                        <input type="text" name="apellido_paterno" id="apellido_paterno" class="form-control @error('apellido_paterno') is-invalid @enderror" value="{{ old('apellido_paterno', $personalUnidad->apellido_paterno) }}" placeholder="Primer apellido">
                         @error('apellido_paterno')
                             <small class="text-danger font-weight-bold d-block mt-1">{{ $message }}</small>
                         @enderror
@@ -93,7 +77,7 @@
 
                     <div class="col-md-3 mb-3">
                         <label for="apellido_materno" class="text-muted small text-uppercase mb-1 d-block font-weight-bold">Apellido Materno</label>
-                        <input type="text" name="apellido_materno" id="apellido_materno" class="form-control @error('apellido_materno') is-invalid @enderror" value="{{ old('apellido_materno', $medico->apellido_materno) }}" placeholder="Segundo apellido">
+                        <input type="text" name="apellido_materno" id="apellido_materno" class="form-control @error('apellido_materno') is-invalid @enderror" value="{{ old('apellido_materno', $personalUnidad->apellido_materno) }}" placeholder="Segundo apellido">
                         @error('apellido_materno')
                             <small class="text-danger font-weight-bold d-block mt-1">{{ $message }}</small>
                         @enderror
@@ -103,7 +87,7 @@
                 <div class="row">
                     <div class="col-md-3 mb-3">
                         <label for="nombres" class="text-muted small text-uppercase mb-1 d-block font-weight-bold">Nombre(s)</label>
-                        <input type="text" name="nombres" id="nombres" class="form-control @error('nombres') is-invalid @enderror" value="{{ old('nombres', $medico->nombres) }}" placeholder="Nombre o nombres">
+                        <input type="text" name="nombres" id="nombres" class="form-control @error('nombres') is-invalid @enderror" value="{{ old('nombres', $personalUnidad->nombres) }}" placeholder="Nombre o nombres">
                         @error('nombres')
                             <small class="text-danger font-weight-bold d-block mt-1">{{ $message }}</small>
                         @enderror
@@ -113,7 +97,7 @@
                         <label for="cedula" class="text-muted small text-uppercase mb-1 d-block font-weight-bold">
                             <i class="fas fa-id-badge text-secondary mr-1"></i> Cédula Profesional
                         </label>
-                        <input type="text" name="cedula" id="cedula" class="form-control @error('cedula') is-invalid @enderror" value="{{ old('cedula', $medico->cedula_profesional) }}" placeholder="Número de cédula">
+                        <input type="text" name="cedula" id="cedula" class="form-control @error('cedula') is-invalid @enderror" value="{{ old('cedula', $personalUnidad->cedula_profesional) }}" placeholder="Número de cédula">
                         @error('cedula')
                             <small class="text-danger font-weight-bold d-block mt-1">{{ $message }}</small>
                         @enderror
@@ -123,8 +107,8 @@
                         <label for="tipo_personal_id" class="text-muted small text-uppercase mb-1 d-block font-weight-bold">Tipo de Personal</label>
                         <select name="tipo_personal_id" id="tipo_personal_id" class="form-control custom-select @error('tipo_personal_id') is-invalid @enderror">
                             <option value="">Seleccione una opción</option>
-                            @foreach($tiposPersonalMedico as $tipo)
-                                <option value="{{ $tipo->id }}" {{ old('tipo_personal_id', $medico->tipo_personal_id) == $tipo->id ? 'selected' : '' }}>
+                            @foreach($tiposPersonalUnidad as $tipo)
+                                <option value="{{ $tipo->id }}" {{ old('tipo_personal_id', $personalUnidad->tipo_personal_id) == $tipo->id ? 'selected' : '' }}>
                                     {{ $tipo->descripcion }}
                                 </option>
                             @endforeach
@@ -141,7 +125,7 @@
                         <select name="servicio_id" id="servicio_id" class="form-control custom-select @error('servicio_id') is-invalid @enderror">
                             <option value="">Seleccione una opción</option>
                             @foreach($servicioEspecialidadMedico as $servicio)
-                                <option value="{{ $servicio->id }}" {{ old('servicio_id', $medico->servicio_id) == $servicio->id ? 'selected' : '' }}>
+                                <option value="{{ $servicio->id }}" {{ old('servicio_id', $personalUnidad->servicio_id) == $servicio->id ? 'selected' : '' }}>
                                     {{ $servicio->especialidad }}
                                 </option>
                             @endforeach
@@ -158,8 +142,8 @@
                             <i class="fas fa-file-contract text-secondary mr-1"></i> ¿Programa U013?
                         </label>
                         <select name="programa_smymg" id="programa_smymg" class="form-control custom-select @error('programa_smymg') is-invalid @enderror">
-                            <option value="0" {{ old('programa_smymg', $medico->programa_smymg) == 0 ? 'selected' : '' }}>NO</option>
-                            <option value="1" {{ old('programa_smymg', $medico->programa_smymg) == 1 ? 'selected' : '' }}>SÍ</option>
+                            <option value="0" {{ old('programa_smymg', $personalUnidad->programa_smymg) == 0 ? 'selected' : '' }}>NO</option>
+                            <option value="1" {{ old('programa_smymg', $personalUnidad->programa_smymg) == 1 ? 'selected' : '' }}>SÍ</option>
                         </select>
                         @error('programa_smymg')
                             <small class="text-danger font-weight-bold d-block mt-1">{{ $message }}</small>
@@ -211,7 +195,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-clock text-success"></i></span>
                                             </div>
-                                            <input type="time" name="{{ $key }}_entrada" class="form-control @error($key.'_entrada') is-invalid @enderror" value="{{ old($key.'_entrada', $medico->{$key.'_entrada'}) }}">
+                                            <input type="time" name="{{ $key }}_entrada" class="form-control @error($key.'_entrada') is-invalid @enderror" value="{{ old($key.'_entrada', $personalUnidad->{$key.'_entrada'}) }}">
                                         </div>
                                         @error($key.'_entrada')
                                             <small class="text-danger font-weight-bold d-block mt-1">{{ $message }}</small>
@@ -222,7 +206,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-clock text-danger"></i></span>
                                             </div>
-                                            <input type="time" name="{{ $key }}_salida" class="form-control @error($key.'_salida') is-invalid @enderror" value="{{ old($key.'_salida', $medico->{$key.'_salida'}) }}">
+                                            <input type="time" name="{{ $key }}_salida" class="form-control @error($key.'_salida') is-invalid @enderror" value="{{ old($key.'_salida', $personalUnidad->{$key.'_salida'}) }}">
                                         </div>
                                         @error($key.'_salida')
                                             <small class="text-danger font-weight-bold d-block mt-1">{{ $message }}</small>
@@ -235,7 +219,7 @@
                 </div>
             </div>
             <div class="card-footer bg-white border-top text-right py-3">
-                <a href="{{ route('medicosIndex') }}" class="btn btn-outline-secondary font-weight-bold mr-2">
+                <a href="{{ route('personalUnidadIndex') }}" class="btn btn-outline-secondary font-weight-bold mr-2">
                     CANCELAR
                 </a>
                 <button type="submit" class="btn btn-success font-weight-bold shadow-sm">

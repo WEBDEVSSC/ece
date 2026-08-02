@@ -583,18 +583,39 @@
         </table>
 
         <!-- Pie de página de la hoja clínica -->
-        <table>
-            <tr>
-                <td><span class="label">36/ Fuentes de consulta en la Atención del Paciente:</span></td>
-            </tr>
-            <tr style="height: 30px;"><td></td></tr>
-            <tr>
-                <td><span class="label">37/ Enfermera(o) Responsable / Nombre Completo / Núm. Cédula / Firma:</span></td>
-            </tr>
-            <tr style="height: 40px;">
-                <td>{{ $user->name }}</td>
-            </tr>
-        </table>
+        <table style="width: 100%; border-collapse: collapse;">
+    <tr>
+        <td colspan="2"><span class="label">36/ Fuentes de consulta en la Atención del Paciente:</span></td>
+    </tr>
+    
+    <tr style="height: 35px;">
+        <td colspan="2"></td>
+    </tr>
+
+    <tr>
+        <td colspan="2"><span class="label">37/ Enfermera(o) Responsable / Nombre Completo / Núm. Cédula / Firma:</span></td>
+    </tr>
+
+    <tr>
+        <!-- Datos de Identificación Centrados -->
+        <td style="text-align: center; vertical-align: bottom; width: 55%; padding-top: 25px; padding-bottom: 5px;">
+            <div style="font-size: 13px; font-weight: bold; color: #111; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.2;">
+                {{ $user->name }}
+            </div>
+            <div style="font-size: 11px; color: #444; margin-top: 4px;">
+                <strong>Cédula Prof.:</strong> {{ $user->personalUnidad->cedula_profesional ?? 'S/C' }}
+            </div>
+        </td>
+
+        <!-- Área destinada a la Firma Autógrafa -->
+        <td style="text-align: center; vertical-align: bottom; width: 45%; padding-top: 25px;">
+            <div style="border-bottom: 1px solid #000; width: 85%; margin: 0 auto;"></div>
+            <span style="font-size: 10px; color: #555; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-top: 4px;">
+                Firma Autógrafa
+            </span>
+        </td>
+    </tr>
+</table>
     </div>
 
 </body>

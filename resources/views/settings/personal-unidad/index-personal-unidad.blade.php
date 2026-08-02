@@ -9,13 +9,13 @@
         <div class="row mb-2 align-items-center">
             <div class="col-sm-6">
                 <h1 class="m-0 text-dark font-weight-bold" style="font-size: 1.6rem;">
-                    Personal Médico
+                    Personal Registrado <span class="badge badge-light border text-muted px-2 py-1"></span>
                 </h1>
-                <p class="text-muted small mb-0">Catálogo general de médicos, especialidades y licencias</p>
+                <p class="text-muted small mb-0">Gestión del Personal de la Unidad</p>
             </div>
             <div class="col-sm-6 text-right">
-                <a href="{{ route('medicosCreate') }}" class="btn btn-success font-weight-bold shadow-sm">
-                    <i class="fas fa-plus mr-1"></i> NUEVO MÉDICO
+                <a href="{{ route('personalUnidadCreate') }}" class="btn btn-success font-weight-bold shadow-sm">
+                    <i class="fas fa-plus mr-1"></i> NUEVO REGISTRO
                 </a>
             </div>
         </div>
@@ -54,9 +54,9 @@
             <div class="info-box shadow-sm border-0">
                 <span class="info-box-icon bg-primary elevation-1"><i class="fas fa-user-md"></i></span>
                 <div class="info-box-content">
-                    <span class="info-box-text text-muted text-uppercase style-label">Total Médicos</span>
+                    <span class="info-box-text text-muted text-uppercase style-label">Total Personal</span>
                     <span class="info-box-number text-dark font-weight-bold" style="font-size: 1.4rem;">
-                        {{ count($medicos) }}
+                        {{ count($personalUnidad) }}
                     </span>
                 </div>
             </div>
@@ -102,7 +102,7 @@
                     <thead class="thead-light">
                         <tr>
                             <th class="px-3" width="15%">CURP</th>
-                            <th width="22%">Nombre del Médico</th>
+                            <th width="22%">Nombre Completo</th>
                             <th width="15%">Tipo Personal</th>
                             <th width="12%">Cédula</th>
                             <th width="15%">Especialidad / Servicio</th>
@@ -111,35 +111,35 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse($medicos as $medico)
+                        @forelse($personalUnidad as $personal)
                             <tr>
                                 <td class="px-3 align-middle font-weight-bold text-secondary">
-                                    <code>{{ $medico->curp }}</code>
+                                    <code>{{ $personal->curp }}</code>
                                 </td>
                                 <td class="align-middle">
                                     <div class="font-weight-bold text-dark">
-                                        {{ $medico->apellido_paterno }} {{ $medico->apellido_materno }} {{ $medico->nombres }}
+                                        {{ $personal->nombre_completo }}
                                     </div>
                                 </td>
                                 <td class="align-middle">
                                     <span class="badge badge-soft-info text-dark border px-2 py-1">
-                                        {{ $medico->tipoPersonal->descripcion ?? 'No asignado' }}
+                                        {{ $personal->tipoPersonal->descripcion ?? 'No asignado' }}
                                     </span>
                                 </td>
                                 <td class="align-middle text-muted">
                                     <i class="fas fa-id-badge text-muted mr-1"></i>
-                                    {{ $medico->cedula_profesional ?? 'S/C' }}
+                                    {{ $personal->cedula_profesional ?? 'S/C' }}
                                 </td>
                                 <td class="align-middle text-muted">
-                                    {{ $medico->servicioEspecialidadMedico->especialidad ?? 'No asignado' }}
+                                    {{ $personal->servicioEspecialidadMedico->especialidad ?? 'No asignado' }}
                                 </td>
                                 <td class="align-middle text-muted">
-                                    <small class="font-weight-bold">{{ $medico->clues->clues ?? 'N/A' }}</small>
+                                    <small class="font-weight-bold">{{ $personal->clues->clues ?? 'N/A' }}</small>
                                 </td>
                                 <td class="text-right align-middle px-3">
                                     <div class="btn-group" role="group" aria-label="Acciones Médico">
                                         <!-- Detalle -->
-                                        <a href="{{ route('medicosShow', $medico->id) }}" 
+                                        <a href="{{ route('personalUnidadShow', $personal->id) }}" 
                                            class="btn btn-outline-primary btn-sm" 
                                            data-toggle="tooltip" 
                                            data-placement="top" 
@@ -148,7 +148,7 @@
                                         </a>
 
                                         <!-- Editar -->
-                                        <a href="{{ route('medicosEdit', $medico->id) }}" 
+                                        <a href="{{ route('personalUnidadEdit', $personal->id) }}" 
                                            class="btn btn-outline-secondary btn-sm" 
                                            data-toggle="tooltip" 
                                            data-placement="top" 
@@ -157,7 +157,7 @@
                                         </a>
 
                                         <!-- Vacaciones -->
-                                        <a href="{{ route('indexMedicosVacacion', $medico->id) }}" 
+                                        <a href="{{ route('indexPersonalUnidadVacacion', $personal->id) }}" 
                                            class="btn btn-outline-dark btn-sm" 
                                            data-toggle="tooltip" 
                                            data-placement="top" 
@@ -166,14 +166,14 @@
                                         </a>
 
                                         <!-- Eliminar -->
-                                        <form action="{{ route('medicosDestroy', $medico->id) }}" method="POST" class="form-eliminar d-inline">
+                                        <form action="{{ route('personalUnidadDestroy', $personal->id) }}" method="POST" class="form-eliminar d-inline">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" 
                                                     class="btn btn-outline-danger btn-sm" 
                                                     data-toggle="tooltip" 
                                                     data-placement="top" 
-                                                    title="Eliminar Médico">
+                                                    title="Eliminar Personal del Sistema">
                                                 <i class="fas fa-trash"></i>
                                             </button>
                                         </form>
@@ -184,7 +184,7 @@
                             <tr>
                                 <td colspan="7" class="text-center py-4 text-muted">
                                     <i class="fas fa-user-slash fa-2x d-block mb-2 text-secondary"></i>
-                                    No hay médicos registrados en el sistema.
+                                    No hay personal de unidad registrado en el sistema.
                                 </td>
                             </tr>
                         @endforelse
@@ -234,7 +234,7 @@
 
             Swal.fire({
                 title: '¿Está seguro?',
-                text: "El médico será eliminado del sistema.",
+                text: "El personal de unidad será eliminado del sistema.",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#d33',

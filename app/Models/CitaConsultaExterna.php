@@ -32,9 +32,9 @@ class CitaConsultaExterna extends Model
     /**
      * Médico de la cita.
      */
-    public function medico()
+    public function personalUnidad()
     {
-        return $this->belongsTo(Medico::class);
+        return $this->belongsTo(PersonalUnidad::class);
     }
 
     /**

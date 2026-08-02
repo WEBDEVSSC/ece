@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Medico;
+use App\Models\PersonalUnidad;
 use App\Models\User;
 use App\Models\Rol;
 use Illuminate\Http\Request;
@@ -158,22 +159,22 @@ class UsuarioController extends Controller
         return redirect()->route('usuariosIndex')->with('success', 'Usuario eliminado exitosamente.');
     }
 
-    public function createUsuarioMedico($id)
+    public function createUsuarioPersonalUnidad($id)
     {
         $usuario = User::findOrFail($id); 
 
         $login = Auth::user();
 
-        $medicos = Medico::where('clues_id', $login->clues_id)->get();
+        $personalUnidad = PersonalUnidad::where('clues_id', $login->clues_id)->get();
 
         if ($usuario->clues_id !== $login->clues_id) {
             abort(403, 'No tienes permiso para editar este usuario.');
         }
 
-        return view('settings.usuarios.asignar-medico-create', compact('usuario', 'medicos'));
+        return view('settings.usuarios.asignar-personal-create', compact('usuario', 'personalUnidad'));
     }
 
-    public function updateUsuarioMedico(Request $request, $id)
+    public function updateUsuarioPersonalUnidad(Request $request, $id)
     {
         $usuario = User::findOrFail($id);
 
@@ -184,15 +185,15 @@ class UsuarioController extends Controller
         }
 
         $request->validate([
-            'medico_id' => 'required|exists:medicos,id',
+            'personal_id' => 'required|exists:personal_unidad,id',
         ],[
-            'medico_id.required' => 'Debe seleccionar un médico.',
-            'medico_id.exists' => 'El médico seleccionado no es válido.',
+            'personal_id.required' => 'Debe seleccionar un personal de salud.',
+            'personal_id.exists' => 'El personal de salud seleccionado no es válido.',
         ]);
 
-        $usuario->medico_id = $request->input('medico_id');
+        $usuario->personal_id = $request->input('personal_id');
         $usuario->save();
 
-        return redirect()->route('usuariosIndex')->with('success', 'Médico asignado al usuario exitosamente.');
+        return redirect()->route('usuariosIndex')->with('success', 'Personal de salud asignado al usuario exitosamente.');
     }
 }

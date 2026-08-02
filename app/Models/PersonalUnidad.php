@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Medico extends Model
+class PersonalUnidad extends Model
 {
     use SoftDeletes;
     
-    protected $table = 'medicos';
+    protected $table = 'personal_unidad';
 
     protected $fillable = [
         'curp',
@@ -40,7 +40,7 @@ class Medico extends Model
      */
     public function tipoPersonal()
     {
-        return $this->belongsTo(CatTipoPersonalMedico::class, 'tipo_personal_id', 'id');
+        return $this->belongsTo(CatTipoPersonalUnidad::class, 'tipo_personal_id', 'id');
     }
 
     /**
@@ -80,6 +80,6 @@ class Medico extends Model
      */
     public function vacaciones()
     {
-        return $this->hasMany(MedicoVacacion::class);
+        return $this->hasMany(PersonalUnidadVacacion::class);
     }
 }

@@ -7,9 +7,9 @@
         <div class="row mb-2 align-items-center">
             <div class="col-sm-6">
                 <h1 class="m-0 text-dark font-weight-bold" style="font-size: 1.6rem;">
-                    Asignación de Médico
+                    Asignación de Personal de Salud a Usuario
                 </h1>
-                <p class="text-muted small mb-0">Vincule un perfil médico al usuario <strong>{{ $usuario->name }}</strong></p>
+                <p class="text-muted small mb-0">Vincule un perfil de personal de salud al usuario <strong>{{ $usuario->name }}</strong></p>
             </div>
             <div class="col-sm-6 text-right">
                 <a href="{{ route('usuariosIndex') }}" class="btn btn-secondary font-weight-bold shadow-sm">
@@ -41,7 +41,7 @@
         </div>
     @endif
 
-    <form action="{{ route('updateUsuarioMedico', $usuario->id) }}" method="POST">
+    <form action="{{ route('updateUsuarioPersonalUnidad', $usuario->id) }}" method="POST">
         @csrf
         @method('PUT')
 
@@ -50,25 +50,25 @@
             <div class="card-header bg-white py-3">
                 <h3 class="card-title text-bold text-dark mb-0" style="font-size: 1.1rem;">
                     <i class="fas fa-user-md text-primary mr-2"></i>
-                    Vinculación de Personal Médico
+                    Vinculación de Personal de Salud
                 </h3>
             </div>
             
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label for="medico_id" class="text-muted small text-uppercase mb-1 d-block font-weight-bold">
-                            <i class="fas fa-user-stethoscope text-secondary mr-1"></i> Seleccionar Médico
+                        <label for="personal_id" class="text-muted small text-uppercase mb-1 d-block font-weight-bold">
+                            <i class="fas fa-user-stethoscope text-secondary mr-1"></i> Seleccionar Personal de Salud
                         </label>
-                        <select name="medico_id" id="medico_id" class="form-control custom-select @error('medico_id') is-invalid @enderror">
-                            <option value="">Seleccione una opción</option>
-                            @foreach($medicos as $medico)
-                                <option value="{{ $medico->id }}" {{ old('medico_id', $usuario->medico_id) == $medico->id ? 'selected' : '' }}>
-                                    {{ $medico->nombre_completo }}
+                        <select name="personal_id" id="personal_id" class="form-control custom-select @error('personal_id') is-invalid @enderror">
+                            <option value="">-- Seleccione una opción --</option>
+                            @foreach($personalUnidad as $personal)
+                                <option value="{{ $personal->id }}" {{ old('personal_id', $usuario->personal_id) == $personal->id ? 'selected' : '' }}>
+                                    {{ $personal->nombre_completo }}
                                 </option>
                             @endforeach
                         </select>
-                        @error('medico_id')
+                        @error('personal_id')
                             <small class="text-danger font-weight-bold d-block mt-1">{{ $message }}</small>
                         @enderror
                     </div>
