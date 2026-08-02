@@ -214,8 +214,8 @@
                                         @endif
 
                                         <!-- Examen Vascular -->
-                                        @if ($citaHoy->status_examen_estructura_osea == 0)
-                                            <a href="{{ route('UnemeEnfermeriaExamenEstructuraOseaCreate', $citaHoy->id) }}" 
+                                        @if ($citaHoy->status_examen_vascular == 0)
+                                            <a href="{{ route('UnemeEnfermeriaExamenVascularCreate', $citaHoy->id) }}" 
                                                class="btn btn-outline-danger btn-sm" 
                                                data-toggle="tooltip" 
                                                data-placement="top" 
@@ -223,7 +223,7 @@
                                                 <i class="fas fa-wave-square"></i>
                                             </a>
                                         @else
-                                            <a href="{{ route('UnemeEnfermeriaExamenEstructuraOseaShow', $citaHoy->id) }}" 
+                                            <a href="{{ route('UnemeEnfermeriaExamenVascularShow', $citaHoy->id) }}" 
                                                class="btn btn-success btn-sm" 
                                                data-toggle="tooltip" 
                                                data-placement="top" 
@@ -231,6 +231,33 @@
                                                 <i class="fas fa-wave-square"></i>
                                             </a>
                                         @endif
+
+                                        <!-- Examen Neurologico -->
+                                        @if ($citaHoy->status_examen_neurologico == 0)
+                                            <a href="{{ route('UnemeEnfermeriaExamenNeurologicoCreate', $citaHoy->id) }}" 
+                                               class="btn btn-outline-danger btn-sm" 
+                                               data-toggle="tooltip" 
+                                               data-placement="top" 
+                                               title="Capturar Examen Neurologico">
+                                                <i class="fas fa-brain"></i>
+                                            </a>
+                                        @else
+                                            <a href="{{ route('UnemeEnfermeriaExamenNeurologicoShow', $citaHoy->id) }}" 
+                                               class="btn btn-success btn-sm" 
+                                               data-toggle="tooltip" 
+                                               data-placement="top" 
+                                               title="Ver Examen Neurologico (Completado)">
+                                                <i class="fas fa-brain"></i>
+                                            </a>
+                                        @endif
+
+                                        <a href="{{ route('pdfCitaConsultaExternaEnfermeriaPrimeraVez', $citaHoy->id) }}" 
+                                               class="btn btn-outline-info btn-sm" 
+                                               data-toggle="tooltip" 
+                                               data-placement="top" 
+                                               title="PDF">
+                                                <i class="far fa-file-pdf"></i>
+                                            </a>
                                     </div>
                                 </td>
                             </tr>

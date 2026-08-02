@@ -21,7 +21,9 @@ class CitaConsultaExternaSignosVitalesController extends Controller
     {
         $signosVitales = CitaConsultaExternaSignosVitales::where('cita_id',$id)->first();
 
-        return view('signos-vitales.show-enfermeria-signos-vitales', compact('signosVitales'));
+        $citaId = CitaConsultaExterna::findOrFail($id);
+
+        return view('signos-vitales.show-enfermeria-signos-vitales', compact('signosVitales','citaId'));
     }
 
     public function SignosVitalesCreate(String $id)
@@ -113,6 +115,6 @@ class CitaConsultaExternaSignosVitalesController extends Controller
 
         //$citasHoy = CitaConsultaExterna::whereDate('fecha', today())            ->get();
 
-        return redirect()->route('SignosVitalesConsultaExternaIndex')->with('success', 'Signos vitales registrados correctamente.');
+        return redirect()->route('citasHoyConsultaExternaEnfermeriaIndex')->with('success', 'Signos vitales registrados correctamente.');
     }
 }

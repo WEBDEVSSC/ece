@@ -22,7 +22,9 @@ class CitaConsultaExternaLaboratorioController extends Controller
     {
         $laboratorio = CitaConsultaExternaLaboratorio::where('cita_id',$id)->first();
 
-        return view('estudios-laboratorio.show-consulta-externa-laboratorio', compact('laboratorio'));
+        $citaId = CitaConsultaExterna::findOrFail($id);
+
+        return view('estudios-laboratorio.show-consulta-externa-laboratorio', compact('laboratorio','citaId'));
     }
 
     public function ConsultaExternaLaboratorioCreate(String $id)
@@ -93,6 +95,6 @@ class CitaConsultaExternaLaboratorioController extends Controller
 
         //$citasHoy = CitaConsultaExterna::whereDate('fecha', today())            ->get();
 
-        return redirect()->route('ConsultaExternaLaboratorioIndex')->with('success', 'Laboratorios registrados correctamente.');
+        return redirect()->route('citasHoyConsultaExternaEnfermeriaIndex')->with('success', 'Laboratorios registrados correctamente.');
     }
 }

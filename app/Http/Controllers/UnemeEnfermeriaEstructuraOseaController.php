@@ -77,7 +77,14 @@ class UnemeEnfermeriaEstructuraOseaController extends Controller
             ]);
         
         return redirect()->route('citasHoyConsultaExternaEnfermeriaIndex')->with('success', 'Examen de Estructura Ósea registrados correctamente.');
+    }
 
+    public function UnemeEnfermeriaExamenEstructuraOseaShow(String $id)
+    {    
+        $examenEstructuraOsea = CitaConsultaExternaExamenEstructuraOsea::where('cita_id', $id)->first();
 
+        $citaId = CitaConsultaExterna::findOrFail($id);
+
+        return view('consulta-externa.unemes.enfermeria.examen-estructura-osea.show-examen-estructura-osea',compact('examenEstructuraOsea','citaId'));
     }
 }

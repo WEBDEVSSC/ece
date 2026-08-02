@@ -49,61 +49,7 @@
 
 <div class="container-fluid">
 
-    <!-- Tarjeta de Información del Paciente -->
-    <div class="card card-outline card-info shadow-sm border-0 mb-4">
-        <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
-            <h3 class="card-title text-bold text-dark mb-0" style="font-size: 1.1rem;">
-                <i class="fas fa-user-injured text-info mr-2"></i>
-                Datos del Paciente
-            </h3>
-            <span class="badge badge-light border text-muted px-2 py-1">
-                Expediente: <strong class="text-dark">{{ $citaId->paciente->expediente ?? 'N/E' }}</strong>
-            </span>
-        </div>
-        <div class="card-body bg-light">
-            <div class="row align-items-center">
-                <!-- Nombre y Datos Rápidos -->
-                <div class="col-md-5 border-right">
-                    <div class="d-flex align-items-center">
-                        <div class="rounded-circle bg-white shadow-sm d-flex align-items-center justify-content-center mr-3 text-info font-weight-bold" style="width: 50px; height: 50px; font-size: 1.2rem;">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <div>
-                            <h5 class="font-weight-bold text-dark mb-1">
-                                {{ $citaId->paciente->nombre ?? 'N/A' }} {{ $citaId->paciente->apellido_paterno ?? '' }} {{ $citaId->paciente->apellido_materno ?? '' }}
-                            </h5>
-                            <span class="badge badge-info">
-                                {{ $citaId->paciente->genero ?? 'No especificado' }}
-                            </span>
-                            <span class="badge badge-secondary ml-1">
-                                {{ $citaId->paciente->edad ?? '--' }} Años
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Detalle de Cita y Documento -->
-                <div class="col-md-7 mt-3 mt-md-0">
-                    <div class="row text-center text-md-left">
-                        <div class="col-sm-4 border-right">
-                            <small class="text-muted text-uppercase d-block font-weight-bold style-label">DNI / CURP</small>
-                            <span class="font-weight-bold text-dark">{{ $citaId->paciente->curp ?? 'Sin registro' }}</span>
-                        </div>
-                        <div class="col-sm-4 border-right">
-                            <small class="text-muted text-uppercase d-block font-weight-bold style-label">Fecha Nacimiento</small>
-                            <span class="font-weight-bold text-dark">
-                                {{ isset($citaId->paciente->fecha_nacimiento) ? \Carbon\Carbon::parse($citaId->paciente->fecha_nacimiento)->format('d/m/Y') : 'N/A' }}
-                            </span>
-                        </div>
-                        <div class="col-sm-4">
-                            <small class="text-muted text-uppercase d-block font-weight-bold style-label">Teléfono</small>
-                            <span class="font-weight-bold text-dark">{{ $citaId->paciente->telefono ?? 'Sin teléfono' }}</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    @include('layouts.show-paciente-card', ['citaId' => $citaId])
 
     <!-- Formulario de Evaluación Ósea -->
     <form action="{{ route('UnemeEnfermeriaExamenEstructuraOseaStore', $citaId->id) }}" method="POST">
@@ -131,56 +77,56 @@
                                     <tr>
                                         <td class="align-middle">a) Dedos de Garra</td>
                                         <td>
-                                            <input type="text" class="form-control form-control-sm sum-pd" name="pd_dedos_garra" value="{{ old('pd_dedos_garra', 0) }}">
+                                            <input type="number" class="form-control form-control-sm sum-pd" name="pd_dedos_garra" value="{{ old('pd_dedos_garra', 0) }}">
                                             @error('pd_dedos_garra')<div class="text-danger small mt-1">{{ $message }}</div>@enderror
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="align-middle">b) Dedos de Martillo</td>
                                         <td>
-                                            <input type="text" class="form-control form-control-sm sum-pd" name="pd_dedos_martillo" value="{{ old('pd_dedos_martillo', 0) }}">
+                                            <input type="number" class="form-control form-control-sm sum-pd" name="pd_dedos_martillo" value="{{ old('pd_dedos_martillo', 0) }}">
                                             @error('pd_dedos_martillo')<div class="text-danger small mt-1">{{ $message }}</div>@enderror
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="align-middle">c) Hallux Valgus</td>
                                         <td>
-                                            <input type="text" class="form-control form-control-sm sum-pd" name="pd_hallux_valgus" value="{{ old('pd_hallux_valgus', 0) }}">
+                                            <input type="number" class="form-control form-control-sm sum-pd" name="pd_hallux_valgus" value="{{ old('pd_hallux_valgus', 0) }}">
                                             @error('pd_hallux_valgus')<div class="text-danger small mt-1">{{ $message }}</div>@enderror
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="align-middle">d) Infraducto</td>
                                         <td>
-                                            <input type="text" class="form-control form-control-sm sum-pd" name="pd_infraducto" value="{{ old('pd_infraducto', 0) }}">
+                                            <input type="number" class="form-control form-control-sm sum-pd" name="pd_infraducto" value="{{ old('pd_infraducto', 0) }}">
                                             @error('pd_infraducto')<div class="text-danger small mt-1">{{ $message }}</div>@enderror
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="align-middle">e) Supraducto</td>
                                         <td>
-                                            <input type="text" class="form-control form-control-sm sum-pd" name="pd_supraducto" value="{{ old('pd_supraducto', 0) }}">
+                                            <input type="number" class="form-control form-control-sm sum-pd" name="pd_supraducto" value="{{ old('pd_supraducto', 0) }}">
                                             @error('pd_supraducto')<div class="text-danger small mt-1">{{ $message }}</div>@enderror
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="align-middle">f) Hipercarga metatarsio</td>
                                         <td>
-                                            <input type="text" class="form-control form-control-sm sum-pd" name="pd_hipercarga_metatarsio" value="{{ old('pd_hipercarga_metatarsio', 0) }}">
+                                            <input type="number" class="form-control form-control-sm sum-pd" name="pd_hipercarga_metatarsio" value="{{ old('pd_hipercarga_metatarsio', 0) }}">
                                             @error('pd_hipercarga_metatarsio')<div class="text-danger small mt-1">{{ $message }}</div>@enderror
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="align-middle">g) Pie de Charcot</td>
                                         <td>
-                                            <input type="text" class="form-control form-control-sm sum-pd" name="pd_pie_charcot" value="{{ old('pd_pie_charcot', 0) }}">
+                                            <input type="number" class="form-control form-control-sm sum-pd" name="pd_pie_charcot" value="{{ old('pd_pie_charcot', 0) }}">
                                             @error('pd_pie_charcot')<div class="text-danger small mt-1">{{ $message }}</div>@enderror
                                         </td>
                                     </tr>
                                     <tr class="bg-light font-weight-bold">
                                         <td class="align-middle text-right">Subtotal</td>
                                         <td>
-                                            <input type="text" class="form-control form-control-sm font-weight-bold" id="pd_subtotal" name="pd_subtotal" value="{{ old('pd_subtotal', 0) }}" readonly>
+                                            <input type="number" class="form-control form-control-sm font-weight-bold" id="pd_subtotal" name="pd_subtotal" value="{{ old('pd_subtotal', 0) }}" readonly>
                                             @error('pd_subtotal')<div class="text-danger small mt-1">{{ $message }}</div>@enderror
                                         </td>
                                     </tr>
@@ -212,56 +158,56 @@
                                     <tr>
                                         <td class="align-middle">a) Dedos de Garra</td>
                                         <td>
-                                            <input type="text" class="form-control form-control-sm sum-pi" name="pi_dedos_garra" value="{{ old('pi_dedos_garra', 0) }}">
+                                            <input type="number" class="form-control form-control-sm sum-pi" name="pi_dedos_garra" value="{{ old('pi_dedos_garra', 0) }}">
                                             @error('pi_dedos_garra')<div class="text-danger small mt-1">{{ $message }}</div>@enderror
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="align-middle">b) Dedos de Martillo</td>
                                         <td>
-                                            <input type="text" class="form-control form-control-sm sum-pi" name="pi_dedos_martillo" value="{{ old('pi_dedos_martillo', 0) }}">
+                                            <input type="number" class="form-control form-control-sm sum-pi" name="pi_dedos_martillo" value="{{ old('pi_dedos_martillo', 0) }}">
                                             @error('pi_dedos_martillo')<div class="text-danger small mt-1">{{ $message }}</div>@enderror
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="align-middle">c) Hallux Valgus</td>
                                         <td>
-                                            <input type="text" class="form-control form-control-sm sum-pi" name="pi_hallux_valgus" value="{{ old('pi_hallux_valgus', 0) }}">
+                                            <input type="number" class="form-control form-control-sm sum-pi" name="pi_hallux_valgus" value="{{ old('pi_hallux_valgus', 0) }}">
                                             @error('pi_hallux_valgus')<div class="text-danger small mt-1">{{ $message }}</div>@enderror
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="align-middle">d) Infraducto</td>
                                         <td>
-                                            <input type="text" class="form-control form-control-sm sum-pi" name="pi_infraducto" value="{{ old('pi_infraducto', 0) }}">
+                                            <input type="number" class="form-control form-control-sm sum-pi" name="pi_infraducto" value="{{ old('pi_infraducto', 0) }}">
                                             @error('pi_infraducto')<div class="text-danger small mt-1">{{ $message }}</div>@enderror
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="align-middle">e) Supraducto</td>
                                         <td>
-                                            <input type="text" class="form-control form-control-sm sum-pi" name="pi_supraducto" value="{{ old('pi_supraducto', 0) }}">
+                                            <input type="number" class="form-control form-control-sm sum-pi" name="pi_supraducto" value="{{ old('pi_supraducto', 0) }}">
                                             @error('pi_supraducto')<div class="text-danger small mt-1">{{ $message }}</div>@enderror
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="align-middle">f) Hipercarga metatarsio</td>
                                         <td>
-                                            <input type="text" class="form-control form-control-sm sum-pi" name="pi_hipercarga_metatarsio" value="{{ old('pi_hipercarga_metatarsio', 0) }}">
+                                            <input type="number" class="form-control form-control-sm sum-pi" name="pi_hipercarga_metatarsio" value="{{ old('pi_hipercarga_metatarsio', 0) }}">
                                             @error('pi_hipercarga_metatarsio')<div class="text-danger small mt-1">{{ $message }}</div>@enderror
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="align-middle">g) Pie de Charcot</td>
                                         <td>
-                                            <input type="text" class="form-control form-control-sm sum-pi" name="pi_pie_charcot" value="{{ old('pi_pie_charcot', 0) }}">
+                                            <input type="number" class="form-control form-control-sm sum-pi" name="pi_pie_charcot" value="{{ old('pi_pie_charcot', 0) }}">
                                             @error('pi_pie_charcot')<div class="text-danger small mt-1">{{ $message }}</div>@enderror
                                         </td>
                                     </tr>
                                     <tr class="bg-light font-weight-bold">
                                         <td class="align-middle text-right">Subtotal</td>
                                         <td>
-                                            <input type="text" class="form-control form-control-sm font-weight-bold" name="pi_subtotal" id="pi_subtotal" value="{{ old('pi_subtotal', 0) }}" readonly>
+                                            <input type="number" class="form-control form-control-sm font-weight-bold" name="pi_subtotal" id="pi_subtotal" value="{{ old('pi_subtotal', 0) }}" readonly>
                                             @error('pi_subtotal')<div class="text-danger small mt-1">{{ $message }}</div>@enderror
                                         </td>
                                     </tr>
@@ -283,6 +229,8 @@
         </div>
     </form>
 </div>
+
+<br>
 
 @stop
 

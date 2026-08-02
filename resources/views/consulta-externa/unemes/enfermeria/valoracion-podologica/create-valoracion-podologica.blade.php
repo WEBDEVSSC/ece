@@ -133,28 +133,28 @@
                                     <tr>
                                         <td class="align-middle">a) Plantar</td>
                                         <td>
-                                            <input type="text" class="form-control form-control-sm" name="pd_plantar" value="{{ old('pd_plantar') }}">
+                                            <input type="text" class="form-control form-control-sm pd-calc" name="pd_plantar" value="{{ old('pd_plantar') }}">
                                             @error('pd_plantar')<div class="text-danger small">{{ $message }}</div>@enderror
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="align-middle">b) Dorsal</td>
                                         <td>
-                                            <input type="text" class="form-control form-control-sm" name="pd_dorsal" value="{{ old('pd_dorsal') }}">
+                                            <input type="text" class="form-control form-control-sm pd-calc" name="pd_dorsal" value="{{ old('pd_dorsal') }}">
                                             @error('pd_dorsal')<div class="text-danger small">{{ $message }}</div>@enderror
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="align-middle">c) Talar</td>
                                         <td>
-                                            <input type="text" class="form-control form-control-sm" name="pd_talar" value="{{ old('pd_talar') }}">
+                                            <input type="text" class="form-control form-control-sm pd-calc" name="pd_talar" value="{{ old('pd_talar') }}">
                                             @error('pd_talar')<div class="text-danger small">{{ $message }}</div>@enderror
                                         </td>
                                     </tr>
                                     <tr class="bg-light font-weight-bold">
                                         <td class="align-middle text-right">Subtotal</td>
                                         <td>
-                                            <input type="text" class="form-control form-control-sm font-weight-bold" name="pd_subtotal" value="{{ old('pd_subtotal') }}">
+                                            <input type="text" class="form-control form-control-sm font-weight-bold pd_subtotal" name="pd_subtotal" value="{{ old('pd_subtotal') }}" readonly>
                                             @error('pd_subtotal')<div class="text-danger small">{{ $message }}</div>@enderror
                                         </td>
                                     </tr>
@@ -210,70 +210,70 @@
                                     <tr>
                                         <td class="align-middle">g) Bullosis</td>
                                         <td>
-                                            <input type="text" class="form-control form-control-sm" name="pd_bullosis" value="{{ old('pd_bullosis') }}">
+                                            <input type="text" class="form-control form-control-sm pd-otras-calc" name="pd_bullosis" value="{{ old('pd_bullosis') }}">
                                             @error('pd_bullosis')<div class="text-danger small">{{ $message }}</div>@enderror
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="align-middle">h) Úlcera</td>
                                         <td>
-                                            <input type="text" class="form-control form-control-sm" name="pd_ulcera" value="{{ old('pd_ulcera') }}">
+                                            <input type="text" class="form-control form-control-sm pd-otras-calc" name="pd_ulcera" value="{{ old('pd_ulcera') }}">
                                             @error('pd_ulcera')<div class="text-danger small">{{ $message }}</div>@enderror
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="align-middle">i) Necrosis</td>
                                         <td>
-                                            <input type="text" class="form-control form-control-sm" name="pd_necrosis" value="{{ old('pd_necrosis') }}">
+                                            <input type="text" class="form-control form-control-sm pd-otras-calc" name="pd_necrosis" value="{{ old('pd_necrosis') }}">
                                             @error('pd_necrosis')<div class="text-danger small">{{ $message }}</div>@enderror
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="align-middle">j) Grietas y fisuras</td>
                                         <td>
-                                            <input type="text" class="form-control form-control-sm" name="pd_grietas_fisuras" value="{{ old('pd_grietas_fisuras') }}">
+                                            <input type="text" class="form-control form-control-sm pd-otras-calc" name="pd_grietas_fisuras" value="{{ old('pd_grietas_fisuras') }}">
                                             @error('pd_grietas_fisuras')<div class="text-danger small">{{ $message }}</div>@enderror
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="align-middle">k) Lesiones superficiales</td>
                                         <td>
-                                            <input type="text" class="form-control form-control-sm" name="pd_lesiones_superficiales" value="{{ old('pd_lesiones_superficiales') }}">
+                                            <input type="text" class="form-control form-control-sm pd-otras-calc" name="pd_lesiones_superficiales" value="{{ old('pd_lesiones_superficiales') }}">
                                             @error('pd_lesiones_superficiales')<div class="text-danger small">{{ $message }}</div>@enderror
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="align-middle">l) Otras</td>
                                         <td>
-                                            <input type="text" class="form-control form-control-sm" name="pd_otras" value="{{ old('pd_otras') }}">
+                                            <input type="text" class="form-control form-control-sm pd-otras-calc" name="pd_otras" value="{{ old('pd_otras') }}">
                                             @error('pd_otras')<div class="text-danger small">{{ $message }}</div>@enderror
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="align-middle">Anhidrosis</td>
                                         <td>
-                                            <input type="text" class="form-control form-control-sm" name="pd_anhidrosis" value="{{ old('pd_anhidrosis') }}">
+                                            <input type="text" class="form-control form-control-sm pd-otras-calc" name="pd_anhidrosis" value="{{ old('pd_anhidrosis') }}">
                                             @error('pd_anhidrosis')<div class="text-danger small">{{ $message }}</div>@enderror
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="align-middle">Tiñas</td>
                                         <td>
-                                            <input type="text" class="form-control form-control-sm" name="pd_tinas" value="{{ old('pd_tinas') }}">
+                                            <input type="text" class="form-control form-control-sm pd-otras-calc" name="pd_tinas" value="{{ old('pd_tinas') }}">
                                             @error('pd_tinas')<div class="text-danger small">{{ $message }}</div>@enderror
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="align-middle">Proceso infeccioso</td>
                                         <td>
-                                            <input type="text" class="form-control form-control-sm" name="pd_proceso_infeccioso" value="{{ old('pd_proceso_infeccioso') }}">
+                                            <input type="text" class="form-control form-control-sm pd-otras-calc" name="pd_proceso_infeccioso" value="{{ old('pd_proceso_infeccioso') }}">
                                             @error('pd_proceso_infeccioso')<div class="text-danger small">{{ $message }}</div>@enderror
                                         </td>
                                     </tr>
                                     <tr class="bg-light font-weight-bold">
                                         <td class="align-middle text-right">Subtotal</td>
                                         <td>
-                                            <input type="text" class="form-control form-control-sm font-weight-bold" name="pd_subtotal_otras_localizadas" value="{{ old('pd_subtotal_otras_localizadas') }}">
+                                            <input type="text" class="form-control form-control-sm font-weight-bold" name="pd_subtotal_otras_localizadas" value="{{ old('pd_subtotal_otras_localizadas') }}" readonly>
                                             @error('pd_subtotal_otras_localizadas')<div class="text-danger small">{{ $message }}</div>@enderror
                                         </td>
                                     </tr>
@@ -308,28 +308,28 @@
                                     <tr>
                                         <td class="align-middle">a) Plantar</td>
                                         <td>
-                                            <input type="text" class="form-control form-control-sm" name="pi_plantar" value="{{ old('pi_plantar') }}">
+                                            <input type="text" class="form-control form-control-sm pi-calc" name="pi_plantar" value="{{ old('pi_plantar') }}">
                                             @error('pi_plantar')<div class="text-danger small">{{ $message }}</div>@enderror
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="align-middle">b) Dorsal</td>
                                         <td>
-                                            <input type="text" class="form-control form-control-sm" name="pi_dorsal" value="{{ old('pi_dorsal') }}">
+                                            <input type="text" class="form-control form-control-sm pi-calc" name="pi_dorsal" value="{{ old('pi_dorsal') }}">
                                             @error('pi_dorsal')<div class="text-danger small">{{ $message }}</div>@enderror
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="align-middle">c) Talar</td>
                                         <td>
-                                            <input type="text" class="form-control form-control-sm" name="pi_talar" value="{{ old('pi_talar') }}">
+                                            <input type="text" class="form-control form-control-sm pi-calc" name="pi_talar" value="{{ old('pi_talar') }}">
                                             @error('pi_talar')<div class="text-danger small">{{ $message }}</div>@enderror
                                         </td>
                                     </tr>
                                     <tr class="bg-light font-weight-bold">
                                         <td class="align-middle text-right">Subtotal</td>
                                         <td>
-                                            <input type="text" class="form-control form-control-sm font-weight-bold" name="pi_subtotal" value="{{ old('pi_subtotal') }}">
+                                            <input type="text" class="form-control form-control-sm font-weight-bold pi_subtotal" name="pi_subtotal" value="{{ old('pi_subtotal') }}" readonly>
                                             @error('pi_subtotal')<div class="text-danger small">{{ $message }}</div>@enderror
                                         </td>
                                     </tr>
@@ -385,70 +385,70 @@
                                     <tr>
                                         <td class="align-middle">g) Bullosis</td>
                                         <td>
-                                            <input type="text" class="form-control form-control-sm" name="pi_bullosis" value="{{ old('pi_bullosis') }}">
+                                            <input type="text" class="form-control form-control-sm pi-otras-calc" name="pi_bullosis" value="{{ old('pi_bullosis') }}">
                                             @error('pi_bullosis')<div class="text-danger small">{{ $message }}</div>@enderror
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="align-middle">h) Úlcera</td>
                                         <td>
-                                            <input type="text" class="form-control form-control-sm" name="pi_ulcera" value="{{ old('pi_ulcera') }}">
+                                            <input type="text" class="form-control form-control-sm pi-otras-calc" name="pi_ulcera" value="{{ old('pi_ulcera') }}">
                                             @error('pi_ulcera')<div class="text-danger small">{{ $message }}</div>@enderror
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="align-middle">i) Necrosis</td>
                                         <td>
-                                            <input type="text" class="form-control form-control-sm" name="pi_necrosis" value="{{ old('pi_necrosis') }}">
+                                            <input type="text" class="form-control form-control-sm pi-otras-calc" name="pi_necrosis" value="{{ old('pi_necrosis') }}">
                                             @error('pi_necrosis')<div class="text-danger small">{{ $message }}</div>@enderror
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="align-middle">j) Grietas y fisuras</td>
                                         <td>
-                                            <input type="text" class="form-control form-control-sm" name="pi_grietas_fisuras" value="{{ old('pi_grietas_fisuras') }}">
+                                            <input type="text" class="form-control form-control-sm pi-otras-calc" name="pi_grietas_fisuras" value="{{ old('pi_grietas_fisuras') }}">
                                             @error('pi_grietas_fisuras')<div class="text-danger small">{{ $message }}</div>@enderror
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="align-middle">k) Lesiones superficiales</td>
                                         <td>
-                                            <input type="text" class="form-control form-control-sm" name="pi_lesiones_superficiales" value="{{ old('pi_lesiones_superficiales') }}">
+                                            <input type="text" class="form-control form-control-sm pi-otras-calc" name="pi_lesiones_superficiales" value="{{ old('pi_lesiones_superficiales') }}">
                                             @error('pi_lesiones_superficiales')<div class="text-danger small">{{ $message }}</div>@enderror
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="align-middle">l) Otras</td>
                                         <td>
-                                            <input type="text" class="form-control form-control-sm" name="pi_otras" value="{{ old('pi_otras') }}">
+                                            <input type="text" class="form-control form-control-sm pi-otras-calc" name="pi_otras" value="{{ old('pi_otras') }}">
                                             @error('pi_otras')<div class="text-danger small">{{ $message }}</div>@enderror
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="align-middle">Anhidrosis</td>
                                         <td>
-                                            <input type="text" class="form-control form-control-sm" name="pi_anhidrosis" value="{{ old('pi_anhidrosis') }}">
+                                            <input type="text" class="form-control form-control-sm pi-otras-calc" name="pi_anhidrosis" value="{{ old('pi_anhidrosis') }}">
                                             @error('pi_anhidrosis')<div class="text-danger small">{{ $message }}</div>@enderror
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="align-middle">Tiñas</td>
                                         <td>
-                                            <input type="text" class="form-control form-control-sm" name="pi_tinas" value="{{ old('pi_tinas') }}">
+                                            <input type="text" class="form-control form-control-sm pi-otras-calc" name="pi_tinas" value="{{ old('pi_tinas') }}">
                                             @error('pi_tinas')<div class="text-danger small">{{ $message }}</div>@enderror
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="align-middle">Proceso infeccioso</td>
                                         <td>
-                                            <input type="text" class="form-control form-control-sm" name="pi_proceso_infeccioso" value="{{ old('pi_proceso_infeccioso') }}">
+                                            <input type="text" class="form-control form-control-sm pi-otras-calc" name="pi_proceso_infeccioso" value="{{ old('pi_proceso_infeccioso') }}">
                                             @error('pi_proceso_infeccioso')<div class="text-danger small">{{ $message }}</div>@enderror
                                         </td>
                                     </tr>
                                     <tr class="bg-light font-weight-bold">
                                         <td class="align-middle text-right">Subtotal</td>
                                         <td>
-                                            <input type="text" class="form-control form-control-sm font-weight-bold" name="pi_subtotal_otras_localizadas" value="{{ old('pi_subtotal_otras_localizadas') }}">
+                                            <input type="text" class="form-control form-control-sm font-weight-bold" name="pi_subtotal_otras_localizadas" value="{{ old('pi_subtotal_otras_localizadas') }}" readonly>
                                             @error('pi_subtotal_otras_localizadas')<div class="text-danger small">{{ $message }}</div>@enderror
                                         </td>
                                     </tr>
@@ -489,6 +489,41 @@
 <script>
     $(function () {
         $('[data-toggle="tooltip"]').tooltip();
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        function setupSubtotalGroup(inputsSelector, outputSelector) {
+            const inputs = document.querySelectorAll(inputsSelector);
+            const output = document.querySelector(outputSelector);
+
+            function calcular() {
+                let total = 0;
+                inputs.forEach(input => {
+                    total += parseFloat(input.value) || 0;
+                });
+                if (output) {
+                    output.value = total % 1 === 0 ? total : total.toFixed(2);
+                }
+            }
+
+            inputs.forEach(input => {
+                input.addEventListener('input', calcular);
+            });
+
+            calcular();
+        }
+
+        // Pie Derecho - Hiperqueratosis
+        setupSubtotalGroup('.pd-calc', 'input[name="pd_subtotal"]');
+
+        // Pie Derecho - Otras Localizadas
+        setupSubtotalGroup('.pd-otras-calc', 'input[name="pd_subtotal_otras_localizadas"]');
+
+        // Pie Izquierdo - Hiperqueratosis
+        setupSubtotalGroup('.pi-calc', 'input[name="pi_subtotal"]');
+
+        // Pie Izquierdo - Otras Localizadas
+        setupSubtotalGroup('.pi-otras-calc', 'input[name="pi_subtotal_otras_localizadas"]');
     });
 </script>
 @stop

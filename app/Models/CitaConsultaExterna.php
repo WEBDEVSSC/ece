@@ -76,4 +76,20 @@ class CitaConsultaExterna extends Model
     {
         return $this->hasOne(CitaConsultaExternaExamenEstructuraOsea::class, 'cita_id');
     }
+
+    /**
+     * Examen vascular
+     */
+    public function examenVascular()
+    {
+        return $this->hasOne(CitaConsultaExternaExamenVascular::class, 'cita_id');
+    }
+
+    /**
+     * Examen neurologico
+     */
+    public function examenNeurologico()
+    {
+        return $this->hasOne(CitaConsultaExternaExamenNeurologico::class, 'cita_id');
+    }
 }

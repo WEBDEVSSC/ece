@@ -170,7 +170,16 @@ class UnemeEnfermeriaValoracionPodologicaController extends Controller
                 'status_valoracion_podologica' => 1,
             ]);
         
-        return redirect()->route('UnemeEnfermeriaValoracionPodologicaIndex')->with('success', 'Valoración Podológica registrados correctamente.');
+        return redirect()->route('citasHoyConsultaExternaEnfermeriaIndex')->with('success', 'Valoración Podológica registrados correctamente.');
 
+    }
+
+    public function UnemeEnfermeriaValoracionPodologicaShow(String $id)
+    {
+        $valoracionPodologica = CitaConsultaExternaValoracionPodologica::where('cita_id',$id)->first();
+
+        $citaId = CitaConsultaExterna::findOrFail($id);
+
+        return view('consulta-externa.unemes.enfermeria.valoracion-podologica.show-valoracion-podologica', compact('valoracionPodologica','citaId'));
     }
 }
