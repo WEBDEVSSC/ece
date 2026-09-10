@@ -163,54 +163,56 @@
 
         <div class="card-body p-0 table-responsive">
             <table class="table table-striped table-hover mb-0">
-                <thead class="thead-light">
-                    <tr>
-                        <th class="py-3 pl-4">Médico</th>
-                        <th class="py-3 pl-4">Tipo</th>
-                        <th class="text-center py-3">Lunes</th>
-                        <th class="text-center py-3">Martes</th>
-                        <th class="text-center py-3">Miércoles</th>
-                        <th class="text-center py-3">Jueves</th>
-                        <th class="text-center py-3">Viernes</th>
-                        <th class="text-center py-3">Sábado</th>
-                        <th class="text-center py-3">Domingo</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @php
-                        $dias = ['lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo'];
-                    @endphp
+            <thead class="thead-light">
+                <tr>
+                    <th class="py-3 pl-4">Médico</th>
+                    <th class="py-3 pl-4">Tipo</th>
+                    <th class="text-center py-3">Lunes</th>
+                    <th class="text-center py-3">Martes</th>
+                    <th class="text-center py-3">Miércoles</th>
+                    <th class="text-center py-3">Jueves</th>
+                    <th class="text-center py-3">Viernes</th>
+                    <th class="text-center py-3">Sábado</th>
+                    <th class="text-center py-3">Domingo</th>
+                </tr>
+            </thead>
+            <tbody>
+                @php
+                    $dias = ['lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo'];
+                @endphp
 
-                    @forelse($listaMedicos as $listaMedico)
-                        <tr>
-                            <td class="align-middle pl-4 font-weight-bold text-dark">
-                                <i class="fas fa-user-md text-info mr-2"></i>{{ $listaMedico->nombre_completo }}
+                @forelse($listaMedicos as $listaMedico)
+                    <tr>
+                        <td class="align-middle pl-4 font-weight-bold text-dark">
+                            <i class="fas fa-user-md text-info mr-2"></i>{{ $listaMedico->nombre_completo }}
+                        </td>
+                        <td class="align-middle pl-4 font-weight-bold text-dark">
+                            <i class="fas fa-id-badge text-info mr-2"></i>{{ $listaMedico->tipoPersonal->descripcion ?? '' }}
+                        </td>
+                        @foreach($dias as $dia)
+                            @php 
+                                $campoAtiende = $dia . '_atiende'; 
+                            @endphp
+                            <td class="text-center align-middle">
+                                @if(!empty($listaMedico->$campoAtiende))
+                                    <i class="fas fa-calendar-check text-success fa-lg"
+                                    data-toggle="tooltip" data-placement="top" title="Atiende"></i>
+                                @else
+                                    <i class="fas fa-calendar-times text-muted opacity-50 fa-lg"
+                                    data-toggle="tooltip" data-placement="top" title="No atiende"></i>
+                                @endif
                             </td>
-                            <td class="align-middle pl-4 font-weight-bold text-dark">
-                                <i class="fas fa-user-md text-info mr-2"></i>{{ $listaMedico->tipoPersonal->descripcion ?? '' }}
-                            </td>
-                            @foreach($dias as $dia)
-                                @php $campo = $dia . '_entrada'; @endphp
-                                <td class="text-center align-middle">
-                                    @if(!empty($listaMedico->$campo))
-                                        <i class="fas fa-calendar-check text-success fa-lg"
-                                           data-toggle="tooltip" data-placement="top" title="Disponible"></i>
-                                    @else
-                                        <i class="fas fa-calendar-times text-muted opacity-50 fa-lg"
-                                           data-toggle="tooltip" data-placement="top" title="No disponible"></i>
-                                    @endif
-                                </td>
-                            @endforeach
-                        </tr>
-                    @empty
-                        <tr>
-                            <td colspan="8" class="text-center text-muted py-4">
-                                <i class="fas fa-info-circle mr-1"></i> No se encontraron médicos para mostrar.
-                            </td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
+                        @endforeach
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="9" class="text-center text-muted py-4">
+                            <i class="fas fa-info-circle mr-1"></i> No se encontraron médicos para mostrar.
+                        </td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
         </div>
 
         <div class="card-footer bg-white py-2"></div>

@@ -36,9 +36,9 @@ class CitaConsultaExternaController extends Controller
     {    
         $request->validate([
             'paciente_id' => 'required',
-            'medico_id' => 'required',
+            'medico_id'   => 'required',
             'primera_vez' => 'required',
-            'fecha' => 'required',
+            'fecha'       => 'required',
         ]);
 
         $medico = PersonalUnidad::findOrFail($request->medico_id);
@@ -46,7 +46,7 @@ class CitaConsultaExternaController extends Controller
         $fecha = $request->fecha;
         $primeraVez = $request->primera_vez;
 
-        // Verificar vacaciones
+        // 1. Verificar vacaciones
         $medicoDeVacaciones = PersonalUnidadVacacion::where('personal_unidad_id', $request->medico_id)
             ->whereDate('fecha', $fecha)
             ->exists();
@@ -58,13 +58,7 @@ class CitaConsultaExternaController extends Controller
             ])->withInput();
         }
 
-        // Citas del día
-        $citasMedico = CitaConsultaExterna::where('medico_id', $request->medico_id)
-            ->whereDate('fecha', $fecha)
-            ->orderBy('hora')
-            ->get();
-
-        // Obtener día de la semana
+        // 2. Mapear el día de la semana con Carbon
         $numeroDia = \Carbon\Carbon::parse($fecha)->dayOfWeek;
 
         $dias = [
@@ -79,29 +73,55 @@ class CitaConsultaExternaController extends Controller
 
         $dia = $dias[$numeroDia];
 
+        // 3. Verificar si el médico atiende ese día de la semana
+        $atiendeDia = $medico->{$dia.'_atiende'};
+
+        if (!$atiendeDia) 
+        {
+            return back()->withErrors([
+                'fecha' => 'El médico seleccionado no ofrece consulta el día ' . ucfirst($dia) . '.'
+            ])->withInput();
+        }
+
+        // 4. Obtener horarios de entrada y salida
         $entrada = $medico->{$dia.'_entrada'};
         $salida = $medico->{$dia.'_salida'};
 
-        if(!$entrada || !$salida){
+        if (!$entrada || !$salida) {
             return back()
                 ->withErrors([
-                    'fecha'=>'El médico no tiene horario asignado para este día.'
+                    'fecha' => 'El médico no tiene horario asignado para este día.'
                 ])
                 ->withInput();
         }
 
-        $horarios = [];
+        // 5. Citas agendadas para el día
+        $citasMedico = CitaConsultaExterna::where('medico_id', $request->medico_id)
+            ->whereDate('fecha', $fecha)
+            ->orderBy('hora')
+            ->get();
 
+        // 6. Generar bloques de horarios de 30 minutos
+        $horarios = [];
         $inicio = \Carbon\Carbon::parse($entrada);
         $fin = \Carbon\Carbon::parse($salida);
 
-        while($inicio < $fin)
+        while ($inicio < $fin)
         {
             $horarios[] = $inicio->format('H:i');
             $inicio->addMinutes(30);
         }
 
-        return view('citas.consulta-externa.cita-find',compact('paciente','medico','citasMedico','fecha','entrada','salida','horarios','primeraVez'));
+        return view('citas.consulta-externa.cita-find', compact(
+            'paciente',
+            'medico',
+            'citasMedico',
+            'fecha',
+            'entrada',
+            'salida',
+            'horarios',
+            'primeraVez'
+        ));
     }
 
     public function citasConsultaExternaStore(Request $request)
