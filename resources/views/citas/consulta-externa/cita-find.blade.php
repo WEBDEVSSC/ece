@@ -86,7 +86,7 @@
                 <div class="info-box-content">
                     <span class="info-box-text text-muted font-weight-bold">PACIENTE SELECCIONADO</span>
                     <span class="info-box-number text-dark">{{ $paciente->nombre_completo }}</span>
-                    <small class="text-muted"><i class="fas fa-id-card mr-1"></i>EXP: {{ $paciente->no_expediente ?? 'Sin expediente' }}</small>
+                    <small class="text-muted"><i class="fas fa-id-card mr-1"></i><strong>EXP</strong>: {{ $paciente->no_expediente ?? 'Sin expediente' }} / <strong>CONSULTA DE PRIMERA VEZ</strong> : {{ $primeraVez }}</small>
                 </div>
             </div>
         </div>
@@ -139,50 +139,61 @@
                 <input type="hidden" name="medico_id" value="{{ $medico->id }}">
                 <input type="hidden" name="fecha" id="fechaInput">
                 <input type="hidden" name="hora" id="horaInput">
+                <input type="hidden" name="primera_vez" value="{{ $primeraVez }}">
 
                 <div class="modal-body p-4">
-                    <div class="form-group mb-3">
-                        <label class="font-weight-bold text-dark">Médico</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text bg-light"><i class="fas fa-user-md text-muted"></i></span>
-                            </div>
-                            <input type="text" class="form-control bg-light" value="{{ $medico->nombre_completo }}" readonly>
-                        </div>
-                    </div>
+    <div class="form-group mb-3">
+        <label class="font-weight-bold text-dark">Médico</label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text bg-light"><i class="fas fa-user-md text-muted"></i></span>
+            </div>
+            <input type="text" class="form-control bg-light" value="{{ $medico->nombre_completo }}" readonly>
+        </div>
+    </div>
 
-                    <div class="form-group mb-3">
-                        <label class="font-weight-bold text-dark">Paciente</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text bg-light"><i class="fas fa-user-injured text-muted"></i></span>
-                            </div>
-                            <input type="text" class="form-control bg-light" value="{{ $paciente->nombre_completo }}" readonly>
-                        </div>
-                    </div>
+    <div class="form-group mb-3">
+        <label class="font-weight-bold text-dark">Paciente</label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text bg-light"><i class="fas fa-user-injured text-muted"></i></span>
+            </div>
+            <input type="text" class="form-control bg-light" value="{{ $paciente->nombre_completo }}" readonly>
+        </div>
+    </div>
 
-                    <div class="row">
-                        <div class="col-md-6 form-group mb-3">
-                            <label class="font-weight-bold text-dark">Fecha</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text bg-light"><i class="fas fa-calendar-alt text-muted"></i></span>
-                                </div>
-                                <input type="text" id="fechaMostrar" class="form-control bg-light" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 form-group mb-3">
-                            <label class="font-weight-bold text-dark">Hora</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text bg-light"><i class="fas fa-clock text-muted"></i></span>
-                                </div>
-                                <input type="text" id="horaMostrar" class="form-control bg-light" readonly>
-                            </div>
-                        </div>
-                    </div>
+    <div class="row">
+        <div class="col-md-4 form-group mb-3">
+            <label class="font-weight-bold text-dark">Fecha</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text bg-light"><i class="fas fa-calendar-alt text-muted"></i></span>
                 </div>
+                <input type="text" id="fechaMostrar" class="form-control bg-light" readonly>
+            </div>
+        </div>
+
+        <div class="col-md-4 form-group mb-3">
+            <label class="font-weight-bold text-dark">Hora</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text bg-light"><i class="fas fa-clock text-muted"></i></span>
+                </div>
+                <input type="text" id="horaMostrar" class="form-control bg-light" readonly>
+            </div>
+        </div>
+
+        <div class="col-md-4 form-group mb-3">
+            <label class="font-weight-bold text-dark">¿Primera vez?</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text bg-light"><i class="fas fa-user-check text-muted"></i></span>
+                </div>
+                <input type="text" class="form-control bg-light" value="{{ $primeraVez }}" readonly>
+            </div>
+        </div>
+    </div>
+</div>
 
                 <div class="modal-footer bg-light py-3">
                     <button type="button" class="btn btn-outline-secondary font-weight-bold" data-dismiss="modal">

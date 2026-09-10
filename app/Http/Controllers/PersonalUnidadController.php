@@ -57,10 +57,11 @@ class PersonalUnidadController extends Controller
             'nombres' => 'required|string|max:150',
             'pais_nacimiento_id' => 'required|integer|exists:cat_paises,id',
             'cedula' => 'required|string|max:16',
-            'tipo_personal_id' => 'required|integer|exists:cat_tipos_personal_medico,id',
+            'tipo_personal_id' => 'required|integer|exists:cat_tipos_personal_unidad,id',
             'servicio_id' => 'required|integer|exists:cat_servicios_especialidad_medicos,id',
             'clues_id' => 'required|integer|exists:cat_clues,id',
             'programa_smymg' => 'required|in:0,1',
+            'medico_consulta_externa' => 'required|in:0,1',
 
             'lunes_entrada' => 'nullable|date_format:H:i',
             'lunes_salida' => 'nullable|date_format:H:i|after:lunes_entrada',
@@ -139,6 +140,9 @@ class PersonalUnidadController extends Controller
             'festivos_entrada.date_format' => 'La hora de entrada en días festivos debe tener el formato HH:MM.',
             'festivos_salida.date_format' => 'La hora de salida en días festivos debe tener el formato HH:MM.',
             'festivos_salida.after' => 'La hora de salida en días festivos debe ser posterior a la hora de entrada.',
+
+            'medico_consulta_externa.required' => 'Debe indicar si el médico es de consulta externa.',
+            'medico_consulta_externa.in' => 'El valor seleccionado no es válido.',
         ]);
 
         // Guardamos los datos
@@ -154,6 +158,7 @@ class PersonalUnidadController extends Controller
         $personalUnidad->servicio_id = $request->servicio_id;
         $personalUnidad->clues_id = $request->clues_id;
         $personalUnidad->programa_smymg = $request->programa_smymg;
+        $personalUnidad->medico_consulta_externa = $request->medico_consulta_externa;
 
         $personalUnidad->lunes_entrada = $request->lunes_entrada;
         $personalUnidad->lunes_salida = $request->lunes_salida;
@@ -216,6 +221,7 @@ class PersonalUnidadController extends Controller
             'apellido_materno' => 'required|string|max:100',
             'nombres' => 'required|string|max:150',
             'programa_smymg' => 'required|in:0,1',
+            'medico_consulta_externa' => 'required|in:0,1',
             'cedula' => 'required|string|max:16',
             'tipo_personal_id' => 'required|integer|exists:cat_tipos_personal_unidad,id',
             'servicio_id' => 'required|integer|exists:cat_servicios_especialidad_medicos,id',
@@ -275,6 +281,9 @@ class PersonalUnidadController extends Controller
             'programa_smymg.required' => 'Debe indicar si el médico pertenece al Programa U013.',
             'programa_smymg.boolean' => 'El valor seleccionado no es válido.',
 
+            'medico_consulta_externa.required' => 'Debe indicar si el médico es de consulta externa.',
+            'medico_consulta_externa.in' => 'El valor seleccionado no es válido.',
+
             'lunes_entrada.date_format' => 'La hora de entrada del lunes debe tener el formato HH:MM.',
             'lunes_salida.date_format' => 'La hora de salida del lunes debe tener el formato HH:MM.',
             'lunes_salida.after' => 'La hora de salida del lunes debe ser posterior a la hora de entrada.',
@@ -312,6 +321,7 @@ class PersonalUnidadController extends Controller
         $personalUnidad->cedula_profesional = $request->cedula;
         $personalUnidad->servicio_id = $request->servicio_id;
         $personalUnidad->programa_smymg = $request->programa_smymg;
+        $personalUnidad->medico_consulta_externa = $request->medico_consulta_externa;
 
         $personalUnidad->lunes_entrada = $request->lunes_entrada;
         $personalUnidad->lunes_salida = $request->lunes_salida;

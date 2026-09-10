@@ -93,12 +93,17 @@
                                 <td class="align-middle">{{ $paciente->derechohabiencia->derechohabiencia ?? 'N/A' }}</td>
                                 <td class="text-right align-middle">
                                     <div class="btn-group" role="group">
+
                                         <a href="{{ route('pacientesShow', $paciente->id) }}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Ver Detalles">
                                             <i class="fas fa-eye"></i>
                                         </a>
 
                                         <a href="{{ route('pacientesEdit', $paciente->id) }}" class="btn btn-secondary btn-sm" data-toggle="tooltip" data-placement="top" title="Editar Registro">
                                             <i class="fas fa-edit"></i>
+                                        </a>
+
+                                        <a href="{{ route('pacientesContactoCreate', $paciente->id) }}" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Datos del Contacto del Paciente">
+                                            <i class="fas fa-user-friends"></i>
                                         </a>
 
                                         <a href="{{ route('pacientesNoExpedienteCreate', $paciente->id) }}" class="btn btn-dark btn-sm" data-toggle="tooltip" data-placement="top" title="Asignar Expediente">

@@ -146,6 +146,8 @@ Route::get('admin/recepcion/pacientes/pacientesEdit/{id}', [PacienteController::
 
 Route::put('admin/recepcion/pacientes/pacientesUpdate/{id}', [PacienteController::class,'pacientesUpdate'])->name('pacientesUpdate');
 
+Route::get('admin/recepcion/pacientes/pacientesContactoCreate/{id}', [PacienteController::class,'pacientesContactoCreate'])->name('pacientesContactoCreate');
+
 
 Route::get('admin/recepcion/pacientes/pacientesNoExpedienteCreate/{id}', [PacienteController::class,'pacientesNoExpedienteCreate'])->name('pacientesNoExpedienteCreate');
 
@@ -179,6 +181,11 @@ Route::delete('admin/recepcion/consulta-externa/citas-delete/{id}', [CitaConsult
 
 Route::get('admin/recepcion/consulta-externa/citas-show/{id}', [CitaConsultaExternaController::class,'citasConsultaExternaShow'])->name('citasConsultaExternaShow');
 
+Route::get('admin/recepcion/consulta-externa/calendario-citas-buscar', [CitaConsultaExternaController::class,'CalendarioCitasConsultaExternaSearch'])->name('CalendarioCitasConsultaExternaSearch');
+
+Route::get('admin/recepcion/consulta-externa/calendario-citas-mostrar', [CitaConsultaExternaController::class,'CalendarioCitasConsultaExternaFind'])->name('CalendarioCitasConsultaExternaFind');
+
+
 /*******************************************************************************************
  * 
  * 
@@ -188,6 +195,8 @@ Route::get('admin/recepcion/consulta-externa/citas-show/{id}', [CitaConsultaExte
  ******************************************************************************************/
 
 Route::get('admin/medicos/consulta-externa/mis-citas',[MedicoConsultaExternaController::class, 'medicoMisCitasIndex'])->name('medicoMisCitasIndex');
+
+Route::get('admin/medicos/consulta-externa/citas-unidad',[MedicoConsultaExternaController::class, 'medicoCitasUnidadIndex'])->name('medicoCitasUnidadIndex');
 
 /*******************************************************************************************
  * 
@@ -285,3 +294,28 @@ Route::get('admin/enfermeria/consulta-externa/examen-neurologico-show/{id}', [Un
 Route::get('admin/enfermeria/consulta-externa/examen-neurologico-create/{id}', [UnemeConsultaExternaEnfermeriaController::class, 'UnemeEnfermeriaExamenNeurologicoCreate'])->name('UnemeEnfermeriaExamenNeurologicoCreate');
 
 Route::post('admin/enfermeria/consulta-externa/examen-neurologico-store/{id}', [UnemeConsultaExternaEnfermeriaController::class, 'UnemeEnfermeriaExamenNeurologicoStore'])->name('UnemeEnfermeriaExamenNeurologicoStore');
+
+/*******************************************************************************************
+ * 
+ * 
+ * MODULO DE CITAS DE CONSULTA EXTERNA - PRESENCIA DOLOR
+ * 
+ * 
+ ******************************************************************************************/
+
+Route::get('admin/enfermeria/consulta-externa/presencia-dolor-show/{id}', [UnemeConsultaExternaEnfermeriaController::class, 'UnemeEnfermeriaPresenciaDolorShow'])->name('UnemeEnfermeriaPresenciaDolorShow');
+
+Route::get('admin/enfermeria/consulta-externa/presencia-dolor-create/{id}', [UnemeConsultaExternaEnfermeriaController::class, 'UnemeEnfermeriaPresenciaDolorCreate'])->name('UnemeEnfermeriaPresenciaDolorCreate');
+
+Route::post('admin/enfermeria/consulta-externa/presencia-dolor-store/{id}', [UnemeConsultaExternaEnfermeriaController::class, 'UnemeEnfermeriaPresenciaDolorStore'])->name('PresenciaDolorStore');
+
+/**
+ * 
+ * 
+ * REPORTES
+ * 
+ * 
+ */
+
+Route::get('admin/enfermeria/consulta-externa/reporte-diario/{fecha}', [CitaConsultaExternaController::class, 'UnemeEnfermeriaReporteDiarioPDF'])->name('UnemeEnfermeriaReporteDiarioPDF');
+

@@ -503,4 +503,19 @@ class UnemeConsultaExternaEnfermeriaController extends Controller
         return redirect()->route('citasHoyConsultaExternaEnfermeriaIndex')->with('success', 'Examen Neurológico registrado correctamente.');
     }
 
+    /********************************************************************************************************
+     * 
+     * 
+     * PRESENCIA DE DOLOR
+     * 
+     * 
+     *******************************************************************************************************/
+
+    public function UnemeEnfermeriaPresenciaDolorCreate(String $id)
+    {
+        $citaId = CitaConsultaExterna::findOrFail($id);    
+
+        return view('consulta-externa.unemes.enfermeria.presencia-dolor.create-presencia-dolor', compact('citaId'));
+    }
+
 }

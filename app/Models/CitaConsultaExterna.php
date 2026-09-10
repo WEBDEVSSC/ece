@@ -13,6 +13,7 @@ class CitaConsultaExterna extends Model
         'hora',
         'paciente_id',
         'medico_id',
+        'primera_vez',
         'clues_id',
         'status',
     ];

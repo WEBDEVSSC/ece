@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\CatParentesco;
 use App\Models\ServiciosEspecialidadMedico;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -21,5 +22,6 @@ class DatabaseSeeder extends Seeder
        $this->call(CatPaisesSeeder::class);
        $this->call(CatEscolaridadSeeder::class);
        $this->call(CatDerechohabienciaSeeder::class);
+       $this->call(CatParentesco::class);
     }
 }

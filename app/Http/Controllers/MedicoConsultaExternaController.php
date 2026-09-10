@@ -15,11 +15,11 @@ class MedicoConsultaExternaController extends Controller
     {
         $medico = Auth::user();
 
-    $misCitas = CitaConsultaExterna::with('paciente')
-        ->where('medico_id', $medico->medico_id)
-        ->whereDate('fecha', today())
-        ->orderBy('hora', 'ASC')
-        ->get();
+        $misCitas = CitaConsultaExterna::with('paciente')
+            ->where('medico_id', $medico->personal_id)
+            ->whereDate('fecha', today())
+            ->orderBy('hora', 'ASC')
+            ->get();
 
     $eventos = $misCitas->map(function ($cita) {
 
@@ -66,5 +66,20 @@ class MedicoConsultaExternaController extends Controller
         'medicos.consulta-externa-mis-citas',
         compact('medico', 'misCitas', 'eventos')
     );
+    }
+
+    public function medicoCitasUnidadIndex()
+    {
+        $medico = Auth::user();
+
+        $citasHoy = CitaConsultaExterna::where('clues_id',$medico->clues_id)
+            ->whereDate('fecha', today())
+            ->orderBy('hora', 'ASC')
+            ->get();
+
+        return view(
+            'medicos.consulta-externa-citas-unidad',
+            compact('medico', 'citasHoy')
+        );
     }
 }

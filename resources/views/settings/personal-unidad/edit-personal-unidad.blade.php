@@ -149,6 +149,19 @@
                             <small class="text-danger font-weight-bold d-block mt-1">{{ $message }}</small>
                         @enderror
                     </div>
+
+                    <div class="col-md-3 mb-3">
+                        <label for="medico_consulta_externa" class="text-muted small text-uppercase mb-1 d-block font-weight-bold">
+                            <i class="fas fa-user-md mr-1"></i> Médico de Consulta Externa
+                        </label>
+                        <select name="medico_consulta_externa" id="medico_consulta_externa" class="form-control custom-select @error('medico_consulta_externa') is-invalid @enderror">
+                            <option value="0" {{ old('medico_consulta_externa', $personalUnidad->medico_consulta_externa) == 0 ? 'selected' : '' }}>NO</option>
+                            <option value="1" {{ old('medico_consulta_externa', $personalUnidad->medico_consulta_externa) == 1 ? 'selected' : '' }}>SÍ</option>
+                        </select>
+                        @error('medico_consulta_externa')
+                            <small class="text-danger font-weight-bold d-block mt-1">{{ $message }}</small>
+                        @enderror
+                    </div>
                 </div>
             </div>
         </div>

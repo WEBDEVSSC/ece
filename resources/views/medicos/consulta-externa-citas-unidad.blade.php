@@ -137,6 +137,16 @@
                                 </td>
                                 <td class="text-center align-middle px-3">
                                     <div class="btn-group" role="group" aria-label="Módulos de Atención">
+
+                                        {{-- ENFERMERIA --}}
+                                        <a href="{{ route('pdfCitaConsultaExternaEnfermeriaPrimeraVez', $citaHoy->id) }}" 
+                                        class="btn btn-outline-info btn-sm" 
+                                        data-toggle="tooltip" 
+                                        data-placement="top" 
+                                        title="PDF Enfermería">
+                                            <i class="fas fa-user-nurse"></i>
+                                        </a>
+
                                         <!-- Signos Vitales -->
                                         @if ($citaHoy->status_signos_vitales == 0)
                                             <a href="{{ route('SignosVitalesCreate', $citaHoy->id) }}" 
@@ -156,128 +166,10 @@
                                             </a>
                                         @endif
 
-                                        <!-- Laboratorios -->
-                                        @if ($citaHoy->status_laboratorios == 0)
-                                            <a href="{{ route('ConsultaExternaLaboratorioCreate', $citaHoy->id) }}" 
-                                               class="btn btn-outline-danger btn-sm" 
-                                               data-toggle="tooltip" 
-                                               data-placement="top" 
-                                               title="Capturar Laboratorios">
-                                                <i class="fas fa-flask"></i>
-                                            </a>
-                                        @else
-                                            <a href="{{ route('ConsultaExternaLaboratorioShow', $citaHoy->id) }}" 
-                                               class="btn btn-success btn-sm" 
-                                               data-toggle="tooltip" 
-                                               data-placement="top" 
-                                               title="Ver Laboratorios (Completado)">
-                                                <i class="fas fa-flask"></i>
-                                            </a>
-                                        @endif
+                                        
 
-                                        <!-- Valoración Podológica -->
-                                        @if ($citaHoy->status_valoracion_podologica == 0)
-                                            <a href="{{ route('UnemeEnfermeriaValoracionPodologicaCreate', $citaHoy->id) }}" 
-                                               class="btn btn-outline-danger btn-sm" 
-                                               data-toggle="tooltip" 
-                                               data-placement="top" 
-                                               title="Capturar Valoración Podológica">
-                                                <i class="fas fa-shoe-prints"></i>
-                                            </a>
-                                        @else
-                                            <a href="{{ route('UnemeEnfermeriaValoracionPodologicaShow', $citaHoy->id) }}" 
-                                               class="btn btn-success btn-sm" 
-                                               data-toggle="tooltip" 
-                                               data-placement="top" 
-                                               title="Ver Valoración Podológica (Completado)">
-                                                <i class="fas fa-shoe-prints"></i>
-                                            </a>
-                                        @endif
+                                        
 
-                                        <!-- Examen Estructura Ósea -->
-                                        @if ($citaHoy->status_examen_estructura_osea == 0)
-                                            <a href="{{ route('UnemeEnfermeriaExamenEstructuraOseaCreate', $citaHoy->id) }}" 
-                                               class="btn btn-outline-danger btn-sm" 
-                                               data-toggle="tooltip" 
-                                               data-placement="top" 
-                                               title="Capturar Estructura Ósea">
-                                                <i class="fas fa-bone"></i>
-                                            </a>
-                                        @else
-                                            <a href="{{ route('UnemeEnfermeriaExamenEstructuraOseaShow', $citaHoy->id) }}" 
-                                               class="btn btn-success btn-sm" 
-                                               data-toggle="tooltip" 
-                                               data-placement="top" 
-                                               title="Ver Estructura Ósea (Completado)">
-                                                <i class="fas fa-bone"></i>
-                                            </a>
-                                        @endif
-
-                                        <!-- Examen Vascular -->
-                                        @if ($citaHoy->status_examen_vascular == 0)
-                                            <a href="{{ route('UnemeEnfermeriaExamenVascularCreate', $citaHoy->id) }}" 
-                                               class="btn btn-outline-danger btn-sm" 
-                                               data-toggle="tooltip" 
-                                               data-placement="top" 
-                                               title="Capturar Examen Vascular">
-                                                <i class="fas fa-wave-square"></i>
-                                            </a>
-                                        @else
-                                            <a href="{{ route('UnemeEnfermeriaExamenVascularShow', $citaHoy->id) }}" 
-                                               class="btn btn-success btn-sm" 
-                                               data-toggle="tooltip" 
-                                               data-placement="top" 
-                                               title="Ver Examen Vascular (Completado)">
-                                                <i class="fas fa-wave-square"></i>
-                                            </a>
-                                        @endif
-
-                                        <!-- Examen Neurologico -->
-                                        @if ($citaHoy->status_examen_neurologico == 0)
-                                            <a href="{{ route('UnemeEnfermeriaExamenNeurologicoCreate', $citaHoy->id) }}" 
-                                               class="btn btn-outline-danger btn-sm" 
-                                               data-toggle="tooltip" 
-                                               data-placement="top" 
-                                               title="Capturar Examen Neurologico">
-                                                <i class="fas fa-brain"></i>
-                                            </a>
-                                        @else
-                                            <a href="{{ route('UnemeEnfermeriaExamenNeurologicoShow', $citaHoy->id) }}" 
-                                               class="btn btn-success btn-sm" 
-                                               data-toggle="tooltip" 
-                                               data-placement="top" 
-                                               title="Ver Examen Neurologico (Completado)">
-                                                <i class="fas fa-brain"></i>
-                                            </a>
-                                        @endif
-
-                                        <!-- Presencia de Dolor -->
-                                        @if ($citaHoy->status_presencia_dolor == 0)
-                                            <a href="{{ route('UnemeEnfermeriaPresenciaDolorCreate', $citaHoy->id) }}" 
-                                               class="btn btn-outline-danger btn-sm" 
-                                               data-toggle="tooltip" 
-                                               data-placement="top" 
-                                               title="Capturar Presencia de Dolor">
-                                                <i class="fas fa-head-side-virus"></i>
-                                            </a>
-                                        @else
-                                            <a href="{{ route('UnemeEnfermeriaPresenciaDolorShow', $citaHoy->id) }}" 
-                                               class="btn btn-success btn-sm" 
-                                               data-toggle="tooltip" 
-                                               data-placement="top" 
-                                               title="Ver Presencia de Dolor (Completado)">
-                                                <i class="fas fa-head-side-virus"></i>
-                                            </a>
-                                        @endif
-
-
-                                        <a href="{{ route('pdfCitaConsultaExternaEnfermeriaPrimeraVez', $citaHoy->id) }}" 
-                                               class="btn btn-outline-info btn-sm" 
-                                               data-toggle="tooltip" 
-                                               data-placement="top" 
-                                               title="PDF">
-                                                <i class="far fa-file-pdf"></i>
-                                            </a>
                                     </div>
                                 </td>
                             </tr>

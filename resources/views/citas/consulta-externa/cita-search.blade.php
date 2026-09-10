@@ -64,7 +64,7 @@
                 <div class="row">
 
                     {{-- Paciente --}}
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group mb-0">
                             <label for="paciente_id" class="font-weight-bold text-dark">Paciente</label>
                             <select name="paciente_id" id="paciente_id" class="form-control select2bs4" style="width: 100%;">
@@ -84,7 +84,7 @@
                     </div>
 
                     {{-- Médico --}}
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group mb-0">
                             <label for="medico_id" class="font-weight-bold text-dark">Médico</label>
                             <select name="medico_id" id="medico_id" class="form-control select2bs4" style="width: 100%;">
@@ -103,16 +103,37 @@
                         </div>
                     </div>
 
+                    {{-- 1° Vez --}}
+                    <div class="col-md-3">
+                        <div class="form-group mb-0">
+                            <label for="primera_vez" class="font-weight-bold text-dark">1° Vez</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text bg-light border-right-0">
+                                        <i class="fas fa-user-check text-muted"></i>
+                                    </span>
+                                </div>
+                                <select name="primera_vez" id="primera_vez" class="form-control @error('primera_vez') is-invalid @enderror">
+                                    <option value="NO" {{ old('primera_vez') == 'NO' ? 'selected' : '' }}>NO</option>
+                                    <option value="SI" {{ old('primera_vez') == 'SI' ? 'selected' : '' }}>SI</option>
+                                </select>
+                            </div>
+
+                            @error('primera_vez')
+                                <small class="text-danger d-block mt-1">{{ $message }}</small>
+                            @enderror
+                        </div>
+                    </div>
+
                     {{-- Fecha --}}
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group mb-0">
                             <label for="fecha" class="font-weight-bold text-dark">Fecha</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text bg-light border-right-0"><i class="fas fa-calendar-alt text-muted"></i></span>
                                 </div>
-                                <input type="text" id="fecha" name="fecha" class="form-control border-left-0"
-                                    value="{{ old('fecha', request('fecha')) }}" placeholder="Seleccionar fecha...">
+                                <input type="text" id="fecha" name="fecha" class="form-control border-left-0" value="{{ old('fecha', request('fecha')) }}" autocomplete="off" placeholder="Seleccionar fecha...">
                             </div>
 
                             @error('fecha')
@@ -145,6 +166,7 @@
                 <thead class="thead-light">
                     <tr>
                         <th class="py-3 pl-4">Médico</th>
+                        <th class="py-3 pl-4">Tipo</th>
                         <th class="text-center py-3">Lunes</th>
                         <th class="text-center py-3">Martes</th>
                         <th class="text-center py-3">Miércoles</th>
@@ -163,6 +185,9 @@
                         <tr>
                             <td class="align-middle pl-4 font-weight-bold text-dark">
                                 <i class="fas fa-user-md text-info mr-2"></i>{{ $listaMedico->nombre_completo }}
+                            </td>
+                            <td class="align-middle pl-4 font-weight-bold text-dark">
+                                <i class="fas fa-user-md text-info mr-2"></i>{{ $listaMedico->tipoPersonal->descripcion ?? '' }}
                             </td>
                             @foreach($dias as $dia)
                                 @php $campo = $dia . '_entrada'; @endphp

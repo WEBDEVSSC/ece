@@ -283,4 +283,11 @@ class PacienteController extends Controller
 
         return $pdf->stream($paciente->curp.'pdf');
     }
+
+    public function pacientesContactoCreate(String $id)
+    {
+        $paciente = Paciente::findOrFail($id);
+
+        return view('pacientes.create-contacto', compact('paciente'));
+    }
 }
