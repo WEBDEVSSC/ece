@@ -177,58 +177,73 @@
             <div class="card-body p-0">
                 <div class="table-responsive">
                     <table class="table table-hover table-striped mb-0 text-sm align-middle">
-                        <thead class="thead-light">
-                            <tr>
-                                <th class="px-3" width="30%">Día Semanal</th>
-                                <th width="35%" class="text-center">Hora de Entrada</th>
-                                <th width="35%" class="text-center">Hora de Salida</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @php
-                                $dias = [
-                                    'lunes' => 'Lunes',
-                                    'martes' => 'Martes',
-                                    'miercoles' => 'Miércoles',
-                                    'jueves' => 'Jueves',
-                                    'viernes' => 'Viernes',
-                                    'sabado' => 'Sábado',
-                                    'domingo' => 'Domingo',
-                                    'festivos' => 'Festivos',
-                                ];
-                            @endphp
+                    <thead class="thead-light">
+                        <tr>
+                            <th class="px-3" width="25%">Día Semanal</th>
+                            <th width="30%" class="text-center">Hora de Entrada</th>
+                            <th width="30%" class="text-center">Hora de Salida</th>
+                            <th width="15%" class="text-center">Atiende</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @php
+                            $dias = [
+                                'lunes' => 'Lunes',
+                                'martes' => 'Martes',
+                                'miercoles' => 'Miércoles',
+                                'jueves' => 'Jueves',
+                                'viernes' => 'Viernes',
+                                'sabado' => 'Sábado',
+                                'domingo' => 'Domingo',
+                                'festivos' => 'Festivos',
+                            ];
+                        @endphp
 
-                            @foreach ($dias as $key => $nombreDia)
-                                <tr>
-                                    <td class="px-3 align-middle font-weight-bold text-dark">
-                                        {{ $nombreDia }}
-                                    </td>
-                                    <td class="px-4">
-                                        <div class="input-group input-group-sm">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="far fa-clock text-success"></i></span>
-                                            </div>
-                                            <input type="time" name="{{ $key }}_entrada" class="form-control @error($key.'_entrada') is-invalid @enderror" value="{{ old($key.'_entrada', $personalUnidad->{$key.'_entrada'}) }}">
+                        @foreach ($dias as $key => $nombreDia)
+                            <tr>
+                                <td class="px-3 align-middle font-weight-bold text-dark">
+                                    {{ $nombreDia }}
+                                </td>
+                                <td class="px-4">
+                                    <div class="input-group input-group-sm">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="far fa-clock text-success"></i></span>
                                         </div>
-                                        @error($key.'_entrada')
-                                            <small class="text-danger font-weight-bold d-block mt-1">{{ $message }}</small>
-                                        @enderror
-                                    </td>
-                                    <td class="px-4">
-                                        <div class="input-group input-group-sm">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="far fa-clock text-danger"></i></span>
-                                            </div>
-                                            <input type="time" name="{{ $key }}_salida" class="form-control @error($key.'_salida') is-invalid @enderror" value="{{ old($key.'_salida', $personalUnidad->{$key.'_salida'}) }}">
+                                        <input type="time" name="{{ $key }}_entrada" class="form-control @error($key.'_entrada') is-invalid @enderror" value="{{ old($key.'_entrada', $personalUnidad->{$key.'_entrada'}) }}">
+                                    </div>
+                                    @error($key.'_entrada')
+                                        <small class="text-danger font-weight-bold d-block mt-1">{{ $message }}</small>
+                                    @enderror
+                                </td>
+                                <td class="px-4">
+                                    <div class="input-group input-group-sm">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="far fa-clock text-danger"></i></span>
                                         </div>
-                                        @error($key.'_salida')
-                                            <small class="text-danger font-weight-bold d-block mt-1">{{ $message }}</small>
-                                        @enderror
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                                        <input type="time" name="{{ $key }}_salida" class="form-control @error($key.'_salida') is-invalid @enderror" value="{{ old($key.'_salida', $personalUnidad->{$key.'_salida'}) }}">
+                                    </div>
+                                    @error($key.'_salida')
+                                        <small class="text-danger font-weight-bold d-block mt-1">{{ $message }}</small>
+                                    @enderror
+                                </td>
+                                <td class="text-center align-middle">
+                                    <div class="custom-control custom-checkbox d-inline-block">
+                                        <input type="checkbox" 
+                                            class="custom-control-input" 
+                                            id="check_{{ $key }}_atiende" 
+                                            name="{{ $key }}_atiende" 
+                                            value="1" 
+                                            {{ old($key.'_atiende', $personalUnidad->{$key.'_atiende'}) ? 'checked' : '' }}>
+                                        <label class="custom-control-label cursor-pointer" for="check_{{ $key }}_atiende"></label>
+                                    </div>
+                                    @error($key.'_atiende')
+                                        <small class="text-danger font-weight-bold d-block mt-1">{{ $message }}</small>
+                                    @enderror
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
                 </div>
             </div>
             <div class="card-footer bg-white border-top text-right py-3">

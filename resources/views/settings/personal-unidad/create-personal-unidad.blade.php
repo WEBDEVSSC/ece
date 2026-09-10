@@ -196,22 +196,23 @@
                     <table class="table table-hover table-striped mb-0 text-sm align-middle">
                         <thead class="thead-light">
                             <tr>
-                                <th class="px-3" width="30%">Día Semanal</th>
-                                <th width="35%" class="text-center">Hora de Entrada</th>
-                                <th width="35%" class="text-center">Hora de Salida</th>
+                                <th class="px-3" width="25%">Día Semanal</th>
+                                <th width="30%" class="text-center">Hora de Entrada</th>
+                                <th width="30%" class="text-center">Hora de Salida</th>
+                                <th width="15%" class="text-center">Atiende</th>
                             </tr>
                         </thead>
                         <tbody>
                             @php
                                 $dias = [
-                                    'Lunes' => ['entrada' => 'lunes_entrada', 'salida' => 'lunes_salida'],
-                                    'Martes' => ['entrada' => 'martes_entrada', 'salida' => 'martes_salida'],
-                                    'Miércoles' => ['entrada' => 'miercoles_entrada', 'salida' => 'miercoles_salida'],
-                                    'Jueves' => ['entrada' => 'jueves_entrada', 'salida' => 'jueves_salida'],
-                                    'Viernes' => ['entrada' => 'viernes_entrada', 'salida' => 'viernes_salida'],
-                                    'Sábado' => ['entrada' => 'sabado_entrada', 'salida' => 'sabado_salida'],
-                                    'Domingo' => ['entrada' => 'domingo_entrada', 'salida' => 'domingo_salida'],
-                                    'Festivos' => ['entrada' => 'festivos_entrada', 'salida' => 'festivos_salida'],
+                                    'Lunes' => ['entrada' => 'lunes_entrada', 'salida' => 'lunes_salida', 'atiende' => 'lunes_atiende'],
+                                    'Martes' => ['entrada' => 'martes_entrada', 'salida' => 'martes_salida', 'atiende' => 'martes_atiende'],
+                                    'Miércoles' => ['entrada' => 'miercoles_entrada', 'salida' => 'miercoles_salida', 'atiende' => 'miercoles_atiende'],
+                                    'Jueves' => ['entrada' => 'jueves_entrada', 'salida' => 'jueves_salida', 'atiende' => 'jueves_atiende'],
+                                    'Viernes' => ['entrada' => 'viernes_entrada', 'salida' => 'viernes_salida', 'atiende' => 'viernes_atiende'],
+                                    'Sábado' => ['entrada' => 'sabado_entrada', 'salida' => 'sabado_salida', 'atiende' => 'sabado_atiende'],
+                                    'Domingo' => ['entrada' => 'domingo_entrada', 'salida' => 'domingo_salida', 'atiende' => 'domingo_atiende'],
+                                    'Festivos' => ['entrada' => 'festivos_entrada', 'salida' => 'festivos_salida', 'atiende' => 'festivos_atiende'],
                                 ];
                             @endphp
 
@@ -241,6 +242,17 @@
                                         @error($campos['salida'])
                                             <small class="text-danger font-weight-bold d-block mt-1">{{ $message }}</small>
                                         @enderror
+                                    </td>
+                                    <td class="text-center align-middle">
+                                        <div class="custom-control custom-checkbox d-inline-block">
+                                            <input type="checkbox" 
+                                                class="custom-control-input" 
+                                                id="check_{{ $campos['atiende'] }}" 
+                                                name="{{ $campos['atiende'] }}" 
+                                                value="1" 
+                                                {{ old($campos['atiende']) ? 'checked' : '' }}>
+                                            <label class="custom-control-label cursor-pointer" for="check_{{ $campos['atiende'] }}"></label>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach

@@ -65,20 +65,35 @@ class PersonalUnidadController extends Controller
 
             'lunes_entrada' => 'nullable|date_format:H:i',
             'lunes_salida' => 'nullable|date_format:H:i|after:lunes_entrada',
+            'lunes_atiende' => 'nullable|boolean',
+
             'martes_entrada' => 'nullable|date_format:H:i',
             'martes_salida' => 'nullable|date_format:H:i|after:martes_entrada',
+            'martes_atiende' => 'nullable|boolean',
+
             'miercoles_entrada' => 'nullable|date_format:H:i',
             'miercoles_salida' => 'nullable|date_format:H:i|after:miercoles_entrada',
+            'miercoles_atiende' => 'nullable|boolean',
+
             'jueves_entrada' => 'nullable|date_format:H:i',
             'jueves_salida' => 'nullable|date_format:H:i|after:jueves_entrada',
+            'jueves_atiende' => 'nullable|boolean',
+
             'viernes_entrada' => 'nullable|date_format:H:i',
             'viernes_salida' => 'nullable|date_format:H:i|after:viernes_entrada',
+            'viernes_atiende' => 'nullable|boolean',
+
             'sabado_entrada' => 'nullable|date_format:H:i',
             'sabado_salida' => 'nullable|date_format:H:i|after:sabado_entrada',
+            'sabado_atiende' => 'nullable|boolean',
+
             'domingo_entrada' => 'nullable|date_format:H:i',
             'domingo_salida' => 'nullable|date_format:H:i|after:domingo_entrada', 
+            'domingo_atiende' => 'nullable|boolean',
+
             'festivos_entrada' => 'nullable|date_format:H:i',
             'festivos_salida' => 'nullable|date_format:H:i|after:festivos_entrada',
+            'festivos_atiende' => 'nullable|boolean',
 
         ], [
             'curp.required' => 'El CURP es obligatorio.',
@@ -119,27 +134,42 @@ class PersonalUnidadController extends Controller
             'lunes_entrada.date_format' => 'La hora de entrada del lunes debe tener el formato HH:MM.',
             'lunes_salida.date_format' => 'La hora de salida del lunes debe tener el formato HH:MM.',
             'lunes_salida.after' => 'La hora de salida del lunes debe ser posterior a la hora de entrada.',
+            'lunes_atiende.boolean' => 'El campo atiende de lunes debe ser un valor válido.',
+
             'martes_entrada.date_format' => 'La hora de entrada del martes debe tener el formato HH:MM.',
             'martes_salida.date_format' => 'La hora de salida del martes debe tener el formato HH:MM.',
             'martes_salida.after' => 'La hora de salida del martes debe ser posterior a la hora de entrada.',
+            'martes_atiende.boolean' => 'El campo atiende de martes debe ser un valor válido.',
+
             'miercoles_entrada.date_format' => 'La hora de entrada del miércoles debe tener el formato HH:MM.',
             'miercoles_salida.date_format' => 'La hora de salida del miércoles debe tener el formato HH:MM.',
             'miercoles_salida.after' => 'La hora de salida del miércoles debe ser posterior a la hora de entrada.',
+            'miercoles_atiende.boolean' => 'El campo atiende de miércoles debe ser un valor válido.',
+
             'jueves_entrada.date_format' => 'La hora de entrada del jueves debe tener el formato HH:MM.',
             'jueves_salida.date_format' => 'La hora de salida del jueves debe tener el formato HH:MM.',
             'jueves_salida.after' => 'La hora de salida del jueves debe ser posterior a la hora de entrada.',
+            'jueves_atiende.boolean' => 'El campo atiende de jueves debe ser un valor válido.',
+
             'viernes_entrada.date_format' => 'La hora de entrada del viernes debe tener el formato HH:MM.',
             'viernes_salida.date_format' => 'La hora de salida del viernes debe tener el formato HH:MM.',
             'viernes_salida.after' => 'La hora de salida del viernes debe ser posterior a la hora de entrada.',
+            'viernes_atiende.boolean' => 'El campo atiende de viernes debe ser un valor válido.',
+
             'sabado_entrada.date_format' => 'La hora de entrada del sábado debe tener el formato HH:MM.',
             'sabado_salida.date_format' => 'La hora de salida del sábado debe tener el formato HH:MM.',
             'sabado_salida.after' => 'La hora de salida del sábado debe ser posterior a la hora de entrada.',
+            'sabado_atiende.boolean' => 'El campo atiende de sábado debe ser un valor válido.',
+
             'domingo_entrada.date_format' => 'La hora de entrada del domingo debe tener el formato HH:MM.',
             'domingo_salida.date_format' => 'La hora de salida del domingo debe tener el formato HH:MM.',
             'domingo_salida.after' => 'La hora de salida del domingo debe ser posterior a la hora de entrada.',
+            'domingo_atiende.boolean' => 'El campo atiende de domingo debe ser un valor válido.',
+
             'festivos_entrada.date_format' => 'La hora de entrada en días festivos debe tener el formato HH:MM.',
             'festivos_salida.date_format' => 'La hora de salida en días festivos debe tener el formato HH:MM.',
             'festivos_salida.after' => 'La hora de salida en días festivos debe ser posterior a la hora de entrada.',
+            'festivos_atiende.boolean' => 'El campo atiende de festivos debe ser un valor válido.',
 
             'medico_consulta_externa.required' => 'Debe indicar si el médico es de consulta externa.',
             'medico_consulta_externa.in' => 'El valor seleccionado no es válido.',
@@ -162,20 +192,35 @@ class PersonalUnidadController extends Controller
 
         $personalUnidad->lunes_entrada = $request->lunes_entrada;
         $personalUnidad->lunes_salida = $request->lunes_salida;
+        $personalUnidad->lunes_atiende = $request->boolean('lunes_atiende');
+
         $personalUnidad->martes_entrada = $request->martes_entrada;
         $personalUnidad->martes_salida = $request->martes_salida;
+        $personalUnidad->martes_atiende = $request->boolean('martes_atiende');
+
         $personalUnidad->miercoles_entrada = $request->miercoles_entrada;
         $personalUnidad->miercoles_salida = $request->miercoles_salida;
+        $personalUnidad->miercoles_atiende = $request->boolean('miercoles_atiende');
+
         $personalUnidad->jueves_entrada = $request->jueves_entrada;
         $personalUnidad->jueves_salida = $request->jueves_salida;
+        $personalUnidad->jueves_atiende = $request->boolean('jueves_atiende');
+
         $personalUnidad->viernes_entrada = $request->viernes_entrada;
         $personalUnidad->viernes_salida = $request->viernes_salida;
+        $personalUnidad->viernes_atiende = $request->boolean('viernes_atiende');
+
         $personalUnidad->sabado_entrada = $request->sabado_entrada;
         $personalUnidad->sabado_salida = $request->sabado_salida;
+        $personalUnidad->sabado_atiende = $request->boolean('sabado_atiende');
+
         $personalUnidad->domingo_entrada = $request->domingo_entrada;
         $personalUnidad->domingo_salida = $request->domingo_salida;
+        $personalUnidad->domingo_atiende = $request->boolean('domingo_atiende');
+
         $personalUnidad->festivos_entrada = $request->festivos_entrada;
         $personalUnidad->festivos_salida = $request->festivos_salida;
+        $personalUnidad->festivos_atiende = $request->boolean('festivos_atiende');
 
         $personalUnidad->save();
 
@@ -226,29 +271,37 @@ class PersonalUnidadController extends Controller
             'tipo_personal_id' => 'required|integer|exists:cat_tipos_personal_unidad,id',
             'servicio_id' => 'required|integer|exists:cat_servicios_especialidad_medicos,id',
 
-            'lunes_entrada'    => 'nullable|date_format:H:i,H:i:s',
-            'lunes_salida'     => 'nullable|date_format:H:i,H:i:s|required_with:lunes_entrada|after:lunes_entrada',
+            'lunes_entrada'     => 'nullable|date_format:H:i,H:i:s',
+            'lunes_salida'      => 'nullable|date_format:H:i,H:i:s|required_with:lunes_entrada|after:lunes_entrada',
+            'lunes_atiende'     => 'nullable|boolean',
 
-            'martes_entrada'   => 'nullable|date_format:H:i,H:i:s',
-            'martes_salida'    => 'nullable|date_format:H:i,H:i:s|required_with:martes_entrada|after:martes_entrada',
+            'martes_entrada'    => 'nullable|date_format:H:i,H:i:s',
+            'martes_salida'     => 'nullable|date_format:H:i,H:i:s|required_with:martes_entrada|after:martes_entrada',
+            'martes_atiende'    => 'nullable|boolean',
 
-            'miercoles_entrada'=> 'nullable|date_format:H:i,H:i:s',
-            'miercoles_salida' => 'nullable|date_format:H:i,H:i:s|required_with:miercoles_entrada|after:miercoles_entrada',
+            'miercoles_entrada' => 'nullable|date_format:H:i,H:i:s',
+            'miercoles_salida'  => 'nullable|date_format:H:i,H:i:s|required_with:miercoles_entrada|after:miercoles_entrada',
+            'miercoles_atiende'  => 'nullable|boolean',
 
-            'jueves_entrada'   => 'nullable|date_format:H:i,H:i:s',
-            'jueves_salida'    => 'nullable|date_format:H:i,H:i:s|required_with:jueves_entrada|after:jueves_entrada',
+            'jueves_entrada'    => 'nullable|date_format:H:i,H:i:s',
+            'jueves_salida'     => 'nullable|date_format:H:i,H:i:s|required_with:jueves_entrada|after:jueves_entrada',
+            'jueves_atiende'    => 'nullable|boolean',
 
-            'viernes_entrada'  => 'nullable|date_format:H:i,H:i:s',
-            'viernes_salida'   => 'nullable|date_format:H:i,H:i:s|required_with:viernes_entrada|after:viernes_entrada',
+            'viernes_entrada'   => 'nullable|date_format:H:i,H:i:s',
+            'viernes_salida'    => 'nullable|date_format:H:i,H:i:s|required_with:viernes_entrada|after:viernes_entrada',
+            'viernes_atiende'   => 'nullable|boolean',
 
-            'sabado_entrada'   => 'nullable|date_format:H:i,H:i:s',
-            'sabado_salida'    => 'nullable|date_format:H:i,H:i:s|required_with:sabado_entrada|after:sabado_entrada',
+            'sabado_entrada'    => 'nullable|date_format:H:i,H:i:s',
+            'sabado_salida'     => 'nullable|date_format:H:i,H:i:s|required_with:sabado_entrada|after:sabado_entrada',
+            'sabado_atiende'    => 'nullable|boolean',
 
-            'domingo_entrada'  => 'nullable|date_format:H:i,H:i:s',
-            'domingo_salida'   => 'nullable|date_format:H:i,H:i:s|required_with:domingo_entrada|after:domingo_entrada',
+            'domingo_entrada'   => 'nullable|date_format:H:i,H:i:s',
+            'domingo_salida'    => 'nullable|date_format:H:i,H:i:s|required_with:domingo_entrada|after:domingo_entrada',
+            'domingo_atiende'   => 'nullable|boolean',
 
-            'festivos_entrada' => 'nullable|date_format:H:i,H:i:s',
-            'festivos_salida'  => 'nullable|date_format:H:i,H:i:s|required_with:festivos_entrada|after:festivos_entrada',
+            'festivos_entrada'  => 'nullable|date_format:H:i,H:i:s',
+            'festivos_salida'   => 'nullable|date_format:H:i,H:i:s|required_with:festivos_entrada|after:festivos_entrada',
+            'festivos_atiende'  => 'nullable|boolean',
         ], [
             'curp.required' => 'El CURP es obligatorio.',
             'curp.size' => 'El CURP debe tener exactamente 18 caracteres.',
@@ -325,20 +378,35 @@ class PersonalUnidadController extends Controller
 
         $personalUnidad->lunes_entrada = $request->lunes_entrada;
         $personalUnidad->lunes_salida = $request->lunes_salida;
+        $personalUnidad->lunes_atiende = $request->boolean('lunes_atiende');
+
         $personalUnidad->martes_entrada = $request->martes_entrada;
         $personalUnidad->martes_salida = $request->martes_salida;
+        $personalUnidad->martes_atiende = $request->boolean('martes_atiende');
+
         $personalUnidad->miercoles_entrada = $request->miercoles_entrada;
         $personalUnidad->miercoles_salida = $request->miercoles_salida;
+        $personalUnidad->miercoles_atiende = $request->boolean('miercoles_atiende');
+
         $personalUnidad->jueves_entrada = $request->jueves_entrada;
         $personalUnidad->jueves_salida = $request->jueves_salida;
+        $personalUnidad->jueves_atiende = $request->boolean('jueves_atiende');
+
         $personalUnidad->viernes_entrada = $request->viernes_entrada;
         $personalUnidad->viernes_salida = $request->viernes_salida;
+        $personalUnidad->viernes_atiende = $request->boolean('viernes_atiende');
+
         $personalUnidad->sabado_entrada = $request->sabado_entrada;
         $personalUnidad->sabado_salida = $request->sabado_salida;
+        $personalUnidad->sabado_atiende = $request->boolean('sabado_atiende');
+
         $personalUnidad->domingo_entrada = $request->domingo_entrada;
         $personalUnidad->domingo_salida = $request->domingo_salida;
+        $personalUnidad->domingo_atiende = $request->boolean('domingo_atiende');
+
         $personalUnidad->festivos_entrada = $request->festivos_entrada;
         $personalUnidad->festivos_salida = $request->festivos_salida;
+        $personalUnidad->festivos_atiende = $request->boolean('festivos_atiende');
 
         $personalUnidad->save();
 

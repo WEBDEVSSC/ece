@@ -154,51 +154,63 @@
                 <table class="table table-hover table-striped mb-0 text-sm align-middle">
                     <thead class="thead-light">
                         <tr>
-                            <th class="px-3" width="30%">Día Semanal</th>
-                            <th width="35%" class="text-center">Hora de Entrada</th>
-                            <th width="35%" class="text-center">Hora de Salida</th>
+                            <th class="px-3" width="25%">Día Semanal</th>
+                            <th width="30%" class="text-center">Hora de Entrada</th>
+                            <th width="30%" class="text-center">Hora de Salida</th>
+                            <th width="15%" class="text-center">Atiende</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @php
-                            $dias = [
-                                'Lunes' => ['entrada' => $personalUnidad->lunes_entrada, 'salida' => $personalUnidad->lunes_salida],
-                                'Martes' => ['entrada' => $personalUnidad->martes_entrada, 'salida' => $personalUnidad->martes_salida],
-                                'Miércoles' => ['entrada' => $personalUnidad->miercoles_entrada, 'salida' => $personalUnidad->miercoles_salida],
-                                'Jueves' => ['entrada' => $personalUnidad->jueves_entrada, 'salida' => $personalUnidad->jueves_salida],
-                                'Viernes' => ['entrada' => $personalUnidad->viernes_entrada, 'salida' => $personalUnidad->viernes_salida],
-                                'Sábado' => ['entrada' => $personalUnidad->sabado_entrada, 'salida' => $personalUnidad->sabado_salida],
-                                'Domingo' => ['entrada' => $personalUnidad->domingo_entrada, 'salida' => $personalUnidad->domingo_salida],
-                                'Festivos' => ['entrada' => $personalUnidad->festivos_entrada, 'salida' => $personalUnidad->festivos_salida],
-                            ];
-                        @endphp
+                    @php
+                        $dias = [
+                            'Lunes' => ['entrada' => $personalUnidad->lunes_entrada, 'salida' => $personalUnidad->lunes_salida, 'atiende' => $personalUnidad->lunes_atiende],
+                            'Martes' => ['entrada' => $personalUnidad->martes_entrada, 'salida' => $personalUnidad->martes_salida, 'atiende' => $personalUnidad->martes_atiende],
+                            'Miércoles' => ['entrada' => $personalUnidad->miercoles_entrada, 'salida' => $personalUnidad->miercoles_salida, 'atiende' => $personalUnidad->miercoles_atiende],
+                            'Jueves' => ['entrada' => $personalUnidad->jueves_entrada, 'salida' => $personalUnidad->jueves_salida, 'atiende' => $personalUnidad->jueves_atiende],
+                            'Viernes' => ['entrada' => $personalUnidad->viernes_entrada, 'salida' => $personalUnidad->viernes_salida, 'atiende' => $personalUnidad->viernes_atiende],
+                            'Sábado' => ['entrada' => $personalUnidad->sabado_entrada, 'salida' => $personalUnidad->sabado_salida, 'atiende' => $personalUnidad->sabado_atiende],
+                            'Domingo' => ['entrada' => $personalUnidad->domingo_entrada, 'salida' => $personalUnidad->domingo_salida, 'atiende' => $personalUnidad->domingo_atiende],
+                            'Festivos' => ['entrada' => $personalUnidad->festivos_entrada, 'salida' => $personalUnidad->festivos_salida, 'atiende' => $personalUnidad->festivos_atiende],
+                        ];
+                    @endphp
 
-                        @foreach ($dias as $dia => $horario)
-                            <tr>
-                                <td class="px-3 align-middle font-weight-bold text-dark">
-                                    {{ $dia }}
-                                </td>
-                                <td class="text-center align-middle">
-                                    @if($horario['entrada'])
-                                        <span class="badge bg-light text-dark border px-3 py-1">
-                                            <i class="far fa-clock text-success mr-1"></i> {{ $horario['entrada'] }}
-                                        </span>
-                                    @else
-                                        <span class="text-muted font-italics">—</span>
-                                    @endif
-                                </td>
-                                <td class="text-center align-middle">
-                                    @if($horario['salida'])
-                                        <span class="badge bg-light text-dark border px-3 py-1">
-                                            <i class="far fa-clock text-danger mr-1"></i> {{ $horario['salida'] }}
-                                        </span>
-                                    @else
-                                        <span class="text-muted font-italics">—</span>
-                                    @endif
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
+                    @foreach ($dias as $dia => $horario)
+                        <tr>
+                            <td class="px-3 align-middle font-weight-bold text-dark">
+                                {{ $dia }}
+                            </td>
+                            <td class="text-center align-middle">
+                                @if($horario['entrada'])
+                                    <span class="badge bg-light text-dark border px-3 py-1">
+                                        <i class="far fa-clock text-success mr-1"></i> {{ $horario['entrada'] }}
+                                    </span>
+                                @else
+                                    <span class="text-muted font-italics">—</span>
+                                @endif
+                            </td>
+                            <td class="text-center align-middle">
+                                @if($horario['salida'])
+                                    <span class="badge bg-light text-dark border px-3 py-1">
+                                        <i class="far fa-clock text-danger mr-1"></i> {{ $horario['salida'] }}
+                                    </span>
+                                @else
+                                    <span class="text-muted font-italics">—</span>
+                                @endif
+                            </td>
+                            <td class="text-center align-middle">
+                                @if($horario['atiende'])
+                                    <span class="badge badge-success px-3 py-1">
+                                        <i class="fas fa-check mr-1"></i> Sí
+                                    </span>
+                                @else
+                                    <span class="badge badge-secondary px-3 py-1">
+                                        <i class="fas fa-times mr-1"></i> No
+                                    </span>
+                                @endif
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
                 </table>
             </div>
         </div>
