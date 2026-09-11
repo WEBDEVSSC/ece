@@ -39,7 +39,7 @@ class CatTipoPersonalMedicoSeeder extends Seeder
         ];
 
         foreach ($tipos as $id => $descripcion) {
-            DB::table('cat_tipos_personal_medico')->insert([
+            DB::table('cat_tipos_personal_unidad')->insert([
                 'id' => $id,
                 'descripcion' => $descripcion,
                 'created_at' => now(),
