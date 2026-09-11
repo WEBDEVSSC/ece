@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\CatClue;
 use App\Models\Clue;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -559,7 +560,7 @@ class ClueSeeder extends Seeder
         ];
 
         foreach ($clues as $clue) {
-            Clue::create($clue);
+            CatClue::create($clue);
         }
 
         $this->command->info('CLUES insertados correctamente.');

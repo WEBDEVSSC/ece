@@ -42,7 +42,7 @@ class ServicioEspecialidadMedicoSeeder extends Seeder
         ];
 
         foreach ($servicios as $nombre) {
-            DB::table('servicios_especialidad_medicos')->insert([
+            DB::table('cat_servicios_especialidad_medicos')->insert([
                 'especialidad' => $nombre,
                 'created_at' => now(),
                 'updated_at' => now(),
