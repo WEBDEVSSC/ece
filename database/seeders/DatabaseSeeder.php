@@ -22,6 +22,6 @@ class DatabaseSeeder extends Seeder
        $this->call(CatPaisesSeeder::class);
        $this->call(CatEscolaridadSeeder::class);
        $this->call(CatDerechohabienciaSeeder::class);
-       $this->call(CatParentesco::class);
+       $this->call(CatParentescoSeeder::class);
     }
 }
