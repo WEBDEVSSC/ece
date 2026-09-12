@@ -23,5 +23,6 @@ class DatabaseSeeder extends Seeder
        $this->call(CatEscolaridadSeeder::class);
        $this->call(CatDerechohabienciaSeeder::class);
        $this->call(CatParentescoSeeder::class);
+       $this->call(CatRolesSeeder::class);
     }
 }

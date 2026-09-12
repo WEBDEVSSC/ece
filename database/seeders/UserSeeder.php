@@ -19,6 +19,8 @@ class UserSeeder extends Seeder
             'email' => 'soportewebssc@gmail.com',
             'password' => Hash::make('Ece1144$'), 
             'clues_id' => '1',
+            'personal_id' => '88',
+            'role_id' => '1'
         ]);
 
         $this->command->info('Se inserto el usuario default correctamente.');
