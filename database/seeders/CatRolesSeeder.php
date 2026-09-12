@@ -52,7 +52,7 @@ class CatRolesSeeder extends Seeder
         ];
 
         foreach ($roles as $rol) {
-            DB::table('roles')->updateOrCreate(
+            DB::table('roles')->updateOrInsert(
                 ['id' => $rol['id']],
                 $rol
             );
