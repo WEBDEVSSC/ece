@@ -100,8 +100,8 @@
                 </a>
             </div>
 
-            <div class="col-md-3">
-                <a href="{{ route('personalUnidadIndex') }}" class="text-decoration-none">
+           <div class="col-md-3">
+                 {{-- <a href="{{ route('personalUnidadIndex') }}" class="text-decoration-none">
                     <div class="small-box bg-gradient-info elevation-3">
                         <div class="inner">
                             <h4 class="font-weight-bold">MÉDICOS</h4>
@@ -116,7 +116,7 @@
                             Acceder <i class="fas fa-arrow-circle-right"></i>
                         </span>
                     </div>
-                </a>
+                </a>--}}
             </div>
 
         </div>

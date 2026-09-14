@@ -13,6 +13,7 @@ use App\Http\Controllers\UnemeConsultaExternaEnfermeriaController;
 use App\Http\Controllers\UnemeEnfermeriaEstructuraOseaController;
 use App\Http\Controllers\UnemeEnfermeriaExamenVascularController;
 use App\Http\Controllers\UnemeEnfermeriaValoracionPodologicaController;
+use App\Http\Controllers\UnemesController;
 use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -247,11 +248,11 @@ Route::post('admin/enfermeria/consulta-externa/laboratorios/laboratorios-store/{
  * 
  ******************************************************************************************/
 
-Route::get('admin/enfermeria/consulta-externa/valoracion-podologica/valoracion-podologica-show/{id}', [UnemeConsultaExternaEnfermeriaController::class, 'UnemeEnfermeriaValoracionPodologicaShow'])->name('UnemeEnfermeriaValoracionPodologicaShow');
+Route::get('admin/enfermeria/consulta-externa/valoracion-podologica/valoracion-podologica-show/{id}', [UnemesController::class, 'UnemeEnfermeriaValoracionPodologicaShow'])->name('UnemeEnfermeriaValoracionPodologicaShow');
 
-Route::get('admin/enfermeria/consulta-externa/valoracion-podologica/valoracion-podologica-create/{id}', [UnemeConsultaExternaEnfermeriaController::class, 'UnemeEnfermeriaValoracionPodologicaCreate'])->name('UnemeEnfermeriaValoracionPodologicaCreate');
+Route::get('admin/enfermeria/consulta-externa/valoracion-podologica/valoracion-podologica-create/{id}', [UnemesController::class, 'UnemeEnfermeriaValoracionPodologicaCreate'])->name('UnemeEnfermeriaValoracionPodologicaCreate');
 
-Route::post('admin/enfermeria/consulta-externa/valoracion-podologica/valoracion-podologica-store/{id}', [UnemeConsultaExternaEnfermeriaController::class, 'UnemeEnfermeriaValoracionPodologicaStore'])->name('UnemeEnfermeriaValoracionPodologicaStore');
+Route::post('admin/enfermeria/consulta-externa/valoracion-podologica/valoracion-podologica-store/{id}', [UnemesController::class, 'UnemeEnfermeriaValoracionPodologicaStore'])->name('UnemeEnfermeriaValoracionPodologicaStore');
 
 /*******************************************************************************************
  * 
@@ -261,11 +262,11 @@ Route::post('admin/enfermeria/consulta-externa/valoracion-podologica/valoracion-
  * 
  ******************************************************************************************/
 
-Route::get('admin/enfermeria/consulta-externa/examen-estructura-osea/examen-estructura-osea-show/{id}', [UnemeConsultaExternaEnfermeriaController::class, 'UnemeEnfermeriaExamenEstructuraOseaShow'])->name('UnemeEnfermeriaExamenEstructuraOseaShow');
+Route::get('admin/enfermeria/consulta-externa/examen-estructura-osea/examen-estructura-osea-show/{id}', [UnemesController::class, 'UnemeEnfermeriaExamenEstructuraOseaShow'])->name('UnemeEnfermeriaExamenEstructuraOseaShow');
 
-Route::get('admin/enfermeria/consulta-externa/examen-estructura-osea/examen-estructura-osea-create/{id}', [UnemeConsultaExternaEnfermeriaController::class, 'UnemeEnfermeriaExamenEstructuraOseaCreate'])->name('UnemeEnfermeriaExamenEstructuraOseaCreate');
+Route::get('admin/enfermeria/consulta-externa/examen-estructura-osea/examen-estructura-osea-create/{id}', [UnemesController::class, 'UnemeEnfermeriaExamenEstructuraOseaCreate'])->name('UnemeEnfermeriaExamenEstructuraOseaCreate');
 
-Route::post('admin/enfermeria/consulta-externa/examen-estructura-osea/examen-estructura-osea-store/{id}', [UnemeConsultaExternaEnfermeriaController::class, 'UnemeEnfermeriaExamenEstructuraOseaStore'])->name('UnemeEnfermeriaExamenEstructuraOseaStore');
+Route::post('admin/enfermeria/consulta-externa/examen-estructura-osea/examen-estructura-osea-store/{id}', [UnemesController::class, 'UnemeEnfermeriaExamenEstructuraOseaStore'])->name('UnemeEnfermeriaExamenEstructuraOseaStore');
 
 /*******************************************************************************************
  * 
@@ -275,11 +276,11 @@ Route::post('admin/enfermeria/consulta-externa/examen-estructura-osea/examen-est
  * 
  ******************************************************************************************/
 
-Route::get('admin/enfermeria/consulta-externa/examen-vascular-show/{id}', [UnemeConsultaExternaEnfermeriaController::class, 'UnemeEnfermeriaExamenVascularShow'])->name('UnemeEnfermeriaExamenVascularShow');
+Route::get('admin/enfermeria/consulta-externa/examen-vascular-show/{id}', [UnemesController::class, 'UnemeEnfermeriaExamenVascularShow'])->name('UnemeEnfermeriaExamenVascularShow');
 
-Route::get('admin/enfermeria/consulta-externa/examen-vascular-create/{id}', [UnemeConsultaExternaEnfermeriaController::class, 'UnemeEnfermeriaExamenVascularCreate'])->name('UnemeEnfermeriaExamenVascularCreate');
+Route::get('admin/enfermeria/consulta-externa/examen-vascular-create/{id}', [UnemesController::class, 'UnemeEnfermeriaExamenVascularCreate'])->name('UnemeEnfermeriaExamenVascularCreate');
 
-Route::post('admin/enfermeria/consulta-externa/examen-vascular-store/{id}', [UnemeConsultaExternaEnfermeriaController::class, 'UnemeEnfermeriaExamenVascularStore'])->name('UnemeEnfermeriaExamenVascularStore');
+Route::post('admin/enfermeria/consulta-externa/examen-vascular-store/{id}', [UnemesController::class, 'UnemeEnfermeriaExamenVascularStore'])->name('UnemeEnfermeriaExamenVascularStore');
 
 /*******************************************************************************************
  * 
@@ -289,11 +290,11 @@ Route::post('admin/enfermeria/consulta-externa/examen-vascular-store/{id}', [Une
  * 
  ******************************************************************************************/
 
-Route::get('admin/enfermeria/consulta-externa/examen-neurologico-show/{id}', [UnemeConsultaExternaEnfermeriaController::class, 'UnemeEnfermeriaExamenNeurologicoShow'])->name('UnemeEnfermeriaExamenNeurologicoShow');
+Route::get('admin/enfermeria/consulta-externa/examen-neurologico-show/{id}', [UnemesController::class, 'UnemeEnfermeriaExamenNeurologicoShow'])->name('UnemeEnfermeriaExamenNeurologicoShow');
 
-Route::get('admin/enfermeria/consulta-externa/examen-neurologico-create/{id}', [UnemeConsultaExternaEnfermeriaController::class, 'UnemeEnfermeriaExamenNeurologicoCreate'])->name('UnemeEnfermeriaExamenNeurologicoCreate');
+Route::get('admin/enfermeria/consulta-externa/examen-neurologico-create/{id}', [UnemesController::class, 'UnemeEnfermeriaExamenNeurologicoCreate'])->name('UnemeEnfermeriaExamenNeurologicoCreate');
 
-Route::post('admin/enfermeria/consulta-externa/examen-neurologico-store/{id}', [UnemeConsultaExternaEnfermeriaController::class, 'UnemeEnfermeriaExamenNeurologicoStore'])->name('UnemeEnfermeriaExamenNeurologicoStore');
+Route::post('admin/enfermeria/consulta-externa/examen-neurologico-store/{id}', [UnemesController::class, 'UnemeEnfermeriaExamenNeurologicoStore'])->name('UnemeEnfermeriaExamenNeurologicoStore');
 
 /*******************************************************************************************
  * 

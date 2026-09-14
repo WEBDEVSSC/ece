@@ -74,6 +74,14 @@ class Paciente extends Model
     }
 
     /**
+     * Citas Consulta Externa
+     */
+    public function citasConsultaExterna()
+    {
+        return $this->hasMany(CitaConsultaExterna::class,'paciente_id');
+    }
+
+    /**
      * Nombre completo.
      */
     public function getNombreCompletoAttribute()

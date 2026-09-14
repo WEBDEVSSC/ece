@@ -272,6 +272,7 @@
 
 
                                         <a href="{{ route('pdfCitaConsultaExternaEnfermeriaPrimeraVez', $citaHoy->id) }}" 
+                                               target="_blank"
                                                class="btn btn-outline-info btn-sm" 
                                                data-toggle="tooltip" 
                                                data-placement="top" 
