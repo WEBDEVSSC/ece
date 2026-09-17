@@ -97,19 +97,34 @@
 
                     <div class="col-md-3 mb-3">
                         <label for="nombre" class="font-weight-bold text-dark">Nombre(s)</label>
-                        <input type="text" name="nombre" id="nombre" class="form-control @error('nombre') is-invalid @enderror" value="{{ old('nombre') }}" placeholder="Nombre(s)">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-light"><i class="fas fa-user text-muted"></i></span>
+                            </div>
+                            <input type="text" name="nombre" id="nombre" class="form-control @error('nombre') is-invalid @enderror" value="{{ old('nombre') }}" placeholder="Nombre(s)">
+                        </div>
                         @error('nombre')<div class="text-danger small mt-1">{{ $message }}</div>@enderror
                     </div>
 
                     <div class="col-md-3 mb-3">
                         <label for="apellido_paterno" class="font-weight-bold text-dark">Apellido Paterno</label>
-                        <input type="text" name="apellido_paterno" id="apellido_paterno" class="form-control @error('apellido_paterno') is-invalid @enderror" value="{{ old('apellido_paterno') }}" placeholder="Primer apellido">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-light"><i class="fas fa-user text-muted"></i></span>
+                            </div>
+                            <input type="text" name="apellido_paterno" id="apellido_paterno" class="form-control @error('apellido_paterno') is-invalid @enderror" value="{{ old('apellido_paterno') }}" placeholder="Primer apellido">
+                        </div>
                         @error('apellido_paterno')<div class="text-danger small mt-1">{{ $message }}</div>@enderror
                     </div>
 
                     <div class="col-md-3 mb-3">
                         <label for="apellido_materno" class="font-weight-bold text-dark">Apellido Materno</label>
-                        <input type="text" name="apellido_materno" id="apellido_materno" class="form-control @error('apellido_materno') is-invalid @enderror" value="{{ old('apellido_materno') }}" placeholder="Segundo apellido">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-light"><i class="fas fa-user text-muted"></i></span>
+                            </div>
+                            <input type="text" name="apellido_materno" id="apellido_materno" class="form-control @error('apellido_materno') is-invalid @enderror" value="{{ old('apellido_materno') }}" placeholder="Segundo apellido">
+                        </div>
                         @error('apellido_materno')<div class="text-danger small mt-1">{{ $message }}</div>@enderror
                     </div>
                 </div>
@@ -118,7 +133,12 @@
                 <div class="row">
                     <div class="col-md-3 mb-3">
                         <label class="font-weight-bold text-dark">Sexo</label>
-                        <input type="text" class="form-control bg-light" value="{{ $sexo == 'H' ? 'MASCULINO' : 'FEMENINO' }}" readonly>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-light"><i class="fas fa-venus-mars text-muted"></i></span>
+                            </div>
+                            <input type="text" class="form-control bg-light" value="{{ $sexo == 'H' ? 'MASCULINO' : 'FEMENINO' }}" readonly>
+                        </div>
                         <input type="hidden" name="sexo" value="{{ old('sexo', $sexo) }}">
                         @error('sexo')<div class="text-danger small mt-1">{{ $message }}</div>@enderror
                     </div>
@@ -127,7 +147,7 @@
                         <label for="fecha_nacimiento" class="font-weight-bold text-dark">Fecha de Nacimiento</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text bg-light"><i class="fas fa-calendar text-muted"></i></span>
+                                <span class="input-group-text bg-light"><i class="fas fa-calendar-alt text-muted"></i></span>
                             </div>
                             <input type="text" name="fecha_nacimiento" id="fecha_nacimiento" class="form-control bg-light" value="{{ old('fecha_nacimiento', $fechaNacimiento) }}" readonly>
                         </div>
@@ -136,32 +156,42 @@
 
                     <div class="col-md-3 mb-3">
                         <label for="escolaridad_id" class="font-weight-bold text-dark">Escolaridad</label>
-                        <select name="escolaridad_id" id="escolaridad_id" class="form-control @error('escolaridad_id') is-invalid @enderror">
-                            <option value="">-- Seleccione una opción --</option>
-                            @foreach($escolaridades as $escolaridad)
-                                <option value="{{ $escolaridad->id }}" {{ old('escolaridad_id') == $escolaridad->id ? 'selected' : '' }}>
-                                    {{ $escolaridad->escolaridad }}
-                                </option>
-                            @endforeach
-                        </select>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-light"><i class="fas fa-graduation-cap text-muted"></i></span>
+                            </div>
+                            <select name="escolaridad_id" id="escolaridad_id" class="form-control @error('escolaridad_id') is-invalid @enderror">
+                                <option value="">-- Seleccione una opción --</option>
+                                @foreach($escolaridades as $escolaridad)
+                                    <option value="{{ $escolaridad->id }}" {{ old('escolaridad_id') == $escolaridad->id ? 'selected' : '' }}>
+                                        {{ $escolaridad->escolaridad }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
                         @error('escolaridad_id')<div class="text-danger small mt-1">{{ $message }}</div>@enderror
                     </div>
 
                     <div class="col-md-3 mb-3">
                         <label for="estado_civil_id" class="font-weight-bold text-dark">Estado Civil</label>
-                        <select name="estado_civil_id" id="estado_civil_id" class="form-control @error('estado_civil_id') is-invalid @enderror">
-                            <option value="">-- Seleccione una opción --</option>
-                            @foreach($estadosCivil as $estadoCivil)
-                                <option value="{{ $estadoCivil->id }}" {{ old('estado_civil_id') == $estadoCivil->id ? 'selected' : '' }}>
-                                    {{ $estadoCivil->estado_civil }}
-                                </option>
-                            @endforeach
-                        </select>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-light"><i class="fas fa-heart text-muted"></i></span>
+                            </div>
+                            <select name="estado_civil_id" id="estado_civil_id" class="form-control @error('estado_civil_id') is-invalid @enderror">
+                                <option value="">-- Seleccione una opción --</option>
+                                @foreach($estadosCivil as $estadoCivil)
+                                    <option value="{{ $estadoCivil->id }}" {{ old('estado_civil_id') == $estadoCivil->id ? 'selected' : '' }}>
+                                        {{ $estadoCivil->estado_civil }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
                         @error('estado_civil_id')<div class="text-danger small mt-1">{{ $message }}</div>@enderror
                     </div>
                 </div>
 
-                {{-- Fila 3: Celular, Email y Derechohabiencia --}}
+                {{-- Fila 3: Celular, Email, Derechohabiencia y N° de Afiliación --}}
                 <div class="row">
                     <div class="col-md-3 mb-3">
                         <label for="celular" class="font-weight-bold text-dark">Teléfono Celular</label>
@@ -185,24 +215,43 @@
                         @error('email')<div class="text-danger small mt-1">{{ $message }}</div>@enderror
                     </div>
 
-                    <div class="col-md-6 mb-3">
+                    <div class="col-md-3 mb-3">
                         <label for="derechohabiencia_id" class="font-weight-bold text-dark">Derechohabiencia</label>
-                        <select name="derechohabiencia_id" id="derechohabiencia_id" class="form-control @error('derechohabiencia_id') is-invalid @enderror">
-                            <option value="">-- Seleccione una opción --</option>
-                            @foreach($derechohabiencias as $derecho)
-                                <option value="{{ $derecho->id }}" {{ old('derechohabiencia_id') == $derecho->id ? 'selected' : '' }}>
-                                    {{ $derecho->derechohabiencia }}
-                                </option>
-                            @endforeach
-                        </select>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-light"><i class="fas fa-hospital-user text-muted"></i></span>
+                            </div>
+                            <select name="derechohabiencia_id" id="derechohabiencia_id" class="form-control @error('derechohabiencia_id') is-invalid @enderror">
+                                <option value="">-- Seleccione una opción --</option>
+                                @foreach($derechohabiencias as $derecho)
+                                    <option value="{{ $derecho->id }}" {{ old('derechohabiencia_id') == $derecho->id ? 'selected' : '' }}>
+                                        {{ $derecho->derechohabiencia }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
                         @error('derechohabiencia_id')<div class="text-danger small mt-1">{{ $message }}</div>@enderror
                     </div>
+
+                    <div class="col-md-3 mb-3">
+                        <label for="no_derechohabiencia" class="font-weight-bold text-dark">N° de Afiliación</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-light"><i class="fas fa-id-card text-muted"></i></span>
+                            </div>
+                            <input type="text" name="no_derechohabiencia" id="no_derechohabiencia" class="form-control @error('no_derechohabiencia') is-invalid @enderror" value="{{ old('no_derechohabiencia') }}" placeholder="Ej. 123456789">
+                        </div>
+                        @error('no_derechohabiencia')<div class="text-danger small mt-1">{{ $message }}</div>@enderror
+                    </div>
+
                 </div>
 
                 {{-- Fila 4: Alergias --}}
                 <div class="row">
                     <div class="col-md-12 mb-2">
-                        <label for="alergias" class="font-weight-bold text-dark">Alergias Conocidas</label>
+                        <label for="alergias" class="font-weight-bold text-dark">
+                            <i class="fas fa-allergies text-muted mr-1"></i> Alergias Conocidas
+                        </label>
                         <textarea name="alergias" id="alergias" rows="4" maxlength="500" class="form-control @error('alergias') is-invalid @enderror" placeholder="Especifique alergias a medicamentos, alimentos u otros elementos..." oninput="contadorCaracteres()">{{ old('alergias') }}</textarea>
                         
                         <div class="d-flex justify-content-between align-items-center mt-1">

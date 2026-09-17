@@ -107,7 +107,7 @@
 
                 <div class="col-md-2 mb-3">
                     <span class="text-uppercase text-muted font-weight-bold style-label d-block">Derechohabiencia</span>
-                    <span class="font-weight-bold text-dark">{{ $paciente->derechohabiencia->derechohabiencia ?? 'N/A' }}</span>
+                    <span class="font-weight-bold text-dark">{{ $paciente->derechohabiencia->derechohabiencia ?? 'N/A' }} - {{ $paciente->no_derechohabiencia ?? 'N/A'}}</span>
                 </div>
 
                 <div class="col-md-2 mb-3">

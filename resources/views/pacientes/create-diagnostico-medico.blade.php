@@ -106,9 +106,9 @@
 
             <div class="card-body p-4">
                 <div class="row">
-                    <div class="col-md-8 mb-3">
+                    <div class="col-md-6 mb-3">
                         <label for="diagnostico_medico_id" class="font-weight-bold text-dark">
-                            Diagnóstico Médico
+                            Diagnóstico CIE-10
                         </label>
                         <p class="text-muted small mb-2">Seleccione el diagnóstico correspondiente conforme al catálogo CIE-10.</p>
 
@@ -125,6 +125,29 @@
                         </div>
 
                         @error('diagnostico_medico_id')
+                            <div class="text-danger small mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="dx_id" class="font-weight-bold text-dark">
+                            Diagnóstico
+                        </label>
+                        <p class="text-muted small mb-2">Seleccione el diagnóstico correspondiente conforme al catálogo interno de la unidad.</p>
+
+                        <div class="input-group">
+                            <select name="dx_id" id="dx_id" class="form-control select2 @error('dx_id') is-invalid @enderror" style="width: 100%;">
+                                <option value=""></option>
+                                @foreach($dxs as $dx)
+                                    <option value="{{ $dx->id }}"
+                                        {{ old('dx_id', $paciente->dx_id) == $dx->id ? 'selected' : '' }}>
+                                        {{ $dx->nombre }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        @error('dx_id')
                             <div class="text-danger small mt-1">{{ $message }}</div>
                         @enderror
                     </div>
@@ -182,6 +205,20 @@
     $(document).ready(function() {
         // Inicialización del Select2
         $('#diagnostico_medico_id').select2({
+            placeholder: "-- Seleccione una opción --",
+            allowClear: true,
+            width: '100%'
+        });
+
+        // Inicialización de Tooltips
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        // Inicialización del Select2
+        $('#dx_id').select2({
             placeholder: "-- Seleccione una opción --",
             allowClear: true,
             width: '100%'

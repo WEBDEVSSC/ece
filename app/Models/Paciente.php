@@ -26,7 +26,8 @@ class Paciente extends Model
         'email',
         'no_expediente',
         'clues_id',
-        'derechohabiencia_id'
+        'derechohabiencia_id',
+        'no_derechohabiencia',
     ];
 
     protected $casts = [
@@ -55,6 +56,11 @@ class Paciente extends Model
     public function diagnosticoMedico()
     {
         return $this->belongsTo(CatCIE10::class, 'diagnostico_medico_id');
+    }
+
+    public function dxMedico()
+    {
+        return $this->belongsTo(CatDiagnosticosMedicos::class, 'dx_id');
     }
 
     /**

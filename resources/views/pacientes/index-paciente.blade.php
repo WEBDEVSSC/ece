@@ -89,7 +89,14 @@
                                         <span class="badge bg-light text-muted font-weight-normal">Sin asignar</span>
                                     @endif
                                 </td>
-                                <td class="align-middle">{{ $paciente->diagnosticoMedico->clave_nombre ?? 'N/A' }}</td>
+                                <td class="align-middle">
+                                    <div> 
+                                        <i class="fas fa-barcode text-primary mr-1"></i> <strong>{{ $paciente->diagnosticoMedico->clave_nombre ?? 'N/A' }}</strong> 
+                                    </div>
+                                    <div class="mt-1">
+                                        <i class="fas fa-stethoscope text-success mr-1"></i> {{ $paciente->dxMedico->nombre ?? 'N/A' }} 
+                                    </div>
+                                </td>
                                 <td class="align-middle">{{ $paciente->derechohabiencia->derechohabiencia ?? 'N/A' }}</td>
                                 <td class="text-right align-middle">
                                     <div class="btn-group" role="group">
@@ -102,7 +109,7 @@
                                             <i class="fas fa-edit"></i>
                                         </a>
 
-                                        <a href="{{ route('pacientesContactoCreate', $paciente->id) }}" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Datos del Contacto del Paciente">
+                                        <a href="{{ route('pacientesContactoCreate', $paciente->id) }}" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Datos del Contacto del Paciente">
                                             <i class="fas fa-user-friends"></i>
                                         </a>
 
