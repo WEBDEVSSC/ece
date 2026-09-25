@@ -11,6 +11,7 @@ class CatDiagnosticosMedicos extends Model
 
     protected $fillable = [
         'nombre',
+        'tipo_unidad',
     ];
 
     public function setNombreAttribute($value)

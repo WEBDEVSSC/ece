@@ -101,23 +101,23 @@
             </div>
 
            <div class="col-md-3">
-                 {{-- <a href="{{ route('personalUnidadIndex') }}" class="text-decoration-none">
-                    <div class="small-box bg-gradient-info elevation-3">
-                        <div class="inner">
-                            <h4 class="font-weight-bold">MÉDICOS</h4>
-                            <p>Catálogo de Médicos</p>
-                        </div>
-
-                        <div class="icon">
-                            <i class="fas fa-user-md"></i>
-                        </div>
-
-                        <span class="small-box-footer">
-                            Acceder <i class="fas fa-arrow-circle-right"></i>
-                        </span>
+            <a href="{{ route('diagnosticosMedicosIndex') }}" class="text-decoration-none">
+                <div class="small-box bg-gradient-info elevation-3">
+                    <div class="inner">
+                        <h4 class="font-weight-bold">DX Médicos</h4>
+                        <p>Catálogo de Diagnósticos Médicos</p>
                     </div>
-                </a>--}}
-            </div>
+
+                    <div class="icon">
+                        <i class="fas fa-notes-medical"></i>
+                    </div>
+
+                    <span class="small-box-footer">
+                        Acceder <i class="fas fa-arrow-circle-right"></i>
+                    </span>
+                </div>
+            </a>
+        </div>
 
         </div>
 

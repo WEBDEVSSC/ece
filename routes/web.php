@@ -4,6 +4,7 @@ use App\Http\Controllers\CitaConsultaExternaController;
 use App\Http\Controllers\CitaConsultaExternaEnfermeriaController;
 use App\Http\Controllers\CitaConsultaExternaLaboratorioController;
 use App\Http\Controllers\CitaConsultaExternaSignosVitalesController;
+use App\Http\Controllers\DiagnosticoMedicoController;
 use App\Http\Controllers\MedicoConsultaExternaController;
 use App\Http\Controllers\PersonalUnidadController;
 use App\Http\Controllers\PacienteController;
@@ -124,6 +125,26 @@ Route::get('admin/settings/roles/rolesEdit/{id}', [RolController::class,'rolesEd
 Route::put('admin/settings/roles/rolesUpdate/{id}', [RolController::class,'rolesUpdate'])->name('rolesUpdate');
 
 Route::delete('admin/settings/roles/rolesDelete/{id}', [RolController::class,'rolesDelete'])->name('rolesDelete');
+
+/*******************************************************************************************
+ * 
+ * 
+ * SETTINGS - MODULO DE DIAGNOSTICOS MEDICOS
+ * 
+ * 
+ ******************************************************************************************/
+
+Route::get('admin/settings/diagnosticos-medicos/index', [DiagnosticoMedicoController::class,'diagnosticosMedicosIndex'])->name('diagnosticosMedicosIndex');
+
+Route::get('admin/settings/diagnosticos-medicos/create', [DiagnosticoMedicoController::class,'diagnosticosMedicosCreate'])->name('diagnosticosMedicosCreate');
+
+Route::post('admin/settings/diagnosticos-medicos/store', [DiagnosticoMedicoController::class,'diagnosticosMedicosStore'])->name('diagnosticosMedicosStore');
+
+Route::get('admin/settings/diagnosticos-medicos/edit/{id}', [DiagnosticoMedicoController::class,'diagnosticosMedicosEdit'])->name('diagnosticosMedicosEdit');
+
+Route::put('admin/settings/diagnosticos-medicos/update/{id}', [DiagnosticoMedicoController::class,'diagnosticosMedicosUpdate'])->name('diagnosticosMedicosUpdate');
+
+Route::delete('admin/settings/diagnosticos-medicos/delete/{id}', [DiagnosticoMedicoController::class,'diagnosticosMedicosDelete'])->name('diagnosticosMedicosDelete');
 
 /*******************************************************************************************
  * 
