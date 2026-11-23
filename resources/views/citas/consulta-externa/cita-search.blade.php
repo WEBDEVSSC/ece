@@ -187,7 +187,7 @@
                             <i class="fas fa-user-md text-info mr-2"></i>{{ $listaMedico->nombre_completo }}
                         </td>
                         <td class="align-middle pl-4 font-weight-bold text-dark">
-                            <i class="fas fa-id-badge text-info mr-2"></i>{{ $listaMedico->tipoPersonal->descripcion ?? '' }}
+                            <i class="fas fa-id-badge text-info mr-2"></i>{{ $listaMedico->servicioEspecialidadMedico->especialidad ?? '' }}
                         </td>
                         @foreach($dias as $dia)
                             @php 
