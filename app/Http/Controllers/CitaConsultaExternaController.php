@@ -22,10 +22,12 @@ class CitaConsultaExternaController extends Controller
 
         $medicos = PersonalUnidad::where('clues_id',$login->clues_id)
                                 ->where('medico_consulta_externa', 1)
+                                ->orderBy('apellido_paterno', 'asc')
                                 ->get();
 
         $listaMedicos = PersonalUnidad::where('clues_id',$login->clues_id)
                                 ->where('medico_consulta_externa', 1)    
+                                ->orderBy('apellido_paterno', 'asc')
                                 ->get();
 
         return view('citas.consulta-externa.cita-search', compact('pacientes', 'medicos', 'listaMedicos'));
