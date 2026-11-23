@@ -103,6 +103,7 @@
                     <thead class="thead-light">
                         <tr>
                             <th class="px-3">Diagnóstico Médico</th>
+                            <th class="text-center align-middle">Número de Pacientes</th>
                             <th width="150" class="text-center">Acciones</th>
                         </tr>
                     </thead>
@@ -113,6 +114,13 @@
                                     <span class="badge badge-soft-info px-2 py-1 font-weight-bold">
                                         <i class="fas fa-stethoscope mr-1"></i>
                                         {{ $diagnostico->nombre }}
+                                    </span>
+                                </td>
+
+                                <td class="text-center align-middle">
+                                    <span class="badge badge-pill badge-primary px-3 py-1 font-weight-bold" style="font-size: 0.85rem;">
+                                        <i class="fas fa-users mr-1"></i>
+                                        {{ $diagnostico->pacientes_count ?? 0 }}
                                     </span>
                                 </td>
                                 

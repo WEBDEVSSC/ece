@@ -18,4 +18,10 @@ class CatDiagnosticosMedicos extends Model
     {
         $this->attributes['nombre'] = mb_strtoupper(trim($value), 'UTF-8');
     }
+
+    public function pacientes()
+    {
+        // Reemplaza Paciente::class y la clave foránea según tu estructura
+        return $this->hasMany(Paciente::class, 'dx_id');
+    }
 }

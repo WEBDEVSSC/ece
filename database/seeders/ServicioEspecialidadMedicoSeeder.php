@@ -38,17 +38,29 @@ class ServicioEspecialidadMedicoSeeder extends Seeder
             'PROMOCIÓN DE LA SALUD',
             'ENFERMERÍA GENERAL',
             'ENFERMERÍA ESPECIALIZADA',
-            'OTRO',
+            'ONCOLOGÍA MEDICA',
+            'ONCOCIRUGIA',
+            'GINEONCOLOGIA',
+            'RADIOTERAPIA',
+            'HEMATOLOGÍA',
+            'ALGOLOGIA',
+            'ODONTOLOGIA ONCOLOGICA',
         ];
 
         foreach ($servicios as $nombre) {
-            DB::table('cat_servicios_especialidad_medicos')->insert([
-                'especialidad' => $nombre,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
+            $existe = DB::table('cat_servicios_especialidad_medicos')
+                ->where('especialidad', $nombre)
+                ->exists();
+
+            if (!$existe) {
+                DB::table('cat_servicios_especialidad_medicos')->insert([
+                    'especialidad' => $nombre,
+                    'created_at'   => now(),
+                    'updated_at'   => now(),
+                ]);
+            }
         }
 
-        $this->command->info('Servicios/Especialidades insertados correctamente.');
+        $this->command->info('Servicios/Especialidades nuevos insertados correctamente.');
     }
 }

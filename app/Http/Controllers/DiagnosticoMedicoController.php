@@ -14,7 +14,9 @@ class DiagnosticoMedicoController extends Controller
     {
         $login = Auth::user();
     
-        $diagnosticos = CatDiagnosticosMedicos::where('tipo_unidad', $login->tipo_unidad)->get();
+        $diagnosticos = CatDiagnosticosMedicos::withCount('pacientes')
+                        ->where('tipo_unidad', $login->tipo_unidad)
+                        ->get();
 
         return view('settings.diagnosticos-medicos.index-diagnosticos-medicos',compact('diagnosticos'));
     }
